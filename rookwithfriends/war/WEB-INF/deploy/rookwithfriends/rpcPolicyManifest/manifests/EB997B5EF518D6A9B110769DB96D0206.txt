@@ -1,0 +1,2 @@
+serviceClass: com.rookwithfriends.web.client.GreetingService
+path: 8F52EBAEC77B83D1E0BD75D130DD2890.gwt.rpc
