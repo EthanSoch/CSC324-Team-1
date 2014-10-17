@@ -16,6 +16,24 @@
     <url-pattern>/rookwithfriends/greet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>chat</servlet-name>
+  	<jsp-file>/chat.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chat</servlet-name>
+  	<url-pattern>/chat</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>chatMessage</servlet-name>
+  	<servlet-class>com.rookwithfriends.web.chat.Chat</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chatMessage</servlet-name>
+  	<url-pattern>/chat/message</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Rookwithfriends.html</welcome-file>
