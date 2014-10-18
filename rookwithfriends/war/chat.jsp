@@ -7,12 +7,21 @@
 <title>Insert title here</title>
 <style>
 	#chatWindow{
+		display: inline-block;
+		border:solid 1px black;
 	}
 	
 	#messages{
-		height:400px;
-		width:200px;
-		border:solid 1px black;
+		height:500px;
+		width:400px;
+	}
+	
+	#buttonBar{
+		border-top:solid 1px black;
+	}
+	
+	#messageInput{
+		width:300px;
 	}
 </style>
 </head>
@@ -40,16 +49,18 @@
 		});
 	}
 	
+	function printToConsole(message){
+		var node = document.createElement("p");
+		node.innerHTML = message
+		$("#messages")[0].appendChild(node);
+	}
+	
 	function onOpened() {
-	    alert("Channel opened!");
+	    printToConsole("Channel opened!");
 	}
 
 	function onMessage(msg) {
-	    //alert(msg.data);
-	    
-		var node = document.createElement("p");
-		node.innerHTML = msg.data
-		$("#messages")[0].appendChild(node);
+		printToConsole(msg.data);
 	}
 
 	function onError(err) {
