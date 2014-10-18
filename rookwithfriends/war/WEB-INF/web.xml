@@ -6,15 +6,6 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.rookwithfriends.web.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/rookwithfriends/greet</url-pattern>
-  </servlet-mapping>
   
   <servlet>
   	<servlet-name>chat</servlet-name>
@@ -36,7 +27,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Rookwithfriends.html</welcome-file>
+    <welcome-file>chat.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>
