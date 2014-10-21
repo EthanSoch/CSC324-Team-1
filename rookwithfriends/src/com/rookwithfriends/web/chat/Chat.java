@@ -11,6 +11,7 @@ import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 
+@SuppressWarnings("serial")
 public class Chat extends HttpServlet {
 	@Override
 	protected void doGet( HttpServletRequest request, HttpServletResponse response)
@@ -34,9 +35,5 @@ public class Chat extends HttpServlet {
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
 		String channelKey = "xyz";
 		channelService.sendMessage(new ChannelMessage(channelKey, message));
-		
-		//request.get
-		
-		//response.getWriter().write("GET/POST response");
 	}
 }
