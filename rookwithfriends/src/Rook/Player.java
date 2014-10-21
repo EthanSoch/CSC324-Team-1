@@ -35,7 +35,7 @@ public class Player {
 	//NEEDS REFACTORING//
 	
 	public void combineHand(CardSet theKitty){
-		for(int i=0; i < theKitty.length() ; i++){
+		for(int i=0; i < theKitty.size() ; i++){
 			this.playerHand.addCard(theKitty.getCard(i)); //CardSet needs a get method to retrieve entire ArrayList
 		}
 	}

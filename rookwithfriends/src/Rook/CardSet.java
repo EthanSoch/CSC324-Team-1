@@ -1,92 +1,83 @@
 package Rook;
+
 import java.util.*;
 
-import javax.smartcardio.Card;
-public class CardSet
-{
-	private int score;
+public class CardSet {
 	private ArrayList<Card> cardSet;
 	private int handID;
-	
-	public CardSet()
-	{
-		cardSet = new ArrayList<Card> ();
-		score=0;
-		handID=0;
+
+	public CardSet() {
+		cardSet = new ArrayList<Card>();
+		handID = 0;
 	}
-	
-	public void Shuffle()
-	{
+
+	public void Shuffle() {
 		Collections.shuffle(cardSet);
 	}
-	
-	public void Sort()
-	{
+
+	public void Sort() {
 		Collections.sort(cardSet, new Comparator<Card>() {
-	        @Override public int compare(Card card1, Card card2) {
-	            return card1.getNum()-card2.getNum();
-	        }
-		}
-		
+			@Override
+			public int compare(Card card1, Card card2) {
+				return card1.getRank().getValue() - card2.getRank().getValue();
+			}
+		});
+
 		Collections.sort(cardSet, new Comparator<Card>() {
-	        @Override public int compare(Card card1, Card card2) {
-	            return card1.getColor()-card2.getColor();
-	        }
-		}
-		
+			@Override
+			public int compare(Card card1, Card card2) {
+				return card1.getColor().getValue()
+						- card2.getColor().getValue();
+			}
+		});
+
 	}
-	
-	public void addCard(Card newCard)
-	{
+
+	public void addCard(Card newCard) {
 		cardSet.add(newCard);
 	}
-	
-	public Card getCard(int index)
-	{
+
+	public Card getCard(int index) {
 		return cardSet.get(index);
 	}
-	
-	public void setID(int newID)
-	{
+
+	public void setID(int newID) {
 		handID = newID;
 	}
-	
-	public int getID()
-	{
+
+	public int getID() {
 		return handID;
 	}
-	
-	public void calcScore()
-	{
-		for(int i=0;i<cardSet.size();i++)
-		{
-			switch(cardSet.get(i).cardNum)
-			{
-			case (1):
-				score+=15;
+
+	public int calcScore() {
+		int score = 0;
+
+		for (int i = 0; i < cardSet.size(); i++) {
+			switch (cardSet.get(i).getRank()) {
+			case one:
+				score += 15;
 				break;
-			case (5):
-				score+=5;
+			case five:
+				score += 5;
 				break;
-			case (10):
-				score+=10;
+			case ten:
+				score += 10;
 				break;
-			case (14):
-				score+=10;
+			case fourteen:
+				score += 10;
 				break;
-			case (10.5):
-				score+=20;
-				break
+			case rook:
+				score += 20;
+				break;
 			default:
 				break;
 			}
 		}
-	}
-	
-	public int getScore()
-	{
+
 		return score;
 	}
-	
-	
+
+	public int size() {
+		return cardSet.size();
+	}
 }
