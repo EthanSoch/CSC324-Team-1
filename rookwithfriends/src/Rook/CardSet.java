@@ -14,15 +14,47 @@ public class CardSet {
 	public void Shuffle() {
 		Collections.shuffle(cardSet);
 	}
-
+	
+	//Sort the cards according to color and number
+	//Only should be used for ordering hands without regards to a specific color
+	//For ordering with regard to a trump color, use findWinningCard(CardColor card)
 	public void Sort() {
+		//use a custom comparator to compare cards
 		Collections.sort(cardSet, new Comparator<Card>() {
 			@Override
 			public int compare(Card card1, Card card2) {
+				//if colors are the same, compare numbers
 				if(card1.getColor().getValue()==card2.getColor().getValue())
-					return card1.getRank().getValue() - card2.getRank().getValue();
+				{
+					if(card1.getRank().getValue() - card2.getRank().getValue() <0)
+					{
+						return -1;
+					}
+					else if(card1.getRank().getValue() - card2.getRank().getValue() ==0)
+					{
+						return 0;
+					}
+					else
+					{
+						return 1;
+					}
+				}
 				else
-					return card1.getColor().getValue()-card2.getRank().getValue();
+				//if colors are different, compare colors
+				{
+					if(card1.getColor().getValue() - card2.getColor().getValue() <0)
+					{
+						return -1;
+					}
+					else if(card1.getColor().getValue() - card2.getColor().getValue() ==0)
+					{
+						return 0;
+					}
+					else
+					{
+						return 1;
+					}
+				}
 			}
 		});
 	}
@@ -75,6 +107,7 @@ public class CardSet {
 		return cardSet.size();
 	}
 	
+	//finds the highest card of a cardset with regards to a trump color
 	public Card findWinningCard(CardColor trump)
 	{
 		Card highCard = cardSet.get(0);
