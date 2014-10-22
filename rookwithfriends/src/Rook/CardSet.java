@@ -74,4 +74,28 @@ public class CardSet {
 	public int size() {
 		return cardSet.size();
 	}
+	
+	public Card findWinningCard(CardColor trump)
+	{
+		Card highCard = cardSet.get(0);
+		for (Card currentCard : cardSet)
+		{
+			if(highCard.getColor().getValue()==trump.getValue() && currentCard.getColor().getValue() == trump.getValue())
+			{
+				if(highCard.getRank().getValue() < currentCard.getRank().getValue())
+					highCard=currentCard;
+			}
+			else if(highCard.getColor().getValue()!=trump.getValue() && currentCard.getColor().getValue() == trump.getValue())
+				highCard= currentCard;
+			else
+			{
+				if(highCard.getColor().getValue()==trump.getValue() && currentCard.getColor().getValue() == trump.getValue())
+				{
+					if(highCard.getRank().getValue() < currentCard.getRank().getValue())
+						highCard= currentCard;
+				}
+			}
+		}
+		return highCard;
+	}
 }
