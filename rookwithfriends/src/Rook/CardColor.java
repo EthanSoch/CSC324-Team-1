@@ -3,7 +3,7 @@ package Rook;
 public enum CardColor{
 	red(0),
 	black(1),
-	blue(2),
+	yellow(2),
 	green(3);
 	
 	private int value;    
