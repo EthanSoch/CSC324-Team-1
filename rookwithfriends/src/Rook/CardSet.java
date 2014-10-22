@@ -19,18 +19,12 @@ public class CardSet {
 		Collections.sort(cardSet, new Comparator<Card>() {
 			@Override
 			public int compare(Card card1, Card card2) {
-				return card1.getRank().getValue() - card2.getRank().getValue();
+				if(card1.getColor().getValue()==card2.getColor().getValue())
+					return card1.getRank().getValue() - card2.getRank().getValue();
+				else
+					return card1.getColor().getValue()-card2.getRank().getValue();
 			}
 		});
-
-		Collections.sort(cardSet, new Comparator<Card>() {
-			@Override
-			public int compare(Card card1, Card card2) {
-				return card1.getColor().getValue()
-						- card2.getColor().getValue();
-			}
-		});
-
 	}
 
 	public void addCard(Card newCard) {
