@@ -16,15 +16,15 @@ public enum CardRank {
 	thirteen(13),
 	fourteen(14),
 	fifteen(15),
-	rook(16);
+	rook(10.5);
 	
-	private int value;    
+	private double value;    
 	
-	private CardRank(int value) {
+	private CardRank(double value) {
 		this.value = value;
 	}
 	
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 }
