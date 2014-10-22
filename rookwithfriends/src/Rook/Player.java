@@ -24,7 +24,7 @@ public class Player {
 	}
 
 	//selectCard(); -- Makes use of CardSet method getCard to return card in playerHand at specific index
-	
+	//Should this ask the user for the card?
 	public Card selectCard(int index){
 		
 		return this.playerHand.getCard(index);
