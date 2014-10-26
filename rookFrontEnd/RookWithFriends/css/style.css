@@ -3,7 +3,7 @@ html {
 }
 #loadingmessage{
 	position: absolute;
-	top: 58%;
+	top: -10%;
 	right: 50%;
 	left: 48%;
 	color: white;
@@ -11,15 +11,29 @@ html {
 	margin-right: -100px;
 	width: 280px;
 }
+#playerContainer{
+	text-align:center;
+	position: absolute;
+	top: 60%;
+	right: 48%;
+	left: 49%;
+	color: white;
+	margin-left: -100px;
+	margin-right: -100px;
+}
 #players{
 	position: absolute;
-	top: 69%;
+	top: 58%;
 	right: 50%;
-	left: 48%;
+	left: 46.5%;
 	color: white;
 	margin-left: -100px;
 	margin-right: -100px;
 	width: 280px;
+}
+#boxContainer{
+	position: relative;
+	left: 61px;
 }
 
 }
@@ -121,24 +135,28 @@ canvas {
 	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
 	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
 }
-
-#squared1, #squared2, #squared3, #squared4{
+#mainContainer{
 	position: absolute;
-	top: 60%;
-	right: 50%;
-	left: 51%;
-	color: white;
+	left: 49%;
+	top: 61%;
+	width: 200px;
+	height: 100px;
 	margin-left: -100px;
-	margin-right: -100px;
+	margin-top: -50px;
+
+}
+#squared1, #squared2, #squared3, #squared4{
+ 	display:inline-block;
+}
+#squared1{
 }
 #squared2 {
-	left: 53%;
 }
 #squared3 {
-	left: 55%;
+
 }
 #squared4 {
-	left: 57%;
+
 }
 
 /* SQUARED ONE */
