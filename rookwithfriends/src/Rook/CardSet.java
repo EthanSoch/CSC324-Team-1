@@ -4,11 +4,12 @@ import java.util.*;
 
 public class CardSet {
 	private ArrayList<Card> cardSet;
-	private int handID;
+	private int handID,score;
 
 	public CardSet() {
 		cardSet = new ArrayList<Card>();
 		handID = 0;
+		score=0;
 	}
 
 	public void Shuffle() {
@@ -76,7 +77,6 @@ public class CardSet {
 	}
 
 	public int calcScore() {
-		int score = 0;
 
 		for (int i = 0; i < cardSet.size(); i++) {
 			switch (cardSet.get(i).getRank()) {
