@@ -131,4 +131,10 @@ public class CardSet {
 		}
 		return highCard;
 	}
+	
+	public int getScore()
+	{
+		this.calcScore();
+		return score;
+	}
 }
