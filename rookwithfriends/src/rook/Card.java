@@ -1,13 +1,13 @@
-package rook;
-
+package Rook;
+import java.util.*;
 public class Card {
 	CardColor color;
 	CardRank rank;
 	int id;
 	
 	public Card(){
-		color=red;
-		rank=one;
+		color=CardColor.red;
+		rank=CardRank.one;
 		id=1;
 	}
 	

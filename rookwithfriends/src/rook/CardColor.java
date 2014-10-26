@@ -1,4 +1,4 @@
-package rook;
+package Rook;
 
 public enum CardColor{
 	red(0),

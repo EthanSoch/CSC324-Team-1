@@ -1,4 +1,4 @@
-package rook;
+package Rook;
 
 public enum CardRank {
 	one(1),

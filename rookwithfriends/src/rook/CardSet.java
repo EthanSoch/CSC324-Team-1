@@ -1,10 +1,10 @@
-package rook;
+package Rook;
 
 import java.util.*;
 
 public class CardSet {
 	private ArrayList<Card> cardSet;
-	private int handID;
+	private int handID,score;
 
 	public CardSet() {
 		cardSet = new ArrayList<Card>();
@@ -76,7 +76,7 @@ public class CardSet {
 	}
 
 	public int calcScore() {
-		int score = 0;
+		score = 0;
 
 		for (int i = 0; i < cardSet.size(); i++) {
 			switch (cardSet.get(i).getRank()) {
@@ -135,6 +135,6 @@ public class CardSet {
 	public int getScore()
 	{
 		this.calcScore();
-		return score;
+		return this.score;
 	}
 }
