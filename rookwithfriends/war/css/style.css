@@ -9,7 +9,8 @@ html {
 	color: white;
 	margin-left: -100px;
 	margin-right: -100px;
-	width: 280px;
+	width: 600px;
+	white-space:nowrap;
 }
 #playerContainer{
 	text-align:center;
@@ -29,7 +30,8 @@ html {
 	color: white;
 	margin-left: -100px;
 	margin-right: -100px;
-	width: 280px;
+	width: 600px;
+	white-space:nowrap;
 }
 #boxContainer{
 	position: relative;
@@ -178,8 +180,6 @@ canvas {
 
 #squared2 label {
 	cursor: pointer;
-r
-
 	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
 	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
 	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
