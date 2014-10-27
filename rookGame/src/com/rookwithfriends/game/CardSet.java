@@ -127,10 +127,16 @@ public class CardSet {
 	
 	public String toString()
 	{
-		String final = "";
-		for(int i = 0;i<playerHand.length;i++)
+		String string = "";
+		for(int i = 0;i<cardSet.size();i++)
 		{
-			final+=playerHand.getCard(i).toString();
+			string+=getCard(i).toString();
 		}
+		return string;
+	}
+	
+	public void discardCard(int index)
+	{
+		cardSet.remove(index);
 	}
 }
