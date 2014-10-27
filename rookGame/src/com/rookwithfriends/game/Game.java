@@ -9,6 +9,8 @@ public class Game {
 	public Player player2;
 	public Player player3;
 	public Player player4;
+	//public Player bidWinner
+	//need to add the kitty, all, and center hands
 
 	
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4)
@@ -27,32 +29,44 @@ public class Game {
 	//Let the Games Begin
 	private void playGame(){
 		//Step 1 -- Shuffle Cards
-			//shuffle(); -- Static?
+			//instantiate hand with all cards
+			//all.shuffle();
 		
 		//Step 2 -- Deal Cards
 			//deal(); -- Is this done with instantiation of each player?
+			//ex: for(i 0 thru 9 : player1.addCard(all.getCard(i))
+			//player needs addCard method which takes a card and adds to hand
+			//do for 10-19,20-29,30-39 for p2-p4. Add 40-44 to kitty
 		
 		//Step 3 -- Sort Each Hand
-			//player1.sortHand() -- Method needed?
+			//player1.sortHand() -- Method needed? 
+			//player needs method sortHand() which calls hand.Sort()
 		    //player2.sortHand() -- Method needed?
 		    //player3.sortHand() -- Method needed?
 		    //player4.sortHand() -- Method needed?
-		
+		//Step 3.5 -- Display each hand
+			//player1.printHand()
+			//player2-4 "
 		//Step 4 -- Round of bidding?
-			//player1.setBid() -- Method needed?
-		    //player2.setBid() -- Method needed?
-		    //player3.setBid() -- Method needed?
-		    //player4.setBid() -- Method needed?
+		//do{
+			//need to update current bidWinner after every bid. 
+			//tempbid=player1.setBid(gameBid) -- Method needed?
+			//if(tempbid>gameBid) {
+			//	bidWinner=player1;
+			//	gameBid=tempbid; }  Can this be put in a method checkBid(tempBid,player)
+		    //tempbid=player2.setBid(gameBid) -- Method needed?
+		    //checkBid(tempBid,player2)
+		    //tempbid=player3.setBid(gameBid) -- Method needed?
+		    //checkBid(tempBid,player3)
+		    //tempbid=player4.setBid(gameBid) -- Method needed?
+		    //checkBid(tempBid,player4)
+		//}while(currentbid<200 and not everyone passes)
 		
 		//Step 4 -- Find winner of bid - Pass control unto them?
-			//int winner = bid.getBidWinner() -- Create Gameboard, add needed methods. 
+			//Player bidWinner is a public variable -- Create Gameboard, add needed methods. 
 			/*
 			 
-			 if(winner == playerId1){
-			 	//Give winner kitty
-			 	 * combineHand()??
-			 	 }
-			 else if{winner == playerId2)....
+			 bidWinner.combineHand(kitty)
 			 
 			 */
 			
