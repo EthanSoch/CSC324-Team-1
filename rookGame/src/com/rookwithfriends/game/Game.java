@@ -46,17 +46,14 @@ public class Game {
 			//player2-4 "
 		//Step 4 -- Round of bidding?
 		//do{
-			//need to update current bidWinner after every bid. 
+			//need to update current bidWinner after every bid.
+			//player1.setBid(gameBid,bidWinner)
+			//get bid or pass from user, check if larger than gameBid, if so, gameBid=newBid, bidWinner=this
 			//tempbid=player1.setBid(gameBid) -- Method needed?
 			//if(tempbid>gameBid) {
 			//	bidWinner=player1;
 			//	gameBid=tempbid; }  Can this be put in a method checkBid(tempBid,player)
-		    //tempbid=player2.setBid(gameBid) -- Method needed?
-		    //checkBid(tempBid,player2)
-		    //tempbid=player3.setBid(gameBid) -- Method needed?
-		    //checkBid(tempBid,player3)
-		    //tempbid=player4.setBid(gameBid) -- Method needed?
-		    //checkBid(tempBid,player4)
+		    
 		//}while(currentbid<200 and not everyone passes)
 		
 		//Step 4 -- Find winner of bid - Pass control unto them?
