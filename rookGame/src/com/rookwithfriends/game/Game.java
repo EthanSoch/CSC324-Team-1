@@ -47,8 +47,6 @@ public class Game {
 		//Step 4 -- Round of bidding?
 		//do{
 			//need to update current bidWinner after every bid.
-			//player1.setBid(gameBid,bidWinner)
-			//get bid or pass from user, check if larger than gameBid, if so, gameBid=newBid, bidWinner=this
 			//tempbid=player1.setBid(gameBid) -- Method needed?
 			//if(tempbid>gameBid) {
 			//	bidWinner=player1;
