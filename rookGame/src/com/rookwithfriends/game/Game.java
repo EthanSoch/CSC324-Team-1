@@ -34,16 +34,12 @@ public class Game {
 		
 		//Step 2 -- Deal Cards
 			//deal(); -- Is this done with instantiation of each player?
-			//ex: for(i 0 thru 9 : player1.addCard(all.getCard(i))
-			//player needs addCard method which takes a card and adds to hand
+			//ex: for(i 0 thru 9 : player1.getHand().addCard(all.getCard(i))
 			//do for 10-19,20-29,30-39 for p2-p4. Add 40-44 to kitty
 		
 		//Step 3 -- Sort Each Hand
-			//player1.sortHand() -- Method needed? 
-			//player needs method sortHand() which calls hand.Sort()
-		    //player2.sortHand() -- Method needed?
-		    //player3.sortHand() -- Method needed?
-		    //player4.sortHand() -- Method needed?
+			//player1.getHand().sortHand() 
+		    //player2-4 "
 		//Step 3.5 -- Display each hand
 			//player1.printHand()
 			//player2-4 "
