@@ -6,7 +6,6 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
-  
   <servlet>
   	<servlet-name>chat</servlet-name>
   	<jsp-file>/chat.jsp</jsp-file>
@@ -17,17 +16,26 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>chatMessage</servlet-name>
+  	<servlet-name>message</servlet-name>
   	<servlet-class>com.rookwithfriends.web.chat.Chat</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>chatMessage</servlet-name>
+  	<servlet-name>message</servlet-name>
   	<url-pattern>/chat/message</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>rook</servlet-name>
+      <servlet-class>com.rookwithfriends.web.RookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>rook</servlet-name>
+      <url-pattern>/rook/messages</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>chat.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
