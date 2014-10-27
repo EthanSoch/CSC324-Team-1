@@ -131,4 +131,9 @@ public class CardSet {
 		}
 		return highCard;
 	}
+	
+	public int getScore(){
+		//TODO implement get score function
+		throw new java.lang.UnsupportedOperationException();
+	}
 }
