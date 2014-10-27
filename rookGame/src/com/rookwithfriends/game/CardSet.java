@@ -124,4 +124,19 @@ public class CardSet {
 		}
 		return highCard;
 	}
+	
+	public String toString()
+	{
+		String string = "";
+		for(int i = 0;i<cardSet.size();i++)
+		{
+			string+=getCard(i).toString();
+		}
+		return string;
+	}
+	
+	public void discardCard(int index)
+	{
+		cardSet.remove(index);
+	}
 }

@@ -34,4 +34,9 @@ public class Card {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String toString()
+	{
+		return color.getValue()+" "+rank.getValue(); 
+	}
 }
