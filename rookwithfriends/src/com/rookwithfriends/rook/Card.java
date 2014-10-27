@@ -4,6 +4,12 @@ public class Card {
 	CardColor color;
 	CardRank rank;
 	int id;
+	
+	public Card(CardColor color, CardRank rank, int id){
+		this.color = color;
+		this.rank = rank;
+		this.id = id;
+	}
 
 	public CardColor getColor() {
 		return color;
