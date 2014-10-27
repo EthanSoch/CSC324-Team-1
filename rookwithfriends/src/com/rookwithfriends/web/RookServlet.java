@@ -24,9 +24,10 @@ public class RookServlet extends HttpServlet {
 		
 		//connecting or creating a new game?
 		//TODO paramaters to connect to existing game or host new game
-		boolean createNewGame = true;
+		boolean createNewGame = request.getParameter("isNewGame").equals("true") ? true : false ;
 		String channelKey;
 		
+		/*
 		Map<String, String> returnObject = new HashMap<String, String>();
 		
 		if(createNewGame){
@@ -42,7 +43,13 @@ public class RookServlet extends HttpServlet {
 		returnObject.put("token", token);
 		
 		String returnJsonObject = JSONUtility.convertToJson(returnObject);
-
+	 	*/
+		ChannelService channelService = ChannelServiceFactory.getChannelService();
+		
+		channelKey = "xyz";
+		String token = channelService.createChannel(channelKey);
+		String returnJsonObject = token;
+		
 		response.setContentType("text/plain");
 		response.getWriter().write(returnJsonObject);
 	}

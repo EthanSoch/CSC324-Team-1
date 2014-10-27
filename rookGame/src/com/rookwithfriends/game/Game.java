@@ -73,6 +73,11 @@ public class Game {
 		
 	}
 	
+	public int addPlayer(){
+		
+		return 0;
+	}
+	
 	
 	
   //Accessors and Mutators for Game
