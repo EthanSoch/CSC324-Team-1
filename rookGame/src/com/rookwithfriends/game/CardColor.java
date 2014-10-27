@@ -1,4 +1,4 @@
-package Rook;
+package com.rookwithfriends.game;
 
 public enum CardColor{
 	red(0),

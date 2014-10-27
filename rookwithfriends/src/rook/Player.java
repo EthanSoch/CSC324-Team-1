@@ -1,4 +1,4 @@
-package rook;
+package Rook;
 //import java.util.*;
 
 
