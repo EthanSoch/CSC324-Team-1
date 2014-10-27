@@ -21,6 +21,8 @@ public class Player {
 	public Player()
 	{
 		this.playerHand = new CardSet();
+		this.cardsWon = new CardSet();
+		this.playerID=0;
 	}
 
 	//selectCard(); -- Makes use of CardSet method getCard to return card in playerHand at specific index
@@ -101,6 +103,7 @@ public class Player {
 				bidWinner=this;
 			}
 		}
+		read.close();
 		
 	}
 	
