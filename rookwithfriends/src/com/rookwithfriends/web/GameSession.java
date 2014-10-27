@@ -6,7 +6,7 @@ import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 
-import Rook.Game;
+import com.rookwithfriends.rook.*;
 
 public class GameSession {
 	private Game game;

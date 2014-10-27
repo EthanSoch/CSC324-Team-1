@@ -1,8 +1,13 @@
-   package Rook;
+   package rookwithfriends.rook;
 
    import org.junit.Assert;
-   import org.junit.Before;
-   import org.junit.Test;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.rookwithfriends.rook.Card;
+import com.rookwithfriends.rook.CardColor;
+import com.rookwithfriends.rook.CardRank;
+import com.rookwithfriends.rook.CardSet;
 
 
    public class CardSetTest {

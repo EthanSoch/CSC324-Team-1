@@ -1,4 +1,4 @@
-package Rook;
+package com.rookwithfriends.rook;
 
 public enum CardRank {
 	one(1),

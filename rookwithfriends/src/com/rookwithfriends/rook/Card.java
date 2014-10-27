@@ -1,4 +1,4 @@
-package Rook;
+package com.rookwithfriends.rook;
 
 public class Card {
 	CardColor color;

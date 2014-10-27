@@ -1,4 +1,4 @@
-package rook;
+package com.rookwithfriends.rook;
 //import java.util.*;
 
 

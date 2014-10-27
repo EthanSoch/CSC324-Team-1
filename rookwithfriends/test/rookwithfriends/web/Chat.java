@@ -1,4 +1,4 @@
-package rookwithfriends;
+package rookwithfriends.web;
 
 import static org.junit.Assert.*;
 
