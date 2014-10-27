@@ -84,7 +84,7 @@ public class Player {
 		this.cardsWon = cardsWon;
 	}
 	
-	public void setBid(int currentBid, Player bidWinner)
+	public int setBid(int currentBid)
 	{
 		Scanner read = new Scanner(System.in);
 		System.out.println("Current bid is" + currentBid);
@@ -100,11 +100,10 @@ public class Player {
 			if(bid%5==0 && bid>currentBid)
 			{
 				currentBid=bid;
-				bidWinner=this;
 			}
 		}
 		read.close();
-		
+		return currentBid;
 	}
 	
 	public void printHand()

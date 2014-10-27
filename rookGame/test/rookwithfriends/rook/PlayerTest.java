@@ -41,7 +41,7 @@ public class PlayerTest {
 
 	@Test
 	public void testCombineHand() {
-		assertTrue(cs1==p.getPlayerHand());
+		assertTrue(cs1.getCard(0)==p.selectCard(0) && cs1.getCard(1)==p.selectCard(1)&&cs1.getCard(2)==p.selectCard(2));
 	}
 
 	@Test
@@ -49,8 +49,8 @@ public class PlayerTest {
 		int currentBid=0;
 		Player p2=new Player();
 		Player winner=p2;
-		p.setBid(currentBid,winner);
-		assertTrue(currentBid==5 && winner==p);
+		currentBid=p.setBid(currentBid);
+		assertTrue(currentBid==5);
 	}
 
 
