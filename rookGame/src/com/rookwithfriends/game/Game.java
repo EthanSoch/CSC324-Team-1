@@ -9,6 +9,7 @@ public class Game {
 	public Player player2;
 	public Player player3;
 	public Player player4;
+	//vector of all players
 	//public Player bidWinner
 	//need to add the kitty, all, and center hands
 
