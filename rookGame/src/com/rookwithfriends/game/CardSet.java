@@ -124,4 +124,13 @@ public class CardSet {
 		}
 		return highCard;
 	}
+	
+	public String toString()
+	{
+		String final = "";
+		for(int i = 0;i<playerHand.length;i++)
+		{
+			final+=playerHand.getCard(i).toString();
+		}
+	}
 }

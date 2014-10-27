@@ -1,5 +1,5 @@
 package com.rookwithfriends.game;
-//import java.util.*;
+import java.util.*;
 
 
 public class Player {
@@ -80,6 +80,33 @@ public class Player {
 
 	public void setCardsWon(CardSet cardsWon) {
 		this.cardsWon = cardsWon;
+	}
+	
+	public void setBid(int currentBid, Player bidWinner)
+	{
+		Scanner read = new Scanner(System.in);
+		System.out.println("Current bid is" + currentBid);
+		System.out.println("Enter 1 to increase, enter 2 to pass");
+		
+		int answer=read.nextInt();
+		if(answer==1)
+		{
+			//get new bid
+			System.out.println("What is your new bid. Must be a multiple of 5");
+			int bid=read.nextInt();
+			//test if multiple of 5 and greater than currentBid
+			if(bid%5==0 && bid>currentBid)
+			{
+				currentBid=bid;
+				bidWinner=this;
+			}
+		}
+		
+	}
+	
+	public void printHand()
+	{
+		System.out.println(playerHand);
 	}
 	
 
