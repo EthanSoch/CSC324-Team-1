@@ -1,11 +1,11 @@
 package com.rookwithfriends.util;
 
-import java.util.Map;
+import java.util.*;
 
 import com.google.gson.Gson;
 
 public class JSONUtility {
-	public static String convertToJson(Map response){
+	public static String convertToJson(Map<String,Object> response){
     	Gson gson = new Gson();
     	return gson.toJson(response);
     }

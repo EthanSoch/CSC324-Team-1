@@ -1,6 +1,7 @@
 package com.rookwithfriends.web;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -9,11 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.rookwithfriends.util.CacheUtility;
 import com.rookwithfriends.util.JSONUtility;;
 
 @SuppressWarnings("serial")
@@ -21,37 +19,36 @@ public class RookServlet extends HttpServlet {
 	@Override
 	protected void doGet( HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		//connecting or creating a new game?
-		//TODO paramaters to connect to existing game or host new game
+		//If new game bool
 		boolean createNewGame = request.getParameter("isNewGame").equals("true") ? true : false ;
-		String channelKey;
+		UUID gameID;
 		
-		/*
-		Map<String, String> returnObject = new HashMap<String, String>();
-		
+		//If new game create game and save to cache else get game id from request parameter
 		if(createNewGame){
-			//adds gameId to returnObject
-			channelKey = createNewGame(returnObject);
+			gameID = createNewGame();
 		} else{
-			//get session
-			channelKey = addToExistingGame(request.getParameter("gameID"));
+			String gameIDString = request.getParameter("gameId");
+			gameID = UUID.fromString(gameIDString);
 		}
 		
+		//get session and add player
+		GameSession session = GameSession.getGameSession(gameID);
+		UserSession newPlayer = session.addPlayer();
+		session.saveToCache();
+		
+		//Create channelService for player using channelKey as the key
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
+		String channelKey = newPlayer.getChannelKey().toString();
 		String token = channelService.createChannel(channelKey);
+		
+		//Generate Client return object
+		Map<String,Object> returnObject = new HashMap<String, Object>();
 		returnObject.put("token", token);
-		
-		String returnJsonObject = JSONUtility.convertToJson(returnObject);
-	 	*/
-		ChannelService channelService = ChannelServiceFactory.getChannelService();
-		
-		channelKey = "xyz";
-		String token = channelService.createChannel(channelKey);
-		String returnJsonObject = token;
+		returnObject.put("connectedPlayer", session.getPlayers().size());
+		returnObject.put("gameId", session.getGameId().toString());
 		
 		response.setContentType("text/plain");
-		response.getWriter().write(returnJsonObject);
+		response.getWriter().write(JSONUtility.convertToJson(returnObject));
 	}
 	
 	@Override
@@ -59,32 +56,20 @@ public class RookServlet extends HttpServlet {
 		throws ServletException, IOException {
 		
 		String message = request.getParameter("message");
+		UUID gameID = UUID.fromString(request.getParameter("gameID"));
 		
-		ChannelService channelService = ChannelServiceFactory.getChannelService();
-		String channelKey = "xyz";
-		channelService.sendMessage(new ChannelMessage(channelKey, message));
-	}
-	
-	private String addToExistingGame(String gameIDString) {
-		CacheUtility util = new CacheUtility();
+		//get Sesson
+		GameSession session = GameSession.getGameSession(gameID);
 		
-		//TODO get channel key from client on player join
-		UUID gameID = UUID.fromString(gameIDString);
-		GameSession session = (GameSession) util.get(gameID);
-		
-		String channelKey = session.addPlayer().toString();
-		
-		return channelKey;
+		for(UserSession player : session.getPlayers()){
+			player.sendMessage(message);
+		}
 	}
 
-	private String createNewGame(Map<String, String> returnObject) {
+	private UUID createNewGame() {
 		GameSession newSession = new GameSession();
-		String channelKey = newSession.addPlayer().toString();
-		
-		CacheUtility util = new CacheUtility();
-		util.put(newSession.getGameId(), newSession);
+		newSession.saveToCache();
 
-		returnObject.put("gameId", newSession.getGameId().toString());
-		return channelKey;
+		return newSession.getGameId();
 	}
 }

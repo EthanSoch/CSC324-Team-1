@@ -3,6 +3,7 @@
   <groupId>rookwithfriends</groupId>
   <artifactId>rookwithfriends</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
@@ -26,10 +27,10 @@
     </plugins>
   </build>
   <dependencies>
-  	<dependency>
-  		<groupId>com.google.code.gson</groupId>
-  		<artifactId>gson</artifactId>
-  		<version>2.3</version>
-  	</dependency>
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.3</version>
+	</dependency>
   </dependencies>
 </project>

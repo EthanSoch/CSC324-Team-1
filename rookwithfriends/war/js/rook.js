@@ -13,21 +13,26 @@ myModule.controller('myController', function($scope) {
 	};
 	
 	$scope.onMessage = function(msg){
-		var data = msg.data;
+		var data = JSON.parse(msg.data);
+		console.log("Message data" + data);
 		
 		$scope.players[data.playerConnected] = true;
 		
+	    $scope.change();
+	    $scope.$apply();
 	}
 	
 	$scope.onOpened = function() {
 	    console.log("connected");
+	    
+	    /*
 	    jQuery($scope.players).each(function(i,player){
 	    	if(!player){
 	    		$scope.players[i] = true;
 	    		return false;
 	    	}
 	    });
-	    
+	    */
 	    $scope.change();
 	    $scope.$apply();
 	}
@@ -40,9 +45,12 @@ myModule.controller('myController', function($scope) {
 	    alert("Channel closed!");
 	}
 	
-	$scope.connect = function(){
-			var token;
-			var data = {"isNewGame" : true};
+	$scope.connect = function(isNewGame){
+			var serverMessage;
+			var data = {"isNewGame" : isNewGame};
+			
+			if(!isNewGame)
+				data.gameId = jQuery("#gameId").val();
 			
 			jQuery.ajax({
 				  data: data,
@@ -50,11 +58,15 @@ myModule.controller('myController', function($scope) {
 				  url: "rook/messages",
 				  async: false
 			}).done(function( msg ) {
-				token = msg;
+				serverMessage = JSON.parse(msg);
 		  	});
 			
+			console.log(serverMessage.gameId);
 			
-			channel = new goog.appengine.Channel(token);
+			for(var i = 0; i <  serverMessage.connectedPlayer; i++)
+				$scope.players[i] = true;
+			
+			channel = new goog.appengine.Channel(serverMessage.token);
 		    socket = channel.open();
 		    socket.onopen = $scope.onOpened;
 		    socket.onmessage = $scope.onMessage;
