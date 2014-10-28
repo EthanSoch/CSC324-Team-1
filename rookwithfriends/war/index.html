@@ -46,9 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ng-click="connect()">Connect</a>
                 <a class="navbar-brand" href="#">Select Game</a>
-                <a class="navbar-brand" href="#">Start Game</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -88,19 +86,22 @@
             </div>
             <div id="boxContainer">
              <div class="squaredOne" id="squared1">
-                <label for="squaredOne" ng-click="player1 = !player1; change()" ng-class="{'squaredOneClicked': player1}"></label>
+                <label for="squaredOne" ng-class="{'squaredOneClicked': player1}"></label>
             </div>
             <div class="squaredOne" id="squared2">
-                <label for="squared2" ng-click="player2 = !player2; change()" ng-class="{'squaredOneClicked': player2}"></label>
+                <label for="squared2"  ng-class="{'squaredOneClicked': player2}"></label>
             </div>
             <div class="squaredOne" id="squared3">
-                <label for="squaredOne" ng-click="player3 = !player3; change()" ng-class="{'squaredOneClicked': player3}"></label>
+                <label for="squaredOne" ng-class="{'squaredOneClicked': player3}"></label>
             </div>
             <div class="squaredOne" id="squared4">
-                <label for="squaredOne" ng-click="player4 = !player4; change()" ng-class="{'squaredOneClicked': player4}"></label>
+                <label for="squaredOne" ng-class="{'squaredOneClicked': player4}"></label>
             </div>
           </div>
             <div id="players">There are currently {{numplayers}} of 4 players connected.</div>
+            <a href="#" class="button" ng-click="connect()">
+              <span>Connect</span>
+            </a>
          </div>
         </div>
 
