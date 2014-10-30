@@ -44,7 +44,7 @@ public class PlayerTest {
 		assertTrue(cs1.getCard(0)==p.selectCard(0) && cs1.getCard(1)==p.selectCard(1)&&cs1.getCard(2)==p.selectCard(2));
 	}
 
-	@Test
+	/*@Test
 	public void testSetBid() {
 		int currentBid=0;
 		Player p2=new Player();
@@ -55,7 +55,7 @@ public class PlayerTest {
 			winner=p;
 		}
 		assertTrue(currentBid==5&&winner==p);
-	}
+	}*/
 
 
 }
