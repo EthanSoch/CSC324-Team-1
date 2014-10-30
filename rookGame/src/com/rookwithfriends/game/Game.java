@@ -1,5 +1,4 @@
 package com.rookwithfriends.game;
-import java.util.*;
 
 
 public class Game 
@@ -40,7 +39,160 @@ public class Game
 	{
 		//Step 1 -- Shuffle Cards
 		//create Deck that holds all cards
-		allDeck = new CardSet();
+		createDeck(); //Moved the code that instantiates allDeck to separate method
+
+	   //instantiate hand with all cards
+		allDeck.Shuffle();
+		allDeckCopy = allDeck; // for when we reset cards // -- WARNING THIS IS A SHALLOW COPY
+		
+		//Step 2 -- Deal Cards
+		dealHands(); //Moved the code that deals hands into separate method
+		
+		
+		//Step 2.5 -- Print all the hands out
+		printHands();
+		
+			//ex: for(i 0 thru 9 : player1.getHand().addCard(all.getCard(i))
+			//do for 10-19,20-29,30-39 for p2-p4. Add 40-44 to kitty
+		
+		//Step 3 -- Sort Each Hand
+			//player1.getHand().sortHand() 
+		    //player2-4 "
+		//Step 3.5 -- Display each hand
+			//player1.printHand()
+			//player2-4 "
+		//Step 4 -- Round of bidding?
+		//do{
+			//need to update current bidWinner after every bid.
+			//tempbid=player1.setBid(gameBid) -- Method needed?
+			//if(tempbid>gameBid) {
+			//	bidWinner=player1;
+			//	gameBid=tempbid; }  Can this be put in a method checkBid(tempBid,player)
+		    
+		//}while(currentbid<200 and not everyone passes)
+		
+		//Step 4 -- Find winner of bid - Pass control unto them?
+			//Player bidWinner is a public variable -- Create Gameboard, add needed methods. 
+			/*
+			 
+			 bidWinner.combineHand(kitty)
+			 
+			 */
+			
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Methods for Game
+	
+		public void moveCard2(String pile, Player thePlayer) {
+			
+			Card movedCard = thePlayer.chooseCard();
+			int cardIndex = 0;
+			
+			if (pile == "CENTER"){
+				move(pile, movedCard);
+			}
+			else if(pile == "DISCARD"){
+				move(pile, movedCard);
+			}
+			else if(pile == "HAND"){ // Remove if not needed
+				move(pile, movedCard);
+			}
+			
+			for(int i = 0; i < thePlayer.getPlayerHand().size(); i++){
+				if(thePlayer.getPlayerHand().getCard(i) == movedCard){
+					cardIndex = i;
+				}
+			}
+			thePlayer.getPlayerHand().discardCard(cardIndex);
+		}
+		
+		//Move method to move a card into either the center or the discard pile
+			public void move(String hand, Card theCard){
+				if (hand == "CENTERPILE"){
+					centerDeck.addCard(theCard);			
+				}
+				else if (hand == "DISCARDPILE"){
+					discardPile.addCard(theCard);
+				}
+				
+			}
+		
+		
+			
+  //Accessors and Mutators for Game
+	public void moveCard(CardSet a, CardSet b, int i, int cardID)
+	{
+		temp = b.getCard(i);
+		temp.setId(cardID);
+		a.addCard(temp);
+		b.discardCard(i);
+	}
+	
+	public int getPlayerID() {
+		return playerID;
+	}
+
+	public void setPlayerID(int playerID) {
+		this.playerID = playerID;
+	}
+
+	public int getGameBid() {
+		return gameBid;
+	}
+
+	public void setGameBid(int gameBid) {
+		this.gameBid = gameBid;
+	}
+
+	public int getTrump() {
+		return trump;
+	}
+
+	public void setTrump(int trump) {
+		this.trump = trump;
+	}
+	public void printHands(){
+		System.out.println("Player 1: ");
+		player1.printHand();
+		
+		System.out.println("Player 2: ");
+		player2.printHand();
+		
+		System.out.println("Player 3: ");
+		player3.printHand();
+		
+		System.out.println("Player 4: ");
+		player4.printHand();
+		
+		System.out.println(kitty);
+	}
+	
+	public void createDeck(){
+		
 		c1 = new Card(CardColor.red, CardRank.one, 0);
 		c2 = new Card(CardColor.red, CardRank.five, 0);
 		c3 = new Card(CardColor.red, CardRank.six, 0);
@@ -135,170 +287,53 @@ public class Game
 		allDeck.addCard(c43);
 		allDeck.addCard(c44);
 		allDeck.addCard(c45);
-
-			//instantiate hand with all cards
-		allDeck.Shuffle();
-		allDeckCopy = allDeck; // for when we reset cards
 		
-		//Step 2 -- Deal Cards
+	}
+	
+	public void dealHands(){
 		//player 1 deal hand
-		for(int i=0; i<10; i++) 
-		{
-			moveCard(deckp1, allDeck, i, 1);// 1 is cardID for player 1, i is index of card
-		}
-		deckp1.Sort();
-		player1.setPlayerHand(deckp1);
-		
-		
-		//player 2 deal hand
-		for(int i=0; i<10; i++) 
-		{
-			moveCard(deckp2, allDeck, i, 2);
-		}
-		deckp2.Sort();
-		player2.setPlayerHand(deckp2);
-		
-		
-		//player 3 deal hand
-		for(int i=0; i<10; i++) 
-		{
-			moveCard(deckp3, allDeck, i, 3);
-		}
-		deckp3.Sort();
-		player3.setPlayerHand(deckp3);
-		
-		
-		//player 4 deal hand
-		for(int i=0; i<10; i++) 
-		{
-			moveCard(deckp4, allDeck, i, 4);
-		}
-		deckp4.Sort();
-		player4.setPlayerHand(deckp4);
-		
-		
-		//kitty deal hand
-		for(int i=0; i<5; i++) 
-		{
-			moveCard(kitty, allDeck, i, 5);
-		}
-		kitty.Sort();
-		
-		System.out.println("Player 1: ");
-		player1.printHand();
-		
-		System.out.println("Player 2: ");
-		player2.printHand();
-		
-		System.out.println("Player 3: ");
-		player3.printHand();
-		
-		System.out.println("Player 4: ");
-		player4.printHand();
-		
-		System.out.println(kitty);
-		
-			//deal(); -- Is this done with instantiation of each player?
-			//ex: for(i 0 thru 9 : player1.getHand().addCard(all.getCard(i))
-			//do for 10-19,20-29,30-39 for p2-p4. Add 40-44 to kitty
-		
-		//Step 3 -- Sort Each Hand
-			//player1.getHand().sortHand() 
-		    //player2-4 "
-		//Step 3.5 -- Display each hand
-			//player1.printHand()
-			//player2-4 "
-		//Step 4 -- Round of bidding?
-		//do{
-			//need to update current bidWinner after every bid.
-			//tempbid=player1.setBid(gameBid) -- Method needed?
-			//if(tempbid>gameBid) {
-			//	bidWinner=player1;
-			//	gameBid=tempbid; }  Can this be put in a method checkBid(tempBid,player)
-		    
-		//}while(currentbid<200 and not everyone passes)
-		
-		//Step 4 -- Find winner of bid - Pass control unto them?
-			//Player bidWinner is a public variable -- Create Gameboard, add needed methods. 
-			/*
-			 
-			 bidWinner.combineHand(kitty)
-			 
-			 */
-			
-		
-	}
-	
-	//Methods for Game
-	
-		public void moveCard2(String pile, Player thePlayer) {
-			
-			Card movedCard = thePlayer.chooseCard();
-			int cardIndex = 0;
-			
-			if (pile == "CENTER"){
-				move(pile, movedCard);
-			}
-			else if(pile == "DISCARD"){
-				move(pile, movedCard);
-			}
-			else if(pile == "HAND"){ // Remove if not needed
-				move(pile, movedCard);
-			}
-			
-			for(int i = 0; i < thePlayer.getPlayerHand().size(); i++){
-				if(thePlayer.getPlayerHand().getCard(i) == movedCard){
-					cardIndex = i;
+				for(int i=0; i<10; i++) 
+				{
+					moveCard(deckp1, allDeck, i, 1);// 1 is cardID for player 1, i is index of card
 				}
-			}
-			thePlayer.getPlayerHand().discardCard(cardIndex);
-		}
-		
-		//Move method to move a card into either the center or the discard pile
-			public void move(String hand, Card theCard){
-				if (hand == "CENTERPILE"){
-					centerDeck.addCard(theCard);			
-				}
-				else if (hand == "DISCARDPILE"){
-					discardPile.addCard(theCard);
-				}
+				deckp1.Sort();
+				player1.setPlayerHand(deckp1);
 				
-			}
-		
-	
-  //Accessors and Mutators for Game
-	public void moveCard(CardSet a, CardSet b, int i, int cardID)
-	{
-		temp = b.getCard(i);
-		temp.setId(cardID);
-		a.addCard(temp);
-		b.discardCard(i);
+				
+				//player 2 deal hand
+				for(int i=0; i<10; i++) 
+				{
+					moveCard(deckp2, allDeck, i, 2);
+				}
+				deckp2.Sort();
+				player2.setPlayerHand(deckp2);
+				
+				
+				//player 3 deal hand
+				for(int i=0; i<10; i++) 
+				{
+					moveCard(deckp3, allDeck, i, 3);
+				}
+				deckp3.Sort();
+				player3.setPlayerHand(deckp3);
+				
+				
+				//player 4 deal hand
+				for(int i=0; i<10; i++) 
+				{
+					moveCard(deckp4, allDeck, i, 4);
+				}
+				deckp4.Sort();
+				player4.setPlayerHand(deckp4);
+				
+				
+				//kitty deal hand
+				for(int i=0; i<5; i++) 
+				{
+					moveCard(kitty, allDeck, i, 5);
+				}
+				kitty.Sort();
 	}
-	
-	public int getPlayerID() {
-		return playerID;
-	}
-
-	public void setPlayerID(int playerID) {
-		this.playerID = playerID;
-	}
-
-	public int getGameBid() {
-		return gameBid;
-	}
-
-	public void setGameBid(int gameBid) {
-		this.gameBid = gameBid;
-	}
-
-	public int getTrump() {
-		return trump;
-	}
-
-	public void setTrump(int trump) {
-		this.trump = trump;
-	}
-
 
 
 }
