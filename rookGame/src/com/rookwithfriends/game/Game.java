@@ -8,7 +8,7 @@ public class Game
 	private int playerID;
 	private int gameBid;
 	private int trump;
-	public CardSet allDeck, allDeckCopy, deckp1, deckp2, deckp3, deckp4, kitty;
+	public CardSet allDeck, allDeckCopy, deckp1, deckp2, deckp3, deckp4, centerDeck, discardPile, kitty;
 	public Card c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16,
 		c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32,
 		c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, temp;
@@ -229,7 +229,42 @@ public class Game
 		
 	}
 	
+	//Methods for Game
 	
+		public void moveCard2(String pile, Player thePlayer) {
+			
+			Card movedCard = thePlayer.chooseCard();
+			int cardIndex = 0;
+			
+			if (pile == "CENTER"){
+				move(pile, movedCard);
+			}
+			else if(pile == "DISCARD"){
+				move(pile, movedCard);
+			}
+			else if(pile == "HAND"){ // Remove if not needed
+				move(pile, movedCard);
+			}
+			
+			for(int i = 0; i < thePlayer.getPlayerHand().size(); i++){
+				if(thePlayer.getPlayerHand().getCard(i) == movedCard){
+					cardIndex = i;
+				}
+			}
+			thePlayer.getPlayerHand().discardCard(cardIndex);
+		}
+		
+		//Move method to move a card into either the center or the discard pile
+			public void move(String hand, Card theCard){
+				if (hand == "CENTERPILE"){
+					centerDeck.addCard(theCard);			
+				}
+				else if (hand == "DISCARDPILE"){
+					discardPile.addCard(theCard);
+				}
+				
+			}
+		
 	
   //Accessors and Mutators for Game
 	public void moveCard(CardSet a, CardSet b, int i, int cardID)
