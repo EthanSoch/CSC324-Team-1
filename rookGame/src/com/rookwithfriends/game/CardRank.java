@@ -75,4 +75,6 @@ public enum CardRank {
 	        }
 	  return theValue;
 	}
-}
+	 
+	 
+}// End of Class
