@@ -3,6 +3,7 @@ var myModule = angular.module('rook', []);
 myModule.controller('myController', function($scope) {
 	$scope.players = [false,false,false,false];
 	$scope.numplayers = 0;
+	$scope.inviteUrl = "";
 	
 	$scope.change = function() {
 		$scope.numplayers = 0;
@@ -14,8 +15,7 @@ myModule.controller('myController', function($scope) {
 	
 	$scope.onMessage = function(msg){
 		var data = JSON.parse(msg.data);
-		console.log("Message data" + data);
-		
+
 		$scope.players[data.playerConnected] = true;
 		
 	    $scope.change();
@@ -24,15 +24,6 @@ myModule.controller('myController', function($scope) {
 	
 	$scope.onOpened = function() {
 	    console.log("connected");
-	    
-	    /*
-	    jQuery($scope.players).each(function(i,player){
-	    	if(!player){
-	    		$scope.players[i] = true;
-	    		return false;
-	    	}
-	    });
-	    */
 	    $scope.change();
 	    $scope.$apply();
 	}
@@ -45,12 +36,16 @@ myModule.controller('myController', function($scope) {
 	    alert("Channel closed!");
 	}
 	
-	$scope.connect = function(isNewGame){
-			var serverMessage;
-			var data = {"isNewGame" : isNewGame};
+	$scope.connect = function(){
+			var gameId = getQueryStringValue("gameId");
+			var data = {"isNewGame" : true};
+			//if url contains a game id Create new game
+			if(gameId != ""){
+				data.gameId = gameId;
+				data.isNewGame = false;
+			}
 			
-			if(!isNewGame)
-				data.gameId = jQuery("#gameId").val();
+			var serverMessage;
 			
 			jQuery.ajax({
 				  data: data,
@@ -72,5 +67,11 @@ myModule.controller('myController', function($scope) {
 		    socket.onmessage = $scope.onMessage;
 		    socket.onerror = $scope.onError;
 		    socket.onclose = $scope.onClose;
+		    
+		    $scope.inviteUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?gameId=" +serverMessage.gameId;
 	}
 });
+
+function getQueryStringValue (key) {  
+	  return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+}  

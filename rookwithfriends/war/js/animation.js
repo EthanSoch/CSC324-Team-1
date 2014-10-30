@@ -79,7 +79,8 @@ $.init = function() {
   $.PI = Math.PI;
   $.TWO_PI = $.PI * 2;
   $.ctx.globalCompositeOperation = 'lighter';
-  document.body.appendChild($.canvas);
+  var loadingmessage = document.getElementById("loadingmessage");
+  document.getElementById("mainContainer").insertBefore($.canvas, loadingmessage);
   $.loop();
 };
 
