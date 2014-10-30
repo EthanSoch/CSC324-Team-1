@@ -1,15 +1,12 @@
 package com.rookwithfriends.game;
-import java.io.ObjectInputStream;
 import java.util.*;
 
 
 public class Player {
 	//Declare Class Members//
 	private int playerID;
-	//private int playerBid;
+	private int playerBid;
 	private int handID;
-	private CardColor trump;
-	
 	
 	//CardSet Objects For Player//
 	private CardSet playerHand;
@@ -47,14 +44,13 @@ public class Player {
 	
 	
 	//Class Setters and Getters for Player//
-	
-	/*public int getPlayerBid() {
+	public int getPlayerBid() {
 		return playerBid;
 	}
 
 	public void setPlayerBid(int playerBid) {
 		this.playerBid = playerBid;
-	}*/
+	}
 
 	public int getPlayerID() {
 		return playerID;
@@ -87,99 +83,6 @@ public class Player {
 	public void setCardsWon(CardSet cardsWon) {
 		this.cardsWon = cardsWon;
 	}
-	
-	public CardColor setTrump() {
-		Scanner read = new Scanner(System.in);
-		String input = null;
-		String colorUp;
-		boolean correctInput = false;
-		
-		//Keep prompting for input until a string has been entered
-		do {
-			System.out.println("Please enter the new trump.");
-			input = read.next();
-			
-			colorUp = input.toUpperCase();
-			
-			if (colorUp == "RED"){
-				correctInput = true;
-			}
-			else if(colorUp == "BLACK"){
-				correctInput = true;
-			}
-			else if(colorUp == "YELLOW"){
-				correctInput = true;
-			}
-			else if(colorUp == "GREEN"){
-				correctInput = true;
-			}
-			
-		} while (!correctInput);
-		
-		//Call Enum method to return the Enum cast of the input
-		CardColor trump = CardColor.returnColor(colorUp);
-		
-		
-		read.close();
-		return trump;
-	}
-	
-	
-	public Card chooseCard(){
-		Scanner read = new Scanner(System.in);
-		String cardColor = null;
-		String colorUp;
-		double theVal;
-		boolean correctInput = false;
-		boolean cardNotFound = false;
-		Card theCard = null;
-		
-		do {
-			
-				//Keep prompting for input until a string has been entered
-				do {
-					System.out.println("Please enter color of the card that you want.\n");
-					cardColor = read.next();
-					colorUp = cardColor.toUpperCase();	
-					
-					if (colorUp == "RED"){
-						correctInput = true;
-					}
-					else if(colorUp == "BLACK"){
-						correctInput = true;
-					}
-					else if(colorUp == "YELLOW"){
-						correctInput = true;
-					}
-					else if(colorUp == "GREEN"){
-						correctInput = true;
-					}
-					
-				} while (!correctInput);
-				
-				System.out.println("Please enter value of the card that you want.\n");
-				theVal = read.nextDouble();
-				
-				CardRank cardVal = CardRank.returnRank(theVal);
-				CardColor theCardColor = CardColor.returnColor(colorUp);
-				
-				for(int i = 0; i < playerHand.size(); i++){
-					if(playerHand.getCard(i).getColor() == theCardColor && playerHand.getCard(i).getRank() == cardVal){
-							theCard = playerHand.getCard(i);
-						}
-					else{
-						cardNotFound = true;
-					}
-						
-				 }
-			}while(cardNotFound);
-			
-			read.close();
-			
-			return theCard;
-		}
-	
-
 	
 	public int setBid(int currentBid)
 	{
