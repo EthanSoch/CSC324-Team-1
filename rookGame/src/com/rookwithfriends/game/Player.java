@@ -124,16 +124,6 @@ public class Player {
 		return trump;
 	}
 	
-	public Card pickCard() {
-			Card theCard = null;
-			
-			
-			
-			removeCard(theCard);
-			return theCard;
-			
-	}
-	
 	
 	public Card chooseCard(){
 		Scanner read = new Scanner(System.in);

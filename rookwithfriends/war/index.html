@@ -33,7 +33,7 @@
 
 </head>
 
-<body ng-app="rook" ng-controller="myController">
+<body ng-app="rook">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -46,9 +46,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ng-click="connect(false)">Connect</a>
-                <a class="navbar-brand" ng-click="connect(true)" href="#">Start Game</a>
-                <input type="text" id="gameId" >
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -70,7 +67,7 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" ng-controller="myController">
 
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -88,52 +85,30 @@
             </div>
             <div id="boxContainer">
              <div class="squaredOne" id="squared1">
-<<<<<<< HEAD
                 <label for="squaredOne" ng-class="{'squaredOneClicked': players[0] }"></label>
-=======
-                <label for="squaredOne" ng-class="{'squaredOneClicked': player1}"></label>
->>>>>>> branch 'master' of https://github.com/EthanSoch/CSC324-Team-1.git
             </div>
             <div class="squaredOne" id="squared2">
-<<<<<<< HEAD
                 <label for="squared2" ng-class="{'squaredOneClicked': players[1] }"></label>
-=======
-                <label for="squared2"  ng-class="{'squaredOneClicked': player2}"></label>
->>>>>>> branch 'master' of https://github.com/EthanSoch/CSC324-Team-1.git
             </div>
             <div class="squaredOne" id="squared3">
-<<<<<<< HEAD
                 <label for="squaredOne" ng-class="{'squaredOneClicked': players[2] }"></label>
-=======
-                <label for="squaredOne" ng-class="{'squaredOneClicked': player3}"></label>
->>>>>>> branch 'master' of https://github.com/EthanSoch/CSC324-Team-1.git
             </div>
             <div class="squaredOne" id="squared4">
-<<<<<<< HEAD
                 <label for="squaredOne" ng-class="{'squaredOneClicked': players[3] }"></label>
-=======
-                <label for="squaredOne" ng-class="{'squaredOneClicked': player4}"></label>
->>>>>>> branch 'master' of https://github.com/EthanSoch/CSC324-Team-1.git
             </div>
           </div>
             <div id="players">There are currently {{numplayers}} of 4 players connected.</div>
-            <a href="#" class="button" ng-click="connect()">
+            <input type="text" readonly="readonly" ng-value="inviteUrl" >
+            <a class="button" ng-click="connect()">
               <span>Connect</span>
             </a>
          </div>
         </div>
-
-          
     </div>
-
-
-
     <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
 </body>
 <script src="js/animation.js"></script>
 <script src="js/angular.min.js"></script>

@@ -50,7 +50,11 @@ public class PlayerTest {
 		Player p2=new Player();
 		Player winner=p2;
 		currentBid=p.setBid(currentBid);
-		assertTrue(currentBid==5);
+		if(currentBid>p2.getPlayerBid())
+		{
+			winner=p;
+		}
+		assertTrue(currentBid==5&&winner==p);
 	}
 
 
