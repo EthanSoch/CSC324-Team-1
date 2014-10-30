@@ -7,7 +7,6 @@ public class Player {
 	private int playerID;
 	private int playerBid;
 	private int handID;
-	private CardColor trump;
 	
 	//CardSet Objects For Player//
 	private CardSet playerHand;
