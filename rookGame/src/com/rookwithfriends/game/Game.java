@@ -2,7 +2,8 @@ package com.rookwithfriends.game;
 import java.util.*;
 
 
-public class Game {
+public class Game 
+{
 	//Declare Class Members//
 	private int playerID;
 	private int gameBid;
@@ -21,7 +22,7 @@ public class Game {
 	//need to add the kitty, all, and center hands
 
 	
-	Game(int playerId1, int playerId2, int playerId3, int playerId4)
+	public Game(int playerId1, int playerId2, int playerId3, int playerId4)
 	{
 		
 		this.player1 = new Player(playerId1);
@@ -35,8 +36,10 @@ public class Game {
 	
 	
 	//Let the Games Begin
-	private void playGame(){
+	private void playGame()
+	{
 		//Step 1 -- Shuffle Cards
+		//create Deck that holds all cards
 		allDeck = new CardSet();
 		c1 = new Card(CardColor.red, CardRank.one, 0);
 		c2 = new Card(CardColor.red, CardRank.five, 0);
@@ -263,12 +266,4 @@ public class Game {
 
 
 
-
-public static void main (String[] args)
-{
-	Game g = new Game(1, 2, 3, 4);
-	//System.out.println(g);
-	//g.playGame();
-	
-}
 }
