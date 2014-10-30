@@ -2,7 +2,6 @@ html {
 	background-color: #2D3135;
 }
 #loadingmessage{
-	width: 600px;
 	white-space:nowrap;
 	color: white;
 }
@@ -12,7 +11,6 @@ html {
 }
 #players{
 	color: white;
-	width: 600px;
 	white-space:nowrap;
 }
 #boxContainer{
@@ -115,7 +113,6 @@ canvas {
 }
 #mainContainer{
 	margin: 0 auto;
-	width: 50%;
 	text-align: center;
 }
 #Connect{
