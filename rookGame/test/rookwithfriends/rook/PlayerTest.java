@@ -25,9 +25,9 @@ public class PlayerTest {
 		c2 = new Card(CardColor.red, CardRank.one, 1);
 		c3 = new Card(CardColor.black, CardRank.five, 2);
 
-		cs1.addCard(c1);
-		cs1.addCard(c2);
-		cs1.addCard(c3);
+		cs1.add(c1);
+		cs1.add(c2);
+		cs1.add(c3);
 		
 		p=new Player();
 		p.combineHand(cs1);
@@ -41,7 +41,7 @@ public class PlayerTest {
 
 	@Test
 	public void testCombineHand() {
-		assertTrue(cs1.getCard(0)==p.selectCard(0) && cs1.getCard(1)==p.selectCard(1)&&cs1.getCard(2)==p.selectCard(2));
+		assertTrue(cs1.get(0)==p.selectCard(0) && cs1.get(1)==p.selectCard(1)&&cs1.get(2)==p.selectCard(2));
 	}
 
 	/*@Test

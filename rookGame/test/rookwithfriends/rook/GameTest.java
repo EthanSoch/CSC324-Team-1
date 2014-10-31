@@ -25,24 +25,24 @@ public class GameTest {
 		for (CardColor color : CardColor.values()) {
 			for (CardRank rank : CardRank.values()) {
 				if (rank != CardRank.rook) {
-					allDeck.addCard(new Card(color, rank, 0));
+					allDeck.add(new Card(color, rank, 0));
 				}
 			}
 		}
 
-		allDeck.addCard(new Card(CardColor.black, CardRank.rook, 0));
+		allDeck.add(new Card(CardColor.black, CardRank.rook, 0));
 
-		ArrayList<Card> actualSet = game.getAllDeck().getArrayList();
-		ArrayList<Card> kitty = game.kitty.getArrayList();
+		ArrayList<Card> actualSet = game.getAllDeck();
+		ArrayList<Card> kitty = game.kitty;
 
-		for (Card card : allDeck.getArrayList()) {
+		for (Card card : allDeck) {
 			// Check if card is in the deck
 			if (!(actualSet.contains(card) || kitty.contains(card))) {
 				boolean doesPlayerHaveCard = false;
 
 				// check if the card has been delt
 				for (Player player : game.players) {
-					if (player.getPlayerHand().getArrayList().contains(card)) {
+					if (player.getPlayerHand().contains(card)) {
 						doesPlayerHaveCard = true;
 						break;
 					}

@@ -2,17 +2,15 @@ package com.rookwithfriends.game;
 
 import java.util.*;
 
-public class CardSet {
-	private ArrayList<Card> cardSet;
+public class CardSet extends ArrayList<Card>{
 	private int handID;
 
 	public CardSet() {
-		cardSet = new ArrayList<Card>();
 		handID = 0;
 	}
 
 	public void Shuffle() {
-		Collections.shuffle(cardSet);
+		Collections.shuffle((List<Card>)this);
 	}
 
 	// Sort the cards according to color and number
@@ -22,7 +20,7 @@ public class CardSet {
 	// card)
 	public void Sort() {
 		// use a custom comparator to compare cards
-		Collections.sort(cardSet, new Comparator<Card>() {
+		Collections.sort(this, new Comparator<Card>() {
 			@Override
 			public int compare(Card card1, Card card2) {
 				// if colors are the same, compare numbers
@@ -52,14 +50,6 @@ public class CardSet {
 		});
 	}
 
-	public void addCard(Card newCard) {
-		cardSet.add(newCard);
-	}
-
-	public Card getCard(int index) {
-		return cardSet.get(index);
-	}
-
 	public void setID(int newID) {
 		handID = newID;
 	}
@@ -71,7 +61,7 @@ public class CardSet {
 	public int getScore() {
 		int score = 0;
 
-		for (Card card : cardSet) {
+		for (Card card : this) {
 			switch (card.getRank()) {
 			case one:
 				score += 15;
@@ -96,14 +86,10 @@ public class CardSet {
 		return score;
 	}
 
-	public int size() {
-		return cardSet.size();
-	}
-
 	// finds the highest card of a cardset with regards to a trump color
 	public Card findWinningCard(CardColor trump) {
-		Card highCard = cardSet.get(0);
-		for (Card currentCard : cardSet) {
+		Card highCard = get(0);
+		for (Card currentCard : this) {
 			if (highCard.getColor().getValue() == trump.getValue()
 					&& currentCard.getColor().getValue() == trump.getValue()) {
 				if (highCard.getRank().getValue() < currentCard.getRank()
@@ -126,29 +112,20 @@ public class CardSet {
 	}
 	
 	public Card front(){
-		return cardSet.get(0);
+		return get(0);
 	}
 	
 	public void pop(){
-		cardSet.remove(0);
+		remove(0);
 	}
 	
 	public String toString()
 	{
 		String string = "";
-		for(int i = 0;i<cardSet.size();i++)
+		for(int i = 0;i<size();i++)
 		{
-			string+=getCard(i).toString();
+			string+=get(i).toString();
 		}
 		return string;
-	}
-	
-	public void discardCard(int index)
-	{
-		cardSet.remove(index);
-	}
-	
-	public ArrayList<Card> getArrayList(){
-		return cardSet;
 	}
 }
