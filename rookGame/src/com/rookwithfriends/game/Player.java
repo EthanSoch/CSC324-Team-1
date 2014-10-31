@@ -97,7 +97,7 @@ public class Player {
 			
 			colorUp = input.toUpperCase();
 			
-			if (colorUp == "RED"){
+			if (colorUp.equals("RED")){
 				correctInput = true;
 			}
 			else if(colorUp.equals("BLACK")){
@@ -142,7 +142,7 @@ public class Player {
 					colorUp = cardColor.toUpperCase();	
 					System.out.println(colorUp);
 					
-					if (colorUp == "RED"){
+					if (colorUp.equals("RED")){
 						correctInput = true;
 						System.out.println("Called");
 					}
