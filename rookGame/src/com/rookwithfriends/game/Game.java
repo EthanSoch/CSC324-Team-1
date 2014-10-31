@@ -52,12 +52,8 @@ public class Game
 		//Step 2.5 -- Print all the hands out
 		printHands(); //Moved the print hands into a different method
 		
-			//ex: for(i 0 thru 9 : player1.getHand().addCard(all.getCard(i))
-			//do for 10-19,20-29,30-39 for p2-p4. Add 40-44 to kitty
-		
 		//Step 3 -- Sort Each Hand
-			//player1.getHand().sortHand() 
-		    //player2-4 "
+			//done in dealHand
 		//Step 3.5 -- Display each hand
 			//player1.printHand()
 			//player2-4 "
@@ -112,6 +108,7 @@ public class Game
 			Card movedCard = thePlayer.chooseCard();
 			int cardIndex = 0;
 			
+			//how are these different?
 			if (pile == "CENTER"){
 				move(pile, movedCard);
 			}
@@ -131,25 +128,29 @@ public class Game
 		}
 		
 		//Move method to move a card into either the center or the discard pile
-			public void move(String hand, Card theCard){
-				if (hand == "CENTERPILE"){
-					centerDeck.addCard(theCard);			
-				}
-				else if (hand == "DISCARDPILE"){
-					discardPile.addCard(theCard);
-				}
-				
+		public void move(String hand, Card theCard){
+			
+			//Should these be "CENTER" and "DISCARD" respectively
+			if (hand == "CENTERPILE"){
+				centerDeck.addCard(theCard);			
 			}
+			else if (hand == "DISCARDPILE"){
+				discardPile.addCard(theCard);
+			}
+			
+		}
 		
 		
 			
   //Accessors and Mutators for Game
-	public void moveCard(CardSet a, CardSet b, int i, int cardID)
+	public void moveCard(CardSet to, CardSet from, int i, int cardID)
 	{
-		temp = b.getCard(i);
+		temp = from.getCard(i);
 		temp.setId(cardID);
-		a.addCard(temp);
-		b.discardCard(i);
+		to.addCard(temp);
+		
+		//If we don't discard, we won't have to recreate the deck each time
+		from.discardCard(i);
 	}
 	
 	public int getPlayerID() {
