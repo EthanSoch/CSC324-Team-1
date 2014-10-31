@@ -121,7 +121,7 @@ public class Game {
 			
 			player.printHand();
 		}
-
+		System.out.println("The Kitty: ");
 		System.out.println(kitty);
 	}
 

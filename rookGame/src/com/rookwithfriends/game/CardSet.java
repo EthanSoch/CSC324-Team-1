@@ -138,7 +138,7 @@ public class CardSet {
 		String string = "";
 		for(int i = 0;i<cardSet.size();i++)
 		{
-			string+=getCard(i).toString();
+			string+="Card ["+i+"]: "+getCard(i).toString() + "\n";
 		}
 		return string;
 	}
