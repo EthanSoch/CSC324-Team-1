@@ -100,13 +100,17 @@ public class Player {
 			if (colorUp == "RED"){
 				correctInput = true;
 			}
-			else if(colorUp == "BLACK"){
+			else if(colorUp.equals("BLACK")){
 				correctInput = true;
 			}
-			else if(colorUp == "YELLOW"){
+			else if(colorUp.equals("YELLOW")){
 				correctInput = true;
 			}
-			else if(colorUp == "GREEN"){
+			else if(colorUp.equals("GREEN")){
+				correctInput
+				= true;
+			}
+			else if(colorUp.equals("WHITE")){
 				correctInput = true;
 			}
 			
@@ -143,13 +147,16 @@ public class Player {
 						correctInput = true;
 						System.out.println("Called");
 					}
-					else if(colorUp == "BLACK"){
+					else if(colorUp.equals("BLACK")){
 						correctInput = true;
 					}
-					else if(colorUp == "YELLOW"){
+					else if(colorUp.equals("YELLOW")){
 						correctInput = true;
 					}
-					else if(colorUp == "GREEN"){
+					else if(colorUp.equals("GREEN")){
+						correctInput = true;
+					}
+					else if(colorUp.equals("WHITE")){
 						correctInput = true;
 					}
 					System.out.println(correctInput);
