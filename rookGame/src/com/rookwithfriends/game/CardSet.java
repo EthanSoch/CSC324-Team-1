@@ -124,7 +124,7 @@ public class CardSet extends ArrayList<Card>{
 		String string = "";
 		for(int i = 0;i<size();i++)
 		{
-			string+=get(i).toString();
+			string+="Card ["+i+"]: "+get(i).toString() + "\n";
 		}
 		return string;
 	}
