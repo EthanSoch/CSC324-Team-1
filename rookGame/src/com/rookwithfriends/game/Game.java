@@ -12,11 +12,15 @@ public class Game {
 
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4) {
 		players = new Player[4];
+		players[0] = new Player(playerId1);
+		players[1] = new Player(playerId2);
+		players[2] = new Player(playerId3);
+		players[3] = new Player(playerId4);
 		
-		for(int i = 0 ; i < players.length ; i++){
+		/*for(int i = 0 ; i < players.length ; i++){
 			players[i] = new Player();
 			System.out.println("Player["+i+"]"+" created.");
-		}
+		}*/
 	}
 
 	public void startGame() {
