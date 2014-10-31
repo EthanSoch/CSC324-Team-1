@@ -61,8 +61,10 @@ public class PlayerTest {
 	public void testChooseCard() {
 		Card card = new Card(CardColor.red, CardRank.one, 0);
 		Player p2=new Player();
+		p2.getPlayerHand().addCard(card);
 		Card newcard = p2.chooseCard();
-		assertTrue(card == newcard);
+		System.out.println(newcard);
+		assertTrue(card.equals(newcard));
 	}
 
 

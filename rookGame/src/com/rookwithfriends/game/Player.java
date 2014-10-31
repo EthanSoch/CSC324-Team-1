@@ -140,11 +140,9 @@ public class Player {
 					System.out.println("Please enter color of the card that you want.\n");
 					cardColor = read.next();
 					colorUp = cardColor.toUpperCase();	
-					System.out.println(colorUp);
 					
 					if (colorUp.equals("RED")){
 						correctInput = true;
-						System.out.println("Called");
 					}
 					else if(colorUp.equals("BLACK")){
 						correctInput = true;
@@ -158,10 +156,9 @@ public class Player {
 					else if(colorUp.equals("WHITE")){
 						correctInput = true;
 					}
-					System.out.println(correctInput);
 				} while (!correctInput);
 				
-				System.out.println("Please enter value of the card that you want.\n");
+				System.out.println("Please enter value of the card that you want. (Must be a double)\n");
 				theVal = read.nextDouble();
 				
 				CardRank cardVal = CardRank.returnRank(theVal);
@@ -169,7 +166,7 @@ public class Player {
 				
 				for(int i = 0; i < playerHand.size(); i++){
 					if(playerHand.getCard(i).getColor() == theCardColor && playerHand.getCard(i).getRank() == cardVal){
-							theCard = playerHand.getCard(i);
+							theCard = playerHand.getCard(i);1
 						}
 					else{
 						cardNotFound = true;
