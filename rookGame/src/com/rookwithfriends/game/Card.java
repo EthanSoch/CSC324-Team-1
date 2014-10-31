@@ -50,6 +50,6 @@ public class Card {
 	
 	public String toString()
 	{
-		return color.getValue()+" "+rank.getValue(); 
+		return color.name() + ":" + rank.name() + ", "; 
 	}
 }
