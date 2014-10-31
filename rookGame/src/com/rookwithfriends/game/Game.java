@@ -13,104 +13,7 @@ public class Game {
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4) {
 		players = new Player[4];
 	}
-	
-	
-	//Let the Games Begin
-	private void playGame()
-	{
-		//Step 1 -- Shuffle Cards
-		//create Deck that holds all cards
-		createDeck(); //Moved the code that instantiates allDeck to separate method
 
-	   //instantiate hand with all cards
-		allDeck.Shuffle();
-
-		//Step 2 -- Deal Cards
-		dealHands(); //Moved the code that deals hands into separate method
-		
-		
-		//Step 2.5 -- Print all the hands out
-		printHands(); //Moved the print hands into a different method
-		
-		//Step 3 -- Sort Each Hand
-			//done in dealHand
-		//Step 3.5 -- Display each hand
-			//player1.printHand()
-			//player2-4 "
-		//Step 4 -- Round of bidding?
-		//do{
-			//need to update current bidWinner after every bid.
-			//tempbid=player1.setBid(gameBid) -- Method needed?
-			//if(tempbid>gameBid) {
-			//	bidWinner=player1;
-			//	gameBid=tempbid; }  Can this be put in a method checkBid(tempBid,player)
-		    
-		//}while(currentbid<200 and not everyone passes)
-		
-		//Step 4 -- Find winner of bid - Pass control unto them?
-			//Player bidWinner is a public variable -- Create Gameboard, add needed methods. 
-			/*
-			 
-			 bidWinner.combineHand(kitty)
-			 
-			 */
-			
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//Methods for Game
-	
-		public void moveCard2(String pile, Player thePlayer) {
-			
-			Card movedCard = thePlayer.chooseCard();
-			int cardIndex = 0;
-			
-			//how are these different?
-			if (pile == "CENTER"){
-				move(pile, movedCard);
-			}
-			else if(pile == "DISCARD"){
-				move(pile, movedCard);
-			}
-			else if(pile == "HAND"){ // Remove if not needed
-				move(pile, movedCard);
-			}
-			
-			for(int i = 0; i < thePlayer.getPlayerHand().size(); i++){
-				if(thePlayer.getPlayerHand().getCard(i) == movedCard){
-					cardIndex = i;
-				}
-			}
-			thePlayer.getPlayerHand().discardCard(cardIndex);
-		}
-		
-			
-		//Accessors and Mutators for Game
-
-	// Let the Games Begin
 	public void startGame() {
 		// Step 1 -- Shuffle Cards
 		// create Deck that holds all cards
@@ -118,13 +21,13 @@ public class Game {
 						// method
 
 		// instantiate hand with all cards
-		//allDeck.Shuffle();
+		// allDeck.Shuffle();
 
 		// Step 2 -- Deal Cards
-		//dealHands(); // Moved the code that deals hands into separate method
+		// dealHands(); // Moved the code that deals hands into separate method
 
 		// Step 2.5 -- Print all the hands out
-		//printHands(); // Moved the print hands into a different method
+		// printHands(); // Moved the print hands into a different method
 
 		// Step 3 -- Sort Each Hand
 		// done in dealHand
@@ -212,7 +115,7 @@ public class Game {
 
 	public void createDeck() {
 		allDeck = new CardSet();
-		
+
 		for (CardColor color : CardColor.values()) {
 			for (CardRank rank : CardRank.values()) {
 				if (rank != CardRank.rook) {
