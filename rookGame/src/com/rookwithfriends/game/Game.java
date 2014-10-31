@@ -157,6 +157,7 @@ public class Game {
 		// kitty deal hand
 		for (int i = 0; i < 5; i++) {
 			kitty.add(allDeck.front());
+			allDeck.pop();
 		}
 		kitty.Sort();
 		System.out.println("Hands have been created, and sorted.\n");

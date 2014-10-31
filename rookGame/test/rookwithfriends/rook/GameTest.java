@@ -55,7 +55,7 @@ public class GameTest {
 			}
 		}
 
-		assertTrue(actualSet.size() == 17);
+		assertTrue(actualSet.size() == 12);
 	}
 
 	/*@Test
