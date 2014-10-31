@@ -58,7 +58,7 @@ public class RookServlet extends HttpServlet {
 		String message = request.getParameter("message");
 		UUID gameID = UUID.fromString(request.getParameter("gameID"));
 		
-		//get Sesson
+		//get Session
 		GameSession session = GameSession.getGameSession(gameID);
 		
 		for(UserSession player : session.getPlayers()){
