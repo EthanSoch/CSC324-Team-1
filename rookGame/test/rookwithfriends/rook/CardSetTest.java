@@ -23,26 +23,26 @@ public class CardSetTest {
 		c2 = new Card(CardColor.red, CardRank.one, 1);
 		c3 = new Card(CardColor.black, CardRank.five, 2);
 
-		cs1.addCard(c1);
-		cs1.addCard(c2);
-		cs1.addCard(c3);
+		cs1.add(c1);
+		cs1.add(c2);
+		cs1.add(c3);
 	}
 
 	@Test
 	public void testAddCard() {
-		assertTrue(cs1.getCard(0) == c1);
+		assertTrue(cs1.get(0) == c1);
 	}
 
 	@Test
 	public void testShuffle() {
 		cs1.Shuffle();
-		assertFalse(cs1.getCard(0) == c1 && cs1.getCard(1) == c2 && cs1.getCard(2) == c3);
+		assertFalse(cs1.get(0) == c1 && cs1.get(1) == c2 && cs1.get(2) == c3);
 	}
 
 	@Test
 	public void testSort() {
 		cs1.Sort();
-		assertTrue(cs1.getCard(0) == c2 && cs1.getCard(2) == c3);
+		assertTrue(cs1.get(0) == c2 && cs1.get(2) == c3);
 	}
 
 	@Test
