@@ -5,6 +5,7 @@ public class Game {
 	private int gameBid, trump;
 	public CardSet allDeck, centerDeck, kitty;
 	public Player[] players;
+	private Player bidWinner;
 
 	// vector of all players
 	// public Player bidWinner
@@ -33,36 +34,39 @@ public class Game {
 		// instantiate hand with all cards
 		allDeck.Shuffle();
 
-		// Step 2 -- Deal Cards
+		// Step 2 -- Deal & Sort Cards
 		dealHands(); // Moved the code that deals hands into separate method
 
-		// Step 2.5 -- Print all the hands out
+		// Step 3 -- Print all the hands out
 		System.out.println("Here are the hands\n");
 		printHands(); // Moved the print hands into a different method
-
-		// Step 3 -- Sort Each Hand
-		// done in dealHand
-		// Step 3.5 -- Display each hand
-		// player1.printHand()
-		// player2-4 "
+		
+		int tempbid;
 		// Step 4 -- Round of bidding?
-		// do{
-		// need to update current bidWinner after every bid.
-		// tempbid=player1.setBid(gameBid) -- Method needed?
-		// if(tempbid>gameBid) {
-		// bidWinner=player1;
-		// gameBid=tempbid; } Can this be put in a method
-		// checkBid(tempBid,player)
-
-		// }while(currentbid<200 and not everyone passes)
+		do{		 
+			 for(int i = 0 ; i < players.length ; i++){
+				 if (gameBid >=200){
+					 break;
+				 }
+				 System.out.println("Player[" + i + "]: It's your turn to bid.\n");
+				  tempbid = players[i].setBid(gameBid);		 
+					 if(tempbid > gameBid){
+						 bidWinner=players[i];
+						 gameBid=tempbid; 
+					 }
+			 }
+		 
+		 } while(gameBid < 200);
 
 		// Step 4 -- Find winner of bid - Pass control unto them?
 		// Player bidWinner is a public variable -- Create Gameboard, add needed
 		// methods.
-		/*
-		 * 
-		 * bidWinner.combineHand(kitty)
-		 */
+		
+		System.out.println("The winner of the bid was: " + bidWinner.getPlayerID());
+		bidWinner.combineHand(kitty);
+		bidWinner.getPlayerHand().Sort();
+		System.out.println("\nThe winners hand is: ");
+		bidWinner.printHand();
 
 	}
 

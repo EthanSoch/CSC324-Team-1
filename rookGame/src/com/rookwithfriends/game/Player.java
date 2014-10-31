@@ -37,9 +37,7 @@ public class Player {
 	//NEEDS REFACTORING//
 	
 	public void combineHand(CardSet theKitty){
-		for(int i=0; i < theKitty.size() ; i++){
-			this.playerHand.add(theKitty.get(i)); //CardSet needs a get method to retrieve entire ArrayList
-		}
+		playerHand.addAll(theKitty);
 	}
 	
 	
@@ -178,20 +176,20 @@ public class Player {
 	public int setBid(int currentBid)
 	{
 		Scanner read = new Scanner(System.in);
-		System.out.println("Current bid is " + currentBid);
-		System.out.println("Enter 1 to increase, enter 2 to pass.");
+		System.out.println("Current bid is " + currentBid + ".\n");
+		System.out.println("Enter 1 to increase, enter 2 to pass.\n");
 		
-		int answer=read.nextInt();
+		int answer = read.nextInt();
 		if(answer == 1){
-			System.out.println("What is your new bid. Must be a multiple of 5");
+			System.out.println("What is your new bid. Must be a multiple of 5.\n");
 			
 			int bid=read.nextInt();
 			if(bid%5 == 0 && bid > currentBid){
 				currentBid=bid;
-				System.out.println("Thank you, your bid has been set. New bid is: " + currentBid);
+				System.out.println("Thank you, your bid has been set. New bid is: " + currentBid + "\n");
 			}
 		}
-		read.close();
+		//read.close();
 		return currentBid;
 	}
 	
