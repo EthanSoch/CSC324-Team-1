@@ -137,9 +137,11 @@ public class Player {
 					System.out.println("Please enter color of the card that you want.\n");
 					cardColor = read.next();
 					colorUp = cardColor.toUpperCase();	
+					System.out.println(colorUp);
 					
 					if (colorUp == "RED"){
 						correctInput = true;
+						System.out.println("Called");
 					}
 					else if(colorUp == "BLACK"){
 						correctInput = true;
@@ -150,7 +152,7 @@ public class Player {
 					else if(colorUp == "GREEN"){
 						correctInput = true;
 					}
-					
+					System.out.println(correctInput);
 				} while (!correctInput);
 				
 				System.out.println("Please enter value of the card that you want.\n");
@@ -178,23 +180,21 @@ public class Player {
 	
 	public int setBid(int currentBid)
 	{
-		//Scanner read = new Scanner(System.in);
-		//System.out.println("Current bid is" + currentBid);
-		//System.out.println("Enter 1 to increase, enter 2 to pass");
+		Scanner read = new Scanner(System.in);
+		System.out.println("Current bid is " + currentBid);
+		System.out.println("Enter 1 to increase, enter 2 to pass.");
 		
-		//int answer=read.nextInt();
-		//if(answer==1)
-		//{
-			//get new bid
-			//System.out.println("What is your new bid. Must be a multiple of 5");
-			//int bid=read.nextInt();
-			//test if multiple of 5 and greater than currentBid
-			//if(bid%5==0 && bid>currentBid)
-			//{
-			//	currentBid=bid;
-			//}
-		//}
-		//read.close();
+		int answer=read.nextInt();
+		if(answer == 1){
+			System.out.println("What is your new bid. Must be a multiple of 5");
+			
+			int bid=read.nextInt();
+			if(bid%5 == 0 && bid > currentBid){
+				currentBid=bid;
+				System.out.println("Thank you, your bid has been set. New bid is: " + currentBid);
+			}
+		}
+		read.close();
 		return currentBid;
 	}
 	
