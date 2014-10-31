@@ -143,7 +143,7 @@ public class Game
 		
 			
   //Accessors and Mutators for Game
-	public void moveCard(CardSet to, CardSet from, int i, int cardID)
+   public void moveCard(CardSet to, CardSet from, int i, int cardID)
 	{
 		temp = from.getCard(i);
 		temp.setId(cardID);

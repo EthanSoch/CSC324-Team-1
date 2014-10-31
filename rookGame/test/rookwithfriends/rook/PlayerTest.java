@@ -54,8 +54,17 @@ public class PlayerTest {
 		{
 			winner=p;
 		}
-		assertTrue(currentBid==5&&winner==p);
+		assertTrue(currentBid==5 && winner==p);
 	}*/
+	
+	@Test
+	public void testChooseCard() {
+		Card card = new Card(CardColor.red, CardRank.one, 0);
+		Player p2=new Player();
+		Card newcard = p2.chooseCard();
+		assertTrue(card == newcard);
+	}
+
 
 
 }
