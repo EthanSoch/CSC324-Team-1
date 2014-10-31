@@ -12,6 +12,10 @@ public class Game {
 
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4) {
 		players = new Player[4];
+		
+		for(int i = 0 ; i < players.length ; i++){
+			players[i] = new Player();
+		}
 	}
 
 	public void startGame() {
@@ -21,10 +25,10 @@ public class Game {
 						// method
 
 		// instantiate hand with all cards
-		// allDeck.Shuffle();
+		allDeck.Shuffle();
 
 		// Step 2 -- Deal Cards
-		// dealHands(); // Moved the code that deals hands into separate method
+		dealHands(); // Moved the code that deals hands into separate method
 
 		// Step 2.5 -- Print all the hands out
 		// printHands(); // Moved the print hands into a different method
@@ -129,17 +133,19 @@ public class Game {
 
 	public void dealHands() {
 		for (Player player : players) {
-			CardSet hand = player.getPlayerHand();
+			CardSet hand = new CardSet();
 
-			for (int i = 10; i < 10; i++) {
+			for (int i = 0; i < 10; i++) {
 				hand.addCard(allDeck.front());
 				allDeck.pop();
-
 			}
 
 			hand.Sort();
+			player.setPlayerHand(hand);
 		}
 
+		kitty = new CardSet();
+		
 		// kitty deal hand
 		for (int i = 0; i < 5; i++) {
 			kitty.addCard(allDeck.front());

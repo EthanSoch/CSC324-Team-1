@@ -97,16 +97,19 @@ public class Player {
 			
 			colorUp = input.toUpperCase();
 			
-			if (colorUp == "RED"){
+			if (colorUp.equals("RED")){
 				correctInput = true;
 			}
-			else if(colorUp == "BLACK"){
+			else if(colorUp.equals("BLACK")){
 				correctInput = true;
 			}
-			else if(colorUp == "YELLOW"){
+			else if(colorUp.equals("YELLOW")){
 				correctInput = true;
 			}
-			else if(colorUp == "GREEN"){
+			else if(colorUp.equals("GREEN")){
+				correctInput = true;
+			}
+			else if(colorUp.equals("WHITE")){
 				correctInput = true;
 			}
 			
@@ -137,25 +140,25 @@ public class Player {
 					System.out.println("Please enter color of the card that you want.\n");
 					cardColor = read.next();
 					colorUp = cardColor.toUpperCase();	
-					System.out.println(colorUp);
 					
-					if (colorUp == "RED"){
-						correctInput = true;
-						System.out.println("Called");
-					}
-					else if(colorUp == "BLACK"){
+					if (colorUp.equals("RED")){
 						correctInput = true;
 					}
-					else if(colorUp == "YELLOW"){
+					else if(colorUp.equals("BLACK")){
 						correctInput = true;
 					}
-					else if(colorUp == "GREEN"){
+					else if(colorUp.equals("YELLOW")){
 						correctInput = true;
 					}
-					System.out.println(correctInput);
+					else if(colorUp.equals("GREEN")){
+						correctInput = true;
+					}
+					else if(colorUp.equals("WHITE")){
+						correctInput = true;
+					}
 				} while (!correctInput);
 				
-				System.out.println("Please enter value of the card that you want.\n");
+				System.out.println("Please enter value of the card that you want. (Must be a double)\n");
 				theVal = read.nextDouble();
 				
 				CardRank cardVal = CardRank.returnRank(theVal);
@@ -163,7 +166,7 @@ public class Player {
 				
 				for(int i = 0; i < playerHand.size(); i++){
 					if(playerHand.getCard(i).getColor() == theCardColor && playerHand.getCard(i).getRank() == cardVal){
-							theCard = playerHand.getCard(i);
+							theCard = playerHand.getCard(i);1
 						}
 					else{
 						cardNotFound = true;
