@@ -112,6 +112,7 @@ public class Game
 			Card movedCard = thePlayer.chooseCard();
 			int cardIndex = 0;
 			
+			//how are these different?
 			if (pile == "CENTER"){
 				move(pile, movedCard);
 			}
@@ -131,25 +132,29 @@ public class Game
 		}
 		
 		//Move method to move a card into either the center or the discard pile
-			public void move(String hand, Card theCard){
-				if (hand == "CENTERPILE"){
-					centerDeck.addCard(theCard);			
-				}
-				else if (hand == "DISCARDPILE"){
-					discardPile.addCard(theCard);
-				}
-				
+		public void move(String hand, Card theCard){
+			
+			//Should these be "CENTER" and "DISCARD" respectively
+			if (hand == "CENTERPILE"){
+				centerDeck.addCard(theCard);			
 			}
+			else if (hand == "DISCARDPILE"){
+				discardPile.addCard(theCard);
+			}
+			
+		}
 		
 		
 			
   //Accessors and Mutators for Game
-	public void moveCard(CardSet a, CardSet b, int i, int cardID)
+	public void moveCard(CardSet to, CardSet from, int i, int cardID)
 	{
-		temp = b.getCard(i);
+		temp = from.getCard(i);
 		temp.setId(cardID);
-		a.addCard(temp);
-		b.discardCard(i);
+		to.addCard(temp);
+		
+		//If we don't discard, we won't have to recreate the deck each time
+		from.discardCard(i);
 	}
 	
 	public int getPlayerID() {
