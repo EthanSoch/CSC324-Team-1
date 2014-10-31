@@ -107,8 +107,7 @@ public class Player {
 				correctInput = true;
 			}
 			else if(colorUp.equals("GREEN")){
-				correctInput
-				= true;
+				correctInput = true;
 			}
 			else if(colorUp.equals("WHITE")){
 				correctInput = true;
