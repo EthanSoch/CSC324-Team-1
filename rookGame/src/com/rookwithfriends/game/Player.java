@@ -29,7 +29,7 @@ public class Player {
 	//Should this ask the user for the card?
 	public Card selectCard(int index){
 		
-		return this.playerHand.getCard(index);
+		return this.playerHand.get(index);
 		
 	}
 	
@@ -38,7 +38,7 @@ public class Player {
 	
 	public void combineHand(CardSet theKitty){
 		for(int i=0; i < theKitty.size() ; i++){
-			this.playerHand.addCard(theKitty.getCard(i)); //CardSet needs a get method to retrieve entire ArrayList
+			this.playerHand.add(theKitty.get(i)); //CardSet needs a get method to retrieve entire ArrayList
 		}
 	}
 	
@@ -141,21 +141,15 @@ public class Player {
 					cardColor = read.next();
 					colorUp = cardColor.toUpperCase();	
 					
-					if (colorUp.equals("RED")){
+					switch(colorUp){
+					case "RED":
+					case "BLACK":
+					case "YELLOW":
+					case "WHITE":
 						correctInput = true;
+						break;
 					}
-					else if(colorUp.equals("BLACK")){
-						correctInput = true;
-					}
-					else if(colorUp.equals("YELLOW")){
-						correctInput = true;
-					}
-					else if(colorUp.equals("GREEN")){
-						correctInput = true;
-					}
-					else if(colorUp.equals("WHITE")){
-						correctInput = true;
-					}
+					
 				} while (!correctInput);
 				
 				System.out.println("Please enter value of the card that you want. (Must be a double)\n");
@@ -165,8 +159,8 @@ public class Player {
 				CardColor theCardColor = CardColor.returnColor(colorUp);
 				
 				for(int i = 0; i < playerHand.size(); i++){
-					if(playerHand.getCard(i).getColor() == theCardColor && playerHand.getCard(i).getRank() == cardVal){
-							theCard = playerHand.getCard(i);
+					if(playerHand.get(i).getColor() == theCardColor && playerHand.get(i).getRank() == cardVal){
+							theCard = playerHand.get(i);
 						}
 					else{
 						cardNotFound = true;

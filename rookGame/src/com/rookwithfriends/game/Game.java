@@ -121,7 +121,7 @@ public class Game {
 			
 			player.printHand();
 		}
-		System.out.println("The Kitty: ");
+
 		System.out.println(kitty);
 	}
 
@@ -131,13 +131,12 @@ public class Game {
 		for (CardColor color : CardColor.values()) {
 			for (CardRank rank : CardRank.values()) {
 				if (rank != CardRank.rook) {
-					allDeck.addCard(new Card(color, rank, 0));
+					allDeck.add(new Card(color, rank, 0));
 				}
 			}
 		}
 
-		allDeck.addCard(new Card(CardColor.black, CardRank.rook, 0));
-		System.out.println("Deck has been created\n");
+		allDeck.add(new Card(CardColor.black, CardRank.rook, 0));
 	}
 
 	public void dealHands() {
@@ -145,7 +144,7 @@ public class Game {
 			CardSet hand = new CardSet();
 
 			for (int i = 0; i < 10; i++) {
-				hand.addCard(allDeck.front());
+				hand.add(allDeck.front());
 				allDeck.pop();
 			}
 
@@ -157,7 +156,7 @@ public class Game {
 		
 		// kitty deal hand
 		for (int i = 0; i < 5; i++) {
-			kitty.addCard(allDeck.front());
+			kitty.add(allDeck.front());
 		}
 		kitty.Sort();
 		System.out.println("Hands have been created, and sorted.\n");
