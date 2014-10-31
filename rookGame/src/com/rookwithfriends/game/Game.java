@@ -52,12 +52,8 @@ public class Game
 		//Step 2.5 -- Print all the hands out
 		printHands(); //Moved the print hands into a different method
 		
-			//ex: for(i 0 thru 9 : player1.getHand().addCard(all.getCard(i))
-			//do for 10-19,20-29,30-39 for p2-p4. Add 40-44 to kitty
-		
 		//Step 3 -- Sort Each Hand
-			//player1.getHand().sortHand() 
-		    //player2-4 "
+			//done in dealHand
 		//Step 3.5 -- Display each hand
 			//player1.printHand()
 			//player2-4 "
