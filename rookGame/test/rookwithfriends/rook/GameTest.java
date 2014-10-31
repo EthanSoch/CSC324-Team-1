@@ -12,7 +12,7 @@ import com.rookwithfriends.game.*;
 public class GameTest {
 	Game game;
 
-	@Test
+	@Before
 	public void setUp() throws Exception {
 		game = new Game(0, 1, 2, 3);
 		game.startGame();
