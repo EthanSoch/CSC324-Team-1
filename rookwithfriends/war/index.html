@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,9 +31,7 @@
     <![endif]-->
 
 </head>
-
-<body ng-app="rook">
-
+<body ng-app="rook" ng-controller="myController">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -60,7 +57,7 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
-                    <li class="form-group">
+                    <li>
                       <input id="searchbox" type="text" class="form-control" type="text" readonly="readonly" ng-value="inviteUrl">
                     </li>
                 </ul>
@@ -69,10 +66,8 @@
         </div>
         <!-- /.container -->
     </nav>
-
     <!-- Page Content -->
-    <div class="container" ng-controller="myController">
-
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 style="color: #ffffff">Welcome to Rook With Friends!</h1>
@@ -107,21 +102,15 @@
             </a>
          </div>
         </div>
-
-          
     </div>
-
-
 
     <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="js/animation.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="/_ah/channel/jsapi"></script>
+	<script src="js/rook.js"></script>
 </body>
-<script src="js/animation.js"></script>
-<script src="js/angular.min.js"></script>
-<script src="/_ah/channel/jsapi"></script>
-<script src="js/rook.js"></script>
 </html>
