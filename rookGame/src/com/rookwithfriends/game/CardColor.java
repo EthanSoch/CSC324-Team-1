@@ -21,16 +21,16 @@ public enum CardColor{
 		{
 			CardColor theColor = null;
 			
-			if (color == "RED"){
+			if (color.equals("RED")){
 				theColor = red;
 			}
-			else if(color == "BLACK"){
+			else if(color.equals("BLACK")){
 				theColor = black;
 			}
-			else if(color == "YELLOW"){
+			else if(color.equals("YELLOW")){
 				theColor = yellow;
 			}
-			else if(color == "GREEN"){
+			else if(color.equals("GREEN")){
 				theColor = green;
 			}
 			return theColor;

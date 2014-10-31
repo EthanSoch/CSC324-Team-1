@@ -57,12 +57,21 @@ public class PlayerTest {
 		assertTrue(currentBid==5 && winner==p);
 	}*/
 	
-	@Test
+	/*@Test
 	public void testChooseCard() {
 		Card card = new Card(CardColor.red, CardRank.one, 0);
 		Player p2=new Player();
+		p2.getPlayerHand().addCard(card);
 		Card newcard = p2.chooseCard();
-		assertTrue(card == newcard);
+		System.out.println(newcard);
+		assertTrue(card.equals(newcard));
+	}*/
+	
+	@Test
+	public void testSetTrump() {
+		Player p2=new Player();
+		CardColor newcard = p2.setTrump();
+		System.out.println(newcard);
 	}
 
 

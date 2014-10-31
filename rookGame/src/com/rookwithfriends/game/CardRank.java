@@ -43,6 +43,7 @@ public enum CardRank {
 			  switch (num) {
 			//I don't know if this has been tested, but if there are errors with just one,
 			//it might have to be CardRank.one
+			  
 	            case 1:  theValue = one;
 	                     break;
 	            case 2:  theValue = two;

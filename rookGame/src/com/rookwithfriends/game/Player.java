@@ -166,7 +166,7 @@ public class Player {
 				
 				for(int i = 0; i < playerHand.size(); i++){
 					if(playerHand.getCard(i).getColor() == theCardColor && playerHand.getCard(i).getRank() == cardVal){
-							theCard = playerHand.getCard(i);
+							theCard = playerHand.getCard(i);1
 						}
 					else{
 						cardNotFound = true;
