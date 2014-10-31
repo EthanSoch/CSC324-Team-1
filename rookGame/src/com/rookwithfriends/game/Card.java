@@ -35,6 +35,19 @@ public class Card {
 		this.id = id;
 	}
 	
+	@Override
+	public boolean equals(Object card){
+		if(card instanceof Card)
+			return equals((Card)card);
+		else
+			return false;
+	}
+	
+	public boolean equals(Card card)
+	{
+		return color == card.color && rank == card.rank;
+	}
+	
 	public String toString()
 	{
 		return color.getValue()+" "+rank.getValue(); 

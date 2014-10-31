@@ -125,6 +125,14 @@ public class CardSet {
 		return highCard;
 	}
 	
+	public Card front(){
+		return cardSet.get(0);
+	}
+	
+	public void pop(){
+		cardSet.remove(0);
+	}
+	
 	public String toString()
 	{
 		String string = "";
@@ -138,5 +146,9 @@ public class CardSet {
 	public void discardCard(int index)
 	{
 		cardSet.remove(index);
+	}
+	
+	public ArrayList<Card> getArrayList(){
+		return cardSet;
 	}
 }

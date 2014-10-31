@@ -15,7 +15,6 @@ public enum CardRank {
 	twelve(12),
 	thirteen(13),
 	fourteen(14),
-	fifteen(15),
 	rook(10.5);
 	
 	private double value;    
@@ -70,8 +69,6 @@ public enum CardRank {
 	                     break;
 	            case 13: theValue = fourteen;
 	            	     break;
-	            case 14: theValue = fifteen;
-	            		 break;
 	            case 15: theValue = rook;
 	   		 			 break;
 	        }
