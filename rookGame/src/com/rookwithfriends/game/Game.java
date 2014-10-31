@@ -15,10 +15,12 @@ public class Game {
 		
 		for(int i = 0 ; i < players.length ; i++){
 			players[i] = new Player();
+			System.out.println("Player["+i+"]"+" created.");
 		}
 	}
 
 	public void startGame() {
+		System.out.println("Starting Game\n");
 		// Step 1 -- Shuffle Cards
 		// create Deck that holds all cards
 		createDeck(); // Moved the code that instantiates allDeck to separate
@@ -31,7 +33,8 @@ public class Game {
 		dealHands(); // Moved the code that deals hands into separate method
 
 		// Step 2.5 -- Print all the hands out
-		// printHands(); // Moved the print hands into a different method
+		System.out.println("Here are the hands\n");
+		printHands(); // Moved the print hands into a different method
 
 		// Step 3 -- Sort Each Hand
 		// done in dealHand
@@ -110,7 +113,8 @@ public class Game {
 
 	public void printHands() {
 		for (Player player : players) {
-			System.out.println("Player " + player.getPlayerID() + ": ");
+			System.out.println("\nPlayer " + player.getPlayerID() + ": " );
+			
 			player.printHand();
 		}
 
@@ -129,6 +133,7 @@ public class Game {
 		}
 
 		allDeck.addCard(new Card(CardColor.black, CardRank.rook, 0));
+		System.out.println("Deck has been created\n");
 	}
 
 	public void dealHands() {
@@ -151,6 +156,7 @@ public class Game {
 			kitty.addCard(allDeck.front());
 		}
 		kitty.Sort();
+		System.out.println("Hands have been created, and sorted.\n");
 	}
 
 }
