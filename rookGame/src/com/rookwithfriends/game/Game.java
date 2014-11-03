@@ -25,7 +25,7 @@ public class Game {
 	}
 
 	public void startGame() {
-		System.out.println("Starting Game\n");
+		//System.out.println("Starting Game\n");
 		// Step 1 -- Shuffle Cards
 		// create Deck that holds all cards
 		createDeck(); // Moved the code that instantiates allDeck to separate
@@ -38,8 +38,8 @@ public class Game {
 		dealHands(); // Moved the code that deals hands into separate method
 
 		// Step 3 -- Print all the hands out
-		System.out.println("Here are the hands\n");
-		printHands(); // Moved the print hands into a different method
+		//System.out.println("Here are the hands\n");
+		//printHands(); // Moved the print hands into a different method
 		
 		int tempbid;
 		// Step 4 -- Round of bidding?
@@ -48,7 +48,7 @@ public class Game {
 				 if (gameBid >=200){
 					 break;
 				 }
-				 System.out.println("Player[" + i + "]: It's your turn to bid.\n");
+				 //System.out.println("Player[" + i + "]: It's your turn to bid.\n");
 				  tempbid = players[i].setBid(gameBid);		 
 					 if(tempbid > gameBid){
 						 bidWinner=players[i];
@@ -62,10 +62,10 @@ public class Game {
 		// Player bidWinner is a public variable -- Create Gameboard, add needed
 		// methods.
 		
-		System.out.println("The winner of the bid was: " + bidWinner.getPlayerID());
+		//System.out.println("The winner of the bid was: " + bidWinner.getPlayerID());
 		bidWinner.combineHand(kitty);
 		bidWinner.getPlayerHand().Sort();
-		System.out.println("\nThe winners hand is: ");
+		//System.out.println("\nThe winners hand is: ");
 		bidWinner.printHand();
 
 	}
@@ -121,12 +121,12 @@ public class Game {
 
 	public void printHands() {
 		for (Player player : players) {
-			System.out.println("\nPlayer " + player.getPlayerID() + ": " );
+			//System.out.println("\nPlayer " + player.getPlayerID() + ": " );
 			
 			player.printHand();
 		}
-		System.out.println("The Kitty: ");
-		System.out.println(kitty);
+		//System.out.println("The Kitty: ");
+		//System.out.println(kitty);
 	}
 
 	public void createDeck() {
@@ -164,7 +164,7 @@ public class Game {
 			allDeck.pop();
 		}
 		kitty.Sort();
-		System.out.println("Hands have been created, and sorted.\n");
+		//System.out.println("Hands have been created, and sorted.\n");
 	}
 
 }
