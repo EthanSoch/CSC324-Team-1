@@ -102,6 +102,10 @@ public class Game {
 	public Player[] getPlayers() {
 		return players;
 	}
+	
+	public Player getPlayer(int index){
+		return players[index];
+	}
 
 	public void setPlayers(Player[] players) {
 		this.players = players;

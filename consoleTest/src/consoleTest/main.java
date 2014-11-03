@@ -5,15 +5,60 @@ import java.util.Scanner;
 import com.rookwithfriends.game.*;
 
 public class main {
-		Scanner read = new Scanner(System.in);
+	Scanner read = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		Game game = new Game(0, 1, 2, 3);
+		Scanner read = new Scanner(System.in);
+		// System.out.println("Starting Game\n");
+		// Step 1 -- Shuffle Cards
+		// create Deck that holds all cards
+		game.createDeck(); // Moved the code that instantiates allDeck to
+							// separate
+							// method
 
+		// instantiate hand with all cards
+		game.getAllDeck().Shuffle();
+
+		// Step 2 -- Deal & Sort Cards
+		game.dealHands(); // Moved the code that deals hands into separate
+							// method
+
+		// Step 3 -- Print all the hands out
+		System.out.println("Here are the hands\n");
+		printHands(); // Moved the print hands into a different method
+
+		int tempbid, gamebid;
+		// Step 4 -- Round of bidding?
+		do {
+			for (int i = 0; i < players.length; i++) {
+				if (gameBid >= 200) {
+					break;
+				}
+				// System.out.println("Player[" + i +
+				// "]: It's your turn to bid.\n");
+				tempbid = game.getPlayer(i).setBid(gameBid);
+				if (tempbid > gameBid) {
+					game.setBidWinner(game.getPlayer(i));
+					gameBid = tempbid;
+				}
+			}
+
+		} while (gameBid < 200);
+
+		// Step 4 -- Find winner of bid - Pass control unto them?
+		// Player bidWinner is a public variable -- Create Gameboard, add needed
+		// methods.
+
+		System.out.println("The winner of the bid was: " + bidWinner.getPlayerID());
+		bidWinner.combineHand(kitty);
+		bidWinner.getPlayerHand().Sort();
+		System.out.println("\nThe winners hand is: ");
+		bidWinner.printHand();
 	}
 
 	public CardColor setTrump() {
-		
+
 		String input = null;
 		String colorUp;
 		boolean correctInput = false;
@@ -82,7 +127,7 @@ public class main {
 			CardRank cardVal = CardRank.returnRank(theVal);
 			CardColor theCardColor = CardColor.returnColor(colorUp);
 
-			for(Card card : player.getPlayerHand().getArrayList()){
+			for (Card card : player.getPlayerHand().getArrayList()) {
 				if (card.getColor() == theCardColor
 						&& card.getRank() == cardVal) {
 					theCard = card;
