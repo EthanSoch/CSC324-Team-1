@@ -5,6 +5,7 @@ public class Player {
 	private int playerID;
 	private int playerBid;
 	private int handID;
+	private boolean hasPassed;
 
 	// CardSet Objects For Player//
 	private CardSet playerHand;
@@ -14,12 +15,14 @@ public class Player {
 		this.playerID = id;
 		this.playerHand = new CardSet();
 		this.cardsWon = new CardSet();
+		this.hasPassed=false;
 	}
 
 	public Player() {
 		this.playerHand = new CardSet();
 		this.cardsWon = new CardSet();
 		this.playerID = 0;
+		this.hasPassed=false;
 	}
 
 	// selectCard(); -- Makes use of CardSet method getCard to return card in
@@ -78,6 +81,14 @@ public class Player {
 
 	public void setCardsWon(CardSet cardsWon) {
 		this.cardsWon = cardsWon;
+	}
+
+	public boolean getHasPassed() {
+		return hasPassed;
+	}
+
+	public void setHasPassed(boolean hasPassed) {
+		this.hasPassed = hasPassed;
 	}
 
 	public CardColor setTrump() {
@@ -179,6 +190,10 @@ public class Player {
 				//System.out.println("Thank you, your bid has been set. New bid is: "
 								//+ currentBid + "\n");
 			}
+		}
+		else
+		{
+			hasPassed=true;
 		}
 		// read.close();
 		return currentBid;

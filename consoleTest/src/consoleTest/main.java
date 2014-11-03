@@ -27,24 +27,8 @@ public class main {
 		// Step 3 -- Print all the hands out
 		System.out.println("Here are the hands\n");
 		printHands(); // Moved the print hands into a different method
-
-		int tempbid, gamebid;
-		// Step 4 -- Round of bidding?
-		do {
-			for (int i = 0; i < players.length; i++) {
-				if (gameBid >= 200) {
-					break;
-				}
-				// System.out.println("Player[" + i +
-				// "]: It's your turn to bid.\n");
-				tempbid = game.getPlayer(i).setBid(gameBid);
-				if (tempbid > gameBid) {
-					game.setBidWinner(game.getPlayer(i));
-					gameBid = tempbid;
-				}
-			}
-
-		} while (gameBid < 200);
+		
+		game.setBid();
 
 		// Step 4 -- Find winner of bid - Pass control unto them?
 		// Player bidWinner is a public variable -- Create Gameboard, add needed

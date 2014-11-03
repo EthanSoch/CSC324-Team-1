@@ -2,15 +2,17 @@ package com.rookwithfriends.game;
 
 public class Game {
 	// Declare Class Members//
-	private int gameBid, trump;
+	private int gameBid, trump,numPasses;
 	public CardSet allDeck, centerDeck, kitty;
 	public Player[] players;
-	private Player bidWinner;
+	private Player bidWinner, currentPlayer;
+	private Boolean bettingIsDone=false;
 
 	// vector of all players
 	// public Player bidWinner
 	// need to add the kitty, all, and center hands
 
+	
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4) {
 		players = new Player[4];
 		players[0] = new Player(playerId1);
@@ -32,7 +34,7 @@ public class Game {
 						// method
 
 		// instantiate hand with all cards
-		allDeck.Shuffle();
+		shuffleAllDeck();
 
 		// Step 2 -- Deal & Sort Cards
 		dealHands(); // Moved the code that deals hands into separate method
@@ -40,23 +42,13 @@ public class Game {
 		// Step 3 -- Print all the hands out
 		//System.out.println("Here are the hands\n");
 		//printHands(); // Moved the print hands into a different method
+		numPasses=0;
+		for(int i=0;!bettingIsDone;i=(i+1)%4)
+		{
+			currentPlayer=getPlayer(i);
+			setBid(currentPlayer);
+		}
 		
-		int tempbid;
-		// Step 4 -- Round of bidding?
-		do{		 
-			 for(int i = 0 ; i < players.length ; i++){
-				 if (gameBid >=200){
-					 break;
-				 }
-				 //System.out.println("Player[" + i + "]: It's your turn to bid.\n");
-				  tempbid = players[i].setBid(gameBid);		 
-					 if(tempbid > gameBid){
-						 bidWinner=players[i];
-						 gameBid=tempbid; 
-					 }
-			 }
-		 
-		 } while(gameBid < 200);
 
 		// Step 4 -- Find winner of bid - Pass control unto them?
 		// Player bidWinner is a public variable -- Create Gameboard, add needed
@@ -70,7 +62,30 @@ public class Game {
 
 	}
 
+	public void setBid(Player curPlayer) {
+		int tempbid;
+		// Step 4 -- Round of bidding?
+
+		// System.out.println("Player[" + i + "]: It's your turn to bid.\n");
+		if(!curPlayer.getHasPassed())
+		{
+			tempbid = curPlayer.setBid(gameBid);
+			if (gameBid >= 200) {
+				bettingIsDone=true;
+			}
+			if (tempbid > gameBid) {
+				bidWinner = curPlayer;
+				gameBid = tempbid;
+			}
+		}
+		
+
+	}
+
 	// Methods for Game
+	public void shuffleAllDeck(){
+		allDeck.Shuffle();
+	}
 	public int getGameBid() {
 		return gameBid;
 	}
@@ -121,6 +136,38 @@ public class Game {
 
 	public void setTrump(int trump) {
 		this.trump = trump;
+	}
+
+	public Player getBidWinner() {
+		return bidWinner;
+	}
+
+	public void setBidWinner(Player bidWinner) {
+		this.bidWinner = bidWinner;
+	}
+
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public void setCurrentPlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
+
+	public Boolean getBettingIsDone() {
+		return bettingIsDone;
+	}
+
+	public void setBettingIsDone(Boolean bettingIsDone) {
+		this.bettingIsDone = bettingIsDone;
+	}
+
+	public int getNumPasses() {
+		return numPasses;
+	}
+
+	public void setNumPasses(int numPasses) {
+		this.numPasses = numPasses;
 	}
 
 	public void printHands() {
