@@ -38,18 +38,15 @@ public class Card {
 	@Override
 	public boolean equals(Object card){
 		if(card instanceof Card)
-			return equals((Card)card);
+			
+			return  color == card.getColor() && rank == card.rank;
 		else
 			return false;
 	}
 	
-	public boolean equals(Card card)
-	{
-		return color == card.color && rank == card.rank;
-	}
 	
 	public String toString()
 	{
-		return color.name() + " " + rank.name(); 
+		return color.name() + " " + rank.getValue(); 
 	}
 }

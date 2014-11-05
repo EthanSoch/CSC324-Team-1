@@ -1,5 +1,7 @@
 package com.rookwithfriends.game;
 
+import java.util.Scanner;
+
 public class Player {
 	// Declare Class Members//
 	private int playerID;
@@ -126,26 +128,27 @@ public class Player {
 	}
 
 	public Card chooseCard() {
-		//Scanner read = new Scanner(System.in);
+		Scanner read = new Scanner(System.in);
 		String cardColor = null;
 		String colorUp;
 		double theVal;
 		boolean correctInput = false;
-		boolean cardNotFound = false;
+		boolean cardNotFound = true;
 		Card theCard = null;
 
 		do {
 
 			// Keep prompting for input until a string has been entered
 			do {
-				//System.out.println("Please enter color of the card that you want.\n");
-				cardColor = "RED";//read.next();
+				System.out.println("Please enter color of the card that you want.\n");
+				cardColor = read.next();
 				colorUp = cardColor.toUpperCase();
 
 				switch (colorUp) {
 				case "RED":
 				case "BLACK":
 				case "YELLOW":
+				case "GREEN":
 				case "WHITE":
 					correctInput = true;
 					break;
@@ -153,38 +156,40 @@ public class Player {
 
 			} while (!correctInput);
 
-			//System.out.println("Please enter value of the card that you want. (Must be a double)\n");
-			theVal = 5;//read.nextDouble();
+			System.out.println("Please enter value of the card that you want. (Must be a double)");
+			theVal = read.nextDouble();
 
 			CardRank cardVal = CardRank.returnRank(theVal);
 			CardColor theCardColor = CardColor.returnColor(colorUp);
-
+			Card temp = new Card(theCardColor,cardVal,0);
+			
 			for (int i = 0; i < playerHand.size(); i++) {
-				if (playerHand.get(i).getColor() == theCardColor
-						&& playerHand.get(i).getRank() == cardVal) {
+				if (playerHand.get(i).equals(temp)) {
 					theCard = playerHand.get(i);
+					System.out.println("Card was found");
+					cardNotFound=false;
 				} else {
-					cardNotFound = true;
+					System.out.println("Card not found");
 				}
 
 			}
 		} while (cardNotFound);
-
+		System.out.println("Afterwhile");
 		//read.close();
 
 		return theCard;
 	}
 
 	public int setBid(int currentBid) {
-		/*Scanner read = new Scanner(System.in);
+		//Scanner read = new Scanner(System.in);
 		System.out.println("Current bid is " + currentBid + ".\n");
-		System.out.println("Enter 1 to increase, enter 2 to pass.\n");*/
+		System.out.println("Enter 1 to increase, enter 2 to pass.\n");
 
 		int answer = 1;//read.nextInt();
 		if (answer == 1) {
 			//System.out.println("What is your new bid. Must be a multiple of 5.\n");
 
-			int bid = 5;//read.nextInt();
+			int bid = currentBid+5;//read.nextInt();
 			if (bid % 5 == 0 && bid > currentBid) {
 				currentBid = bid;
 				//System.out.println("Thank you, your bid has been set. New bid is: "

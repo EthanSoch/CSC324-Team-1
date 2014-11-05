@@ -5,7 +5,6 @@ import java.util.Scanner;
 import com.rookwithfriends.game.*;
 
 public class main {
-	Scanner read = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		Game game = new Game(0, 1, 2, 3);

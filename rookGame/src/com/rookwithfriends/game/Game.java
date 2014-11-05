@@ -2,10 +2,11 @@ package com.rookwithfriends.game;
 
 public class Game {
 	// Declare Class Members//
-	private int gameBid, trump,numPasses;
+	private int gameBid,numPasses;
+	private CardColor trump;
 	public CardSet allDeck, centerDeck, kitty;
 	public Player[] players;
-	private Player bidWinner, currentPlayer;
+	public Player bidWinner, currentPlayer;
 	private Boolean bettingIsDone=false;
 
 	// vector of all players
@@ -47,6 +48,7 @@ public class Game {
 		{
 			currentPlayer=getPlayer(i);
 			setBid(currentPlayer);
+			
 		}
 		
 
@@ -59,20 +61,37 @@ public class Game {
 		bidWinner.getPlayerHand().Sort();
 		//System.out.println("\nThe winners hand is: ");
 		bidWinner.printHand();
-
+		setTrump(bidWinner);
+		
+		kitty.clear();
+		for(int i=0;i<5;i++)
+		{
+			Card temp = bidWinner.chooseCard();
+			kitty.add(temp);
+			bidWinner.getPlayerHand().remove(bidWinner.getPlayerHand().indexOf(temp));
+		}
 	}
 
 	public void setBid(Player curPlayer) {
 		int tempbid;
 		// Step 4 -- Round of bidding?
 
-		// System.out.println("Player[" + i + "]: It's your turn to bid.\n");
+		System.out.println(curPlayer+": It's your turn to bid.\n");
 		if(!curPlayer.getHasPassed())
 		{
-			tempbid = curPlayer.setBid(gameBid);
 			if (gameBid >= 200) {
 				bettingIsDone=true;
 			}
+			tempbid = curPlayer.setBid(gameBid);
+			if(curPlayer.getHasPassed())
+			{
+				numPasses+=1;
+				if(numPasses==4)
+				{
+					bettingIsDone=true;
+				}
+			}
+			
 			if (tempbid > gameBid) {
 				bidWinner = curPlayer;
 				gameBid = tempbid;
@@ -130,13 +149,10 @@ public class Game {
 		this.gameBid = gameBid;
 	}
 
-	public int getTrump() {
+	public CardColor getTrump() {
 		return trump;
 	}
 
-	public void setTrump(int trump) {
-		this.trump = trump;
-	}
 
 	public Player getBidWinner() {
 		return bidWinner;
@@ -185,13 +201,13 @@ public class Game {
 
 		for (CardColor color : CardColor.values()) {
 			for (CardRank rank : CardRank.values()) {
-				if (rank != CardRank.rook) {
+				if (rank != CardRank.rook && color != CardColor.white) {
 					allDeck.add(new Card(color, rank, 0));
 				}
 			}
 		}
 
-		allDeck.add(new Card(CardColor.black, CardRank.rook, 0));
+		allDeck.add(new Card(CardColor.white, CardRank.rook, 0));
 	}
 
 	public void dealHands() {
@@ -217,5 +233,35 @@ public class Game {
 		kitty.Sort();
 		//System.out.println("Hands have been created, and sorted.\n");
 	}
+	
+	public void setTrump(Player winner) {
+
+		String input = null;
+		String colorUp;
+		boolean correctInput = false;
+
+		// Keep prompting for input until a string has been entered
+		do {
+			System.out.println("Please enter the new trump.");
+			input = "RED";
+
+			colorUp = input.toUpperCase();
+
+			if (colorUp == "RED") {
+				correctInput = true;
+			} else if (colorUp == "BLACK") {
+				correctInput = true;
+			} else if (colorUp == "YELLOW") {
+				correctInput = true;
+			} else if (colorUp == "GREEN") {
+				correctInput = true;
+			}
+
+		} while (!correctInput);
+
+		// Call Enum method to return the Enum cast of the input
+		trump = CardColor.returnColor(colorUp);
+	}
+
 
 }
