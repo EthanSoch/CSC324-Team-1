@@ -131,16 +131,22 @@ public class Player {
 		Scanner read = new Scanner(System.in);
 		String cardColor = null;
 		String colorUp;
-		double theVal;
+		int theVal;
 		boolean correctInput = false;
 		boolean cardNotFound = true;
 		Card theCard = null;
-
-		do {
+		System.out.println("Enter the index of the card you want to remove:");
+		theVal=read.nextInt();
+		if(theVal<playerHand.size())
+		{
+			theCard=playerHand.get(theVal);
+			playerHand.remove(theVal);
+		}
+		/*do {
 
 			// Keep prompting for input until a string has been entered
 			do {
-				System.out.println("Please enter color of the card that you want.\n");
+				System.out.println("Please enter color of the card that you want.");
 				cardColor = read.next();
 				colorUp = cardColor.toUpperCase();
 
@@ -168,13 +174,10 @@ public class Player {
 					theCard = playerHand.get(i);
 					System.out.println("Card was found");
 					cardNotFound=false;
-				} else {
-					System.out.println("Card not found");
-				}
+				} 
 
 			}
-		} while (cardNotFound);
-		System.out.println("Afterwhile");
+		} while (cardNotFound);*/
 		//read.close();
 
 		return theCard;

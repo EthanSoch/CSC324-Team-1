@@ -19,8 +19,8 @@ public class CardSetTest {
 	public void setUp() {
 		
 		cs1 = new CardSet();
-		c1 = new Card(CardColor.red, CardRank.two, 1);
-		c2 = new Card(CardColor.red, CardRank.one, 1);
+		c1 = new Card(CardColor.red, CardRank.six, 1);
+		c2 = new Card(CardColor.red, CardRank.seven, 1);
 		c3 = new Card(CardColor.black, CardRank.five, 2);
 
 		cs1.add(c1);

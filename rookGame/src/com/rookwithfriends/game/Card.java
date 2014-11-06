@@ -37,16 +37,38 @@ public class Card {
 	
 	@Override
 	public boolean equals(Object card){
-		if(card instanceof Card)
+		if(!(card instanceof Card))
 			
-			return  color == card.getColor() && rank == card.rank;
+			return  false;
 		else
-			return false;
+		{
+			Card objCard = (Card)card;
+			return color == objCard.getColor() && rank == objCard.getRank();
+		}
 	}
 	
 	
 	public String toString()
 	{
-		return color.name() + " " + rank.getValue(); 
+		String temp = "";
+		if(color.name()=="white")
+		{
+			temp+="Rook";
+		}
+		else
+		{
+			temp+=color.name();
+			temp+=" ";
+			if(rank.getValue()==15)
+			{
+				temp+="1";
+			}
+			else
+			{
+				temp+=rank.getValue();
+			}
+		}
+		
+		return temp; 
 	}
 }

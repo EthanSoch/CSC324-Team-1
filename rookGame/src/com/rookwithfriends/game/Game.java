@@ -2,7 +2,7 @@ package com.rookwithfriends.game;
 
 public class Game {
 	// Declare Class Members//
-	private int gameBid,numPasses;
+	private int gameBid=100,numPasses;
 	private CardColor trump;
 	public CardSet allDeck, centerDeck, kitty;
 	public Player[] players;

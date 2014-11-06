@@ -1,10 +1,7 @@
 package com.rookwithfriends.game;
 
 public enum CardRank {
-	one(1),
-	two(2),
-	three(3),
-	four(4),
+	one(15),
 	five(5),
 	six(6),
 	seven(7),
@@ -45,12 +42,6 @@ public enum CardRank {
 			//it might have to be CardRank.one
 			  
 	            case 1:  theValue = one;
-	                     break;
-	            case 2:  theValue = two;
-	                     break;
-	            case 3:  theValue = three;
-	                     break;
-	            case 4:  theValue = four;
 	                     break;
 	            case 5:  theValue = five;
 	                     break;
