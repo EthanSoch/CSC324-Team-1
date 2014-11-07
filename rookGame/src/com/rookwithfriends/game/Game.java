@@ -1,11 +1,11 @@
 package com.rookwithfriends.game;
-
+import java.util.*;
 public class Game {
 	// Declare Class Members//
 	private int gameBid=100,numPasses;
 	private CardColor trump;
 	public CardSet allDeck, centerDeck, kitty;
-	public Player[] players;
+	public ArrayList<Player> players;
 	public Player bidWinner, currentPlayer;
 	private Boolean bettingIsDone=false;
 
@@ -15,12 +15,13 @@ public class Game {
 
 	
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4) {
-		players = new Player[4];
-		players[0] = new Player(playerId1);
-		players[1] = new Player(playerId2);
-		players[2] = new Player(playerId3);
-		players[3] = new Player(playerId4);
 		
+		players = new ArrayList<Player>(4);
+		players.add(new Player(playerId1));
+		players.add(new Player(playerId2));
+		players.add(new Player(playerId3));
+		players.add(new Player(playerId4));
+		centerDeck=new CardSet();
 		/*for(int i = 0 ; i < players.length ; i++){
 			players[i] = new Player();
 			System.out.println("Player["+i+"]"+" created.");
@@ -71,6 +72,9 @@ public class Game {
 			kitty.add(temp);
 			bidWinner.getPlayerHand().remove(bidWinner.getPlayerHand().indexOf(temp));
 		}
+		
+		//bidwinner starts game
+		playRound();
 	}
 
 	public void setBid(Player curPlayer) {
@@ -134,15 +138,15 @@ public class Game {
 		this.kitty = kitty;
 	}
 
-	public Player[] getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 	
 	public Player getPlayer(int index){
-		return players[index];
+		return players.get(index);
 	}
 
-	public void setPlayers(Player[] players) {
+	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
 
@@ -262,6 +266,64 @@ public class Game {
 
 		// Call Enum method to return the Enum cast of the input
 		trump = CardColor.returnColor(colorUp);
+	}
+	
+	public void playRound()
+	{
+		currentPlayer=bidWinner;
+		centerDeck.clear();
+		CardColor trickColor=null;
+		for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
+		{
+			System.out.println("Player "+j+", Choose a card to play:");
+			currentPlayer.printHand();
+			Card temp = currentPlayer.chooseCard();
+			if(i==0)
+			{
+				trickColor=temp.getColor();
+				centerDeck.add(temp);
+				currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
+				j=(j+1)%4;
+				currentPlayer=players.get(j);
+			}
+			else if(temp.getColor()!=trickColor && temp.getColor()!=trump)
+			{
+				boolean hasGoodColor = false;
+				System.out.println("2");
+				for(Card card : currentPlayer.getPlayerHand())
+				{
+					if(card.getColor()==trickColor)
+					{
+						hasGoodColor=true;
+					}
+				}
+				System.out.println("3");
+				if(hasGoodColor)
+				{
+					System.out.println("4");
+					System.out.println("Card invalid. Please choose another");
+					i--;
+				}
+				else
+				{
+					centerDeck.add(temp);
+					currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
+					j=(j+1)%4;
+					currentPlayer=players.get(j);
+					System.out.println("5");
+				}
+				
+			}
+			else
+			{
+				centerDeck.add(temp);
+				currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
+				j=(j+1)%4;
+				currentPlayer=players.get(j);
+				System.out.println("6");
+			}
+			
+		}
 	}
 
 

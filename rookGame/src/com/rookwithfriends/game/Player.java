@@ -129,56 +129,14 @@ public class Player {
 
 	public Card chooseCard() {
 		Scanner read = new Scanner(System.in);
-		String cardColor = null;
-		String colorUp;
 		int theVal;
-		boolean correctInput = false;
-		boolean cardNotFound = true;
 		Card theCard = null;
-		System.out.println("Enter the index of the card you want to remove:");
+		
 		theVal=read.nextInt();
 		if(theVal<playerHand.size())
 		{
 			theCard=playerHand.get(theVal);
-			playerHand.remove(theVal);
 		}
-		/*do {
-
-			// Keep prompting for input until a string has been entered
-			do {
-				System.out.println("Please enter color of the card that you want.");
-				cardColor = read.next();
-				colorUp = cardColor.toUpperCase();
-
-				switch (colorUp) {
-				case "RED":
-				case "BLACK":
-				case "YELLOW":
-				case "GREEN":
-				case "WHITE":
-					correctInput = true;
-					break;
-				}
-
-			} while (!correctInput);
-
-			System.out.println("Please enter value of the card that you want. (Must be a double)");
-			theVal = read.nextDouble();
-
-			CardRank cardVal = CardRank.returnRank(theVal);
-			CardColor theCardColor = CardColor.returnColor(colorUp);
-			Card temp = new Card(theCardColor,cardVal,0);
-			
-			for (int i = 0; i < playerHand.size(); i++) {
-				if (playerHand.get(i).equals(temp)) {
-					theCard = playerHand.get(i);
-					System.out.println("Card was found");
-					cardNotFound=false;
-				} 
-
-			}
-		} while (cardNotFound);*/
-		//read.close();
 
 		return theCard;
 	}
