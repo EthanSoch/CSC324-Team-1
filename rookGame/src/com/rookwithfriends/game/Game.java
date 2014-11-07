@@ -63,6 +63,7 @@ public class Game {
 		bidWinner.printHand();
 		setTrump(bidWinner);
 		
+		
 		kitty.clear();
 		for(int i=0;i<5;i++)
 		{

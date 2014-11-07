@@ -90,6 +90,10 @@ public class CardSet extends ArrayList<Card>{
 	public Card findWinningCard(CardColor trump) {
 		Card highCard = get(0);
 		for (Card currentCard : this) {
+			if(currentCard.getColor()==CardColor.white)
+			{
+				currentCard.setColor(trump);
+			}
 			if (highCard.getColor().getValue() == trump.getValue()
 					&& currentCard.getColor().getValue() == trump.getValue()) {
 				if (highCard.getRank().getValue() < currentCard.getRank()
