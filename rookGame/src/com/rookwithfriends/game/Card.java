@@ -1,9 +1,22 @@
 package com.rookwithfriends.game;
 
-public class Card {
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+public class Card implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	CardColor color;
 	CardRank rank;
 	int id;
+	
+	public Card(){
+		
+	}
 	
 	public Card(CardColor color, CardRank rank, int id){
 		this.color = color;

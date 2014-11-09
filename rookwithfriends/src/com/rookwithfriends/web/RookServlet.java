@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
-import com.rookwithfriends.util.JSONUtility;;
+import com.rookwithfriends.util.JSONUtility;
 
 @SuppressWarnings("serial")
 public class RookServlet extends HttpServlet {
@@ -55,15 +55,19 @@ public class RookServlet extends HttpServlet {
 	protected void doPost( HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 		
-		String message = request.getParameter("message");
-		UUID gameID = UUID.fromString(request.getParameter("gameID"));
+		//String message = request.getParameter("message");
+		UUID gameID = UUID.fromString(request.getParameter("gameId"));
+		
+		Map<String,String[]> paramaters = request.getParameterMap();
 		
 		//get Session
 		GameSession session = GameSession.getGameSession(gameID);
+		session.gameInstruction(paramaters);
 		
-		for(UserSession player : session.getPlayers()){
-			player.sendMessage(message);
-		}
+		
+		//for(UserSession player : session.getPlayers()){
+		//	player.sendMessage(message);
+		//}
 	}
 
 	private UUID createNewGame() {

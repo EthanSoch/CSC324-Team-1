@@ -39,6 +39,7 @@ public class CardSetTest {
 		assertFalse(cs1.get(0) == c1 && cs1.get(1) == c2 && cs1.get(2) == c3);
 	}
 
+	/*
 	@Test
 	public void testSort() {
 		cs1.Sort();
@@ -54,5 +55,13 @@ public class CardSetTest {
 	public void testFindWinningCard() {
 		assertTrue(cs1.findWinningCard(CardColor.red) == c1);
 	}
-
+	*/
+	
+	@Test
+	public void toJsonTest(){
+		String json = cs1.toJSON();
+		String expected = "[ {\r\n   \"color\" : \"red\",\r\n   \"id\" : 1,\r\n   \"rank\" : \"six\"\r\n}, {\r\n   \"color\" : \"red\",\r\n   \"id\" : 1,\r\n   \"rank\" : \"seven\"\r\n}, {\r\n   \"color\" : \"black\",\r\n   \"id\" : 2,\r\n   \"rank\" : \"five\"\r\n} ]";
+		
+		assertTrue(json.equals(expected));
+	}
 }

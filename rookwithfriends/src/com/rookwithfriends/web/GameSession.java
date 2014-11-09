@@ -8,11 +8,8 @@ import com.rookwithfriends.game.*;
 import com.rookwithfriends.util.*;
 
 public class GameSession implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -443526662938702934L;
-	//private Game game;//Can't create the game right now cause it needs to be Serializable
+	private Game game;
 	private UUID gameId;
 	private List<UserSession> players;
 	
@@ -24,10 +21,44 @@ public class GameSession implements Serializable{
 	}
 	
 	public GameSession(){
-		//game = new RookGame();
 		players = new ArrayList<UserSession>();
 		
 		gameId = UUID.randomUUID();
+	}
+	
+	public void gameInstruction(Map<String,String[]> input){
+		
+		switch(input.get("op")[0]){
+		case "start":
+			startGame();
+			break;
+		case "msg":
+			Map<String,Object> msg = new HashMap<String,Object>();
+			msg.put("op","msg");
+			msg.put("msg", input.get("msg")[0]);
+			sendToAll(msg);
+			break;
+		}
+	}
+
+	public void startGame(){
+		game = new Game();
+		
+		//set user ids
+		for(int i = 0 ; i < players.size() ; i++){
+			players.get(i).setGameID(i);
+		}
+		
+		game.startGame();
+		updateAllPlayersCards();
+	}
+	
+	public void updateAllPlayersCards(){
+		for(UserSession player : players){
+			Player gamePlayer = game.getPlayerById(player.getGameID());
+			String jsonString = gamePlayer.getPlayerHand().toJSON();
+			player.sendMessage(jsonString);
+		}
 	}
 	
 	/*
@@ -62,6 +93,10 @@ public class GameSession implements Serializable{
 		return newPlayer;
 	}
 	
+	public void sendToAll(Map<String,Object> data){
+		sendToAll(JSONUtility.convertToJson(data));
+	}
+	
 	public void sendToAll(String message){
 		for(UserSession player : players){
 			player.sendMessage(message);
@@ -86,9 +121,5 @@ public class GameSession implements Serializable{
 
 	public void setPlayers(List<UserSession> players) {
 		this.players = players;
-	}
-
-	public void startGame(){
-		//TODO Needs to be inplemented
 	}
 }

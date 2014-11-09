@@ -1,11 +1,21 @@
 package com.rookwithfriends.game;
+import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.*;
-public class Game {
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
+import org.eclipse.persistence.jaxb.MarshallerProperties;
+
+public class Game implements Serializable{
+	private static final long serialVersionUID = 6986630091662956160L;
 	// Declare Class Members//
 	private int gameBid=100,numPasses;
 	private CardColor trump;
 	public CardSet allDeck, centerDeck, kitty;
-	public ArrayList<Player> players;
+	public List<Player> players;
 	public Player bidWinner, currentPlayer;
 	private Boolean bettingIsDone=false;
 
@@ -13,7 +23,10 @@ public class Game {
 	// public Player bidWinner
 	// need to add the kitty, all, and center hands
 
-	
+	public Game(){
+		this(0,1,2,3);
+	}
+
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4) {
 		
 		players = new ArrayList<Player>(4);
@@ -44,6 +57,7 @@ public class Game {
 		// Step 3 -- Print all the hands out
 		//System.out.println("Here are the hands\n");
 		//printHands(); // Moved the print hands into a different method
+		/*
 		numPasses=0;
 		for(int i=0;!bettingIsDone;i=(i+1)%4)
 		{
@@ -75,6 +89,7 @@ public class Game {
 		
 		//bidwinner starts game
 		playRound();
+		*/
 	}
 
 	public void setBid(Player curPlayer) {
@@ -138,7 +153,7 @@ public class Game {
 		this.kitty = kitty;
 	}
 
-	public ArrayList<Player> getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 	
@@ -189,6 +204,15 @@ public class Game {
 
 	public void setNumPasses(int numPasses) {
 		this.numPasses = numPasses;
+	}
+	
+	public Player getPlayerById(int id){
+		for(Player player : players){
+			if(player.getPlayerID() == id)
+				return player;
+		}
+		
+		return null;
 	}
 
 	public void printHands() {
@@ -325,6 +349,4 @@ public class Game {
 			
 		}
 	}
-
-
 }

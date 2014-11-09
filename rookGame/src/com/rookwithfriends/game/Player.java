@@ -1,8 +1,21 @@
 package com.rookwithfriends.game;
 
+import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.Scanner;
 
-public class Player {
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.eclipse.persistence.jaxb.MarshallerProperties;
+
+@XmlRootElement
+public class Player implements Serializable{
+	private static final long serialVersionUID = -1161562471614255655L;
 	// Declare Class Members//
 	private int playerID;
 	private int playerBid;
@@ -10,6 +23,7 @@ public class Player {
 	private boolean hasPassed;
 
 	// CardSet Objects For Player//
+	@XmlElement(name = "hand")
 	private CardSet playerHand;
 	private CardSet cardsWon;
 
@@ -168,5 +182,37 @@ public class Player {
 	public void printHand() {
 		System.out.println(playerHand);
 	}
-
+	
+	public String toJSON(){
+		
+		try{
+			// Create a JaxBContext
+			JAXBContext jc = JAXBContext.newInstance(Player.class);
+	
+			// Create the Marshaller Object using the JaxB Context
+			Marshaller marshaller = jc.createMarshaller();
+			
+			// Set the Marshaller media type to JSON or XML
+			marshaller.setProperty(MarshallerProperties.MEDIA_TYPE, "application/json");
+			
+			// Set it to true if you need to include the JSON root element in the JSON output
+			marshaller.setProperty(MarshallerProperties.JSON_INCLUDE_ROOT, false);
+			
+			// Set it to true if you need the JSON output to formatted
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			
+			StringWriter stringWriter = new StringWriter();
+			
+			// Marshal the employee object to JSON and print the output to console
+			marshaller.marshal(this, stringWriter);
+			
+			return stringWriter.toString();
+		}
+		catch(JAXBException e){
+			System.err.println("toJson error\n" + e.getMessage());
+		}
+		
+		return "error";
+		
+	}
 }

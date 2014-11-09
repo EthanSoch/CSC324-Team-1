@@ -15,6 +15,7 @@ myModule.controller('myController', function($scope) {
 	
 	$scope.onMessage = function(msg){
 		var data = JSON.parse(msg.data);
+		console.log(data);
 
 		$scope.players[data.playerConnected] = true;
 		
