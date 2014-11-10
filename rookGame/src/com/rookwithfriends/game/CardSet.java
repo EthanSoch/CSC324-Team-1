@@ -105,22 +105,17 @@ public class CardSet extends ArrayList<Card>{
 			{
 				currentCard.setColor(trump);
 			}
-			if (highCard.getColor().getValue() == trump.getValue()
-					&& currentCard.getColor().getValue() == trump.getValue()) {
-				if (highCard.getRank().getValue() < currentCard.getRank()
-						.getValue())
+			if (highCard.getColor().getValue() == trump.getValue() && currentCard.getColor().getValue() == trump.getValue()) {
+				if (highCard.getRank().getValue() < currentCard.getRank().getValue()) {
 					highCard = currentCard;
-			} else if (highCard.getColor().getValue() != trump.getValue()
-					&& currentCard.getColor().getValue() == trump.getValue())
-				highCard = currentCard;
-			else {
-				if (highCard.getColor().getValue() == trump.getValue()
-						&& currentCard.getColor().getValue() == trump
-								.getValue()) {
-					if (highCard.getRank().getValue() < currentCard.getRank()
-							.getValue())
-						highCard = currentCard;
 				}
+			} else if (highCard.getColor().getValue() != trump.getValue() && currentCard.getColor().getValue() == trump.getValue()) {
+				highCard = currentCard;
+			}
+			else if(highCard.getColor().getValue() != trump.getValue() && currentCard.getColor().getValue() != trump.getValue()) {
+					if (highCard.getRank().getValue() < currentCard.getRank().getValue()) {
+						highCard = currentCard;
+					}
 			}
 		}
 		return highCard;

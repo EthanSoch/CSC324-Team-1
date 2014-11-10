@@ -244,6 +244,7 @@ public class Game implements Serializable{
 			CardSet hand = new CardSet();
 
 			for (int i = 0; i < 10; i++) {
+				allDeck.front().setId(player.getPlayerID());
 				hand.add(allDeck.front());
 				allDeck.pop();
 			}
@@ -292,9 +293,9 @@ public class Game implements Serializable{
 		trump = CardColor.returnColor(colorUp);
 	}
 	
-	public void playRound()
+	public void playRound(Player curPlayer)
 	{
-		currentPlayer=bidWinner;
+		currentPlayer=curPlayer;
 		centerDeck.clear();
 		CardColor trickColor=null;
 		for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
@@ -310,10 +311,9 @@ public class Game implements Serializable{
 				j=(j+1)%4;
 				currentPlayer=players.get(j);
 			}
-			else if(temp.getColor()!=trickColor && temp.getColor()!=trump)
+			else if(temp.getColor()!=trickColor && temp.getColor()!=trump && temp.getColor()!=CardColor.white)
 			{
 				boolean hasGoodColor = false;
-				System.out.println("2");
 				for(Card card : currentPlayer.getPlayerHand())
 				{
 					if(card.getColor()==trickColor)
@@ -321,10 +321,8 @@ public class Game implements Serializable{
 						hasGoodColor=true;
 					}
 				}
-				System.out.println("3");
 				if(hasGoodColor)
 				{
-					System.out.println("4");
 					System.out.println("Card invalid. Please choose another");
 					i--;
 				}
@@ -334,7 +332,6 @@ public class Game implements Serializable{
 					currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
 					j=(j+1)%4;
 					currentPlayer=players.get(j);
-					System.out.println("5");
 				}
 				
 			}
@@ -344,7 +341,6 @@ public class Game implements Serializable{
 				currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
 				j=(j+1)%4;
 				currentPlayer=players.get(j);
-				System.out.println("6");
 			}
 			
 		}
