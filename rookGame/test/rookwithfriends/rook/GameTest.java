@@ -14,7 +14,7 @@ public class GameTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		game = new Game(0, 1, 2, 3);
+		/*game = new Game(0, 1, 2, 3);
 		Scanner read = new Scanner(System.in);
 		// System.out.println("Starting Game\n");
 		// Step 1 -- Shuffle Cards
@@ -79,7 +79,7 @@ public class GameTest {
 		
 		System.out.println("Winning player was:" +game.currentPlayer.getPlayerID());
 		
-		game.playRound(game.currentPlayer);
+		game.playRound(game.currentPlayer);*/
 	}
 	
 
