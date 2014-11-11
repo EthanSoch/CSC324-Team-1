@@ -435,7 +435,7 @@ a.circle {
 	
 }
 .pCard:hover{
-  margin-bottom: 36px;
+  bottom: 40px;
   z-index: 1000 !important;
 }
 
