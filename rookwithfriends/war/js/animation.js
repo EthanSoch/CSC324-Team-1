@@ -90,5 +90,4 @@ $.loop = function() {
   $.draw();
   $.tick++;
 };
-
 var animationInit = $.init;

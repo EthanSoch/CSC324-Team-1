@@ -8,6 +8,23 @@ myModule.controller('myController', function($scope, $location) {
   $scope.middleHand = [];
   $scope.playerHand = [];
   
+  $scope.middleHand[0] = {num:1,color:"red"};
+  $scope.middleHand[1] = {num:1,color:"green"};
+  $scope.middleHand[2] = {num:1,color:"black"};
+  $scope.middleHand[3] = {num:1,color:"yellow"};
+  $scope.middleHand[4] = {num:1,color:"green"};
+  
+  $scope.playerHand[0] = {num:1,color:"red"};
+  $scope.playerHand[1] = {num:1,color:"green"};
+  $scope.playerHand[2] = {num:1,color:"black"};
+  $scope.playerHand[3] = {num:1,color:"yellow"};
+  $scope.playerHand[4] = {num:1,color:"green"};
+  $scope.playerHand[5] = {num:1,color:"red"};
+  $scope.playerHand[6] = {num:1,color:"green"};
+  $scope.playerHand[7] = {num:1,color:"black"};
+  $scope.playerHand[8] = {num:1,color:"yellow"};
+  $scope.playerHand[9] = {num:1,color:"green"};
+  
   $scope.change = function() {
     $scope.numplayers = 0;
     $scope.players.forEach( function(player){
@@ -25,31 +42,13 @@ myModule.controller('myController', function($scope, $location) {
   $scope.player2 = "player 2";
   $scope.player3 = "player 3";
   $scope.player4 = "player 4";
-  
-  $scope.middleHand[0] = {num:1,color:"red"};
-  $scope.middleHand[1] = {num:4,color:"green"};
-  $scope.middleHand[2] = {num:6,color:"black"};
-  $scope.middleHand[3] = {num:1,color:"yellow"};
-  $scope.middleHand[4] = {num:2,color:"green"};
-  
-  $scope.playerHand[0] = {num:1,color:"red"};
-  $scope.playerHand[1] = {num:4,color:"green"};
-  $scope.playerHand[2] = {num:6,color:"black"};
-  $scope.playerHand[3] = {num:1,color:"yellow"};
-  $scope.playerHand[4] = {num:2,color:"green"};
-  $scope.playerHand[5] = {num:1,color:"red"};
-  $scope.playerHand[6] = {num:4,color:"green"};
-  $scope.playerHand[7] = {num:6,color:"black"};
-  $scope.playerHand[8] = {num:1,color:"yellow"};
-  $scope.playerHand[9] = {num:2,color:"green"};
 
   $scope.onMessage = function(msg){
     var data = JSON.parse(msg.data);
-
     $scope.players[data.playerConnected] = true;
     
-      $scope.change();
-      $scope.$apply();
+    $scope.change();
+    $scope.$apply();
   }
   
   $scope.onOpened = function() {

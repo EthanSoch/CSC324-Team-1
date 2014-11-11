@@ -8,7 +8,6 @@
 			<h5 class="playerName">{{player2}}</h5>
 		</a> 
 	</div>
-	
 	<div>
 		<div class="centerStrip avatarContainer">
 			<a class="circle" id="player3"> 

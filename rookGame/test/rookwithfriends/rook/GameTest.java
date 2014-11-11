@@ -11,7 +11,7 @@ import com.rookwithfriends.game.*;
 
 public class GameTest {
 	Game game;
-	/*
+	
 	@Before
 	public void setUp() throws Exception {
 		game = new Game(0, 1, 2, 3);
@@ -56,12 +56,32 @@ public class GameTest {
 		game.kitty.clear();
 		for(int i=0;i<5;i++)
 		{
+			System.out.println("Choose a card to remove");
 			Card temp = game.bidWinner.chooseCard();
 			game.kitty.add(temp);
+			game.bidWinner.getPlayerHand().remove(game.bidWinner.getPlayerHand().indexOf(temp));
 			game.bidWinner.printHand();
 		}
+		
+		game.playRound(game.bidWinner);
+		Card winningCard = game.centerDeck.findWinningCard(game.getTrump());
+		System.out.println("Winning card is: "+winningCard);
+		for(Player p : game.players)
+		{
+			if(winningCard.getId()==p.getPlayerID())
+			{
+				p.getCardsWon().addAll(game.centerDeck);
+				game.setCurrentPlayer(p);
+				game.centerDeck.clear();
+				break;
+			}
+		}
+		
+		System.out.println("Winning player was:" +game.currentPlayer.getPlayerID());
+		
+		game.playRound(game.currentPlayer);
 	}
-	*/
+	
 
 	@Test
 	public void testDeckCreation() {
