@@ -1,8 +1,19 @@
 package com.rookwithfriends.game;
 
+import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.*;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.eclipse.persistence.jaxb.MarshallerProperties;
+
+
 public class CardSet extends ArrayList<Card>{
+	private static final long serialVersionUID = 3456263502636499019L;
 	private int handID;
 
 	public CardSet() {
@@ -90,22 +101,21 @@ public class CardSet extends ArrayList<Card>{
 	public Card findWinningCard(CardColor trump) {
 		Card highCard = get(0);
 		for (Card currentCard : this) {
-			if (highCard.getColor().getValue() == trump.getValue()
-					&& currentCard.getColor().getValue() == trump.getValue()) {
-				if (highCard.getRank().getValue() < currentCard.getRank()
-						.getValue())
+			if(currentCard.getColor()==CardColor.white)
+			{
+				currentCard.setColor(trump);
+			}
+			if (highCard.getColor().getValue() == trump.getValue() && currentCard.getColor().getValue() == trump.getValue()) {
+				if (highCard.getRank().getValue() < currentCard.getRank().getValue()) {
 					highCard = currentCard;
-			} else if (highCard.getColor().getValue() != trump.getValue()
-					&& currentCard.getColor().getValue() == trump.getValue())
-				highCard = currentCard;
-			else {
-				if (highCard.getColor().getValue() == trump.getValue()
-						&& currentCard.getColor().getValue() == trump
-								.getValue()) {
-					if (highCard.getRank().getValue() < currentCard.getRank()
-							.getValue())
-						highCard = currentCard;
 				}
+			} else if (highCard.getColor().getValue() != trump.getValue() && currentCard.getColor().getValue() == trump.getValue()) {
+				highCard = currentCard;
+			}
+			else if(highCard.getColor().getValue() != trump.getValue() && currentCard.getColor().getValue() != trump.getValue()) {
+					if (highCard.getRank().getValue() < currentCard.getRank().getValue()) {
+						highCard = currentCard;
+					}
 			}
 		}
 		return highCard;
@@ -117,6 +127,39 @@ public class CardSet extends ArrayList<Card>{
 	
 	public void pop(){
 		remove(0);
+	}
+	
+	public String toJSON(){
+		
+		try{
+			// Create a JaxBContext
+			JAXBContext jc = JAXBContext.newInstance(Card.class);
+	
+			// Create the Marshaller Object using the JaxB Context
+			Marshaller marshaller = jc.createMarshaller();
+			
+			// Set the Marshaller media type to JSON or XML
+			marshaller.setProperty(MarshallerProperties.MEDIA_TYPE, "application/json");
+			
+			// Set it to true if you need to include the JSON root element in the JSON output
+			marshaller.setProperty(MarshallerProperties.JSON_INCLUDE_ROOT, true);
+			
+			// Set it to true if you need the JSON output to formatted
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			
+			StringWriter stringWriter = new StringWriter();
+			
+			// Marshal the employee object to JSON and print the output to console
+			marshaller.marshal(this, stringWriter);
+			
+			return stringWriter.toString();
+		}
+		catch(JAXBException e){
+			System.err.println("toJson error\n" + e.getMessage());
+		}
+		
+		return "error";
+		
 	}
 	
 	public String toString()

@@ -1,10 +1,11 @@
 package com.rookwithfriends.game;
 
-public enum CardColor{
+public enum CardColor {
 	red(0),
 	black(1),
 	yellow(2),
-	green(3);
+	green(3),
+	white(4);
 	
 	private int value;    
 	
@@ -32,6 +33,10 @@ public enum CardColor{
 			}
 			else if(color.equals("GREEN")){
 				theColor = green;
+			}
+			else if(color.equals("WHITE"))
+			{
+				theColor = white;
 			}
 			return theColor;
 		}

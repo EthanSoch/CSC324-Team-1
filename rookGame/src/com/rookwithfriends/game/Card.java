@@ -1,9 +1,22 @@
 package com.rookwithfriends.game;
 
-public class Card {
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+public class Card implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	CardColor color;
 	CardRank rank;
 	int id;
+	
+	public Card(){
+		
+	}
 	
 	public Card(CardColor color, CardRank rank, int id){
 		this.color = color;
@@ -37,19 +50,37 @@ public class Card {
 	
 	@Override
 	public boolean equals(Object card){
-		if(card instanceof Card)
-			return equals((Card)card);
+		if(!(card instanceof Card))
+			
+			return  false;
 		else
-			return false;
+		{
+			Card objCard = (Card)card;
+			return color == objCard.getColor() && rank == objCard.getRank();
+		}
 	}
 	
-	public boolean equals(Card card)
-	{
-		return color == card.color && rank == card.rank;
-	}
 	
 	public String toString()
 	{
-		return color.name() + " " + rank.name(); 
+		String temp = "";
+		if(color.name()=="white" || rank.getValue()==10.5)
+		{
+			temp+="Rook";
+		}
+		else
+		{
+			temp+=color.name();
+			temp+=" ";
+			if(rank.getValue()==15)
+			{
+				temp+="1";
+			}
+			else
+			{
+				temp+=rank.getValue();
+			}
+		}
+		return temp; 
 	}
 }
