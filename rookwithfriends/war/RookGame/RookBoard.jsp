@@ -17,35 +17,31 @@
 		</div>
 		<div id="table1" class="centerStrip">
 			<div id="table2">
-				<div id="middleHand">
-				<% for( int i = 0 ; i < 5 ; i ++){ %>
-					<div class="card three midCards" ng-class="middleHand[<%= i %>].color">
+				<div id="middleHand" >
+					<div class="card three midCards" ng-class="card.color" ng-repeat="card in middleHand">
 						<div class="cardTop">
-							<div class="number">{{middleHand[<%= i %>].num}}</div>
-							<div class="color">{{middleHand[<%= i %>].color}}</div>
+							<div class="number">{{card.num}}</div>
+							<div class="color">{{card.color}}</div>
 						</div>
-						<div class="cardMiddle">{{middleHand[<%= i %>].num}}</div>
+						<div class="cardMiddle">{{card.num}}</div>
 						<div class="cardBottom">
-							<div class="number">{{middleHand[<%= i %>].num}}</div>
-							<div class="color">{{middleHand[<%= i %>].color}}</div>
+							<div class="number">{{card.num}}</div>
+							<div class="color">{{card.color}}</div>
 						</div>
 					</div>
-				<% } %>
 				</div>
 				<div id="playerHand">
-				<% for( int i = 0 ; i < 10 ; i ++){ %>
-					<div class="card pCard" ng-class="playerHand[<%= i %>].color">
+					<div class="card pCard" ng-class="card.color" ng-repeat="card in playerHand">
 						<div class="cardTop">
-							<div class="number">{{playerHand[<%= i %>].num}}</div>
-							<div class="color">{{playerHand[<%= i %>].color}}</div>
+							<div class="number">{{card.num}}</div>
+							<div class="color">{{card.color}}</div>
 						</div>
-						<div class="cardMiddle">{{playerHand[<%= i %>].num}}</div>
+						<div class="cardMiddle">{{card.num}}</div>
 						<div class="cardBottom">
-							<div class="number">{{playerHand[<%= i %>].num}}</div>
-							<div class="color">{{playerHand[<%= i %>].color}}</div>
+							<div class="number">{{card.num}}</div>
+							<div class="color">{{card.color}}</div>
 						</div>
 					</div>
-				<% } %>
 				</div>
 			</div>
 		</div>
