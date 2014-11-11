@@ -33,9 +33,18 @@
       <url-pattern>/rook/messages</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+      <servlet-name>index</servlet-name>
+      <jsp-file>/index.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>index</servlet-name>
+      <url-pattern>/RookBoard</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>

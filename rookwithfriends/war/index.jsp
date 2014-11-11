@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" ng-app="rook" >
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,9 +32,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+     <base href="/">
 
 </head>
-<body ng-app="rook" ng-controller="myController">
+
+<body ng-controller= "myController">
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -43,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Select Game</a>
+                 <a class="navbar-brand">Share Game</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -57,7 +63,7 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
-                    <li>
+                    <li class="form-group">
                       <input id="searchbox" type="text" class="form-control" type="text" ng-value="inviteUrl">
                     </li>
                 </ul>
@@ -66,51 +72,21 @@
         </div>
         <!-- /.container -->
     </nav>
+
     <!-- Page Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1 style="color: #ffffff">Welcome to Rook With Friends!</h1>
-            </div>
-        </div>
-        <div class="row">
-         <div id="mainContainer">
-            <div id="loadingmessage">Please Wait While Your Friends Connect
-                <span class="dots">
-                <span>.</span>
-                <span>.</span>
-                <span>.</span>
-                </span>
-            </div>
-            <div id="boxContainer">
-             <div class="squaredOne" id="squared1">
-                <label for="squaredOne" ng-class="{'squaredOneClicked': players[0] }"></label>
-            </div>
-            <div class="squaredOne" id="squared2">
-                <label for="squared2" ng-class="{'squaredOneClicked': players[1] }"></label>
-            </div>
-            <div class="squaredOne" id="squared3">
-                <label for="squaredOne" ng-class="{'squaredOneClicked': players[2] }"></label>
-            </div>
-            <div class="squaredOne" id="squared4">
-                <label for="squaredOne" ng-class="{'squaredOneClicked': players[3] }"></label>
-            </div>
-          </div>
-            <div id="players">There are currently {{numplayers}} of 4 players connected.</div>
-            <a href="#" class="button" ng-click="connect()">
-              <span>Connect</span>
-            </a>
-         </div>
-        </div>
-    </div>
+    <div ng-view></div>
+
 
     <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/animation.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="/_ah/channel/jsapi"></script>
-	<script src="js/rook.js"></script>
+
 </body>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/angular-animate.min.js"></script>
+<script src="/_ah/channel/jsapi"></script>
+<script src="js/rook.js"></script>
 </html>
