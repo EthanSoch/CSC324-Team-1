@@ -1,6 +1,6 @@
 
 <!-- Page Content -->
-<div>
+<div style="margin: 0 auto 0 auto;width:1250px;">
 	<!--User Avatars and Names-->
 	<div class="avatarContainer">	
 		<a class="circle" id="player2"> 
