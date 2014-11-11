@@ -1,6 +1,3 @@
-setTimeout(theDomHasLoaded,300);
-
-function theDomHasLoaded(e) {
 var $ = {};
 
 $.Particle = function( opt ) {
@@ -95,5 +92,3 @@ $.loop = function() {
 };
 
 $.init();
-
-}

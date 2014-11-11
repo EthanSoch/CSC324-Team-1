@@ -260,19 +260,3 @@ sup  { font-size: 36px; font-weight: 100; line-height: 55px; }
   right: 0;
   top: 50%;
 }
-
-/*Optional Button Effects*/
-
-/*@-webkit-keyframes greenPulse {
-  from { color: #ffffff; text-shadow: 0 0 9px #ffffff; }
-  50% { color: #ffffff; text-shadow: 0 0 18px #ffffff; }
-  to { color: #ffffff; text-shadow: 0 0 9px #ffffff; }
-}*/
-
-/*.gameBtn{
-  -webkit-animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  color:white;
-}*/
-

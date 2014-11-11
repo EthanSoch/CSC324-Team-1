@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
+import com.rookwithfriends.game.CardSet;
 
 public class UserSession implements Serializable{
 	/**
@@ -18,6 +19,10 @@ public class UserSession implements Serializable{
 	public UserSession(int gamePlayerID,UUID channelKey){
 		this.gamePlayerID = gamePlayerID;
 		this.channelKey = channelKey;
+	}
+	
+	public void sendMessage(CardSet cards){
+		
 	}
 	
 	public void sendMessage(String message){
