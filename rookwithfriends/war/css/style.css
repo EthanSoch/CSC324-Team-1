@@ -260,3 +260,263 @@ sup  { font-size: 36px; font-weight: 100; line-height: 55px; }
   right: 0;
   top: 50%;
 }
+
+/*Optional Button Effects*/
+
+/*@-webkit-keyframes greenPulse {
+  from { color: #ffffff; text-shadow: 0 0 9px #ffffff; }
+  50% { color: #ffffff; text-shadow: 0 0 18px #ffffff; }
+  to { color: #ffffff; text-shadow: 0 0 9px #ffffff; }
+}*/
+
+/*.gameBtn{
+  -webkit-animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  color:white;
+}*/
+
+/* Poker Table CSS*/
+
+#table1{
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 2px solid black;
+	width: 1000px;
+	height: 489px;
+	border-radius: 129px;
+	-moz-border-radius: 5px;
+	background-color: #222;
+	margin: auto;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	bottom: 0;
+	margin-top: 182px;
+	right: 0;
+}
+
+#table2{
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 2px solid black;
+	width: 965px;
+	height: 455px;
+	border-radius: 129px;
+	-moz-border-radius: 5px;
+	background-color: #2D3132;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin-top: 199px;
+}
+#tl{
+	border-bottom: 0px;
+	border-right: 0px;
+}
+
+/*Avatars*/
+body {
+  background: #212833;
+	font: 100 14px sans-serif;
+	color: #000;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.1);
+	text-align: center;	
+}
+::-moz-selection {
+  background: rgba(0,0,0,0.1);
+}
+::selection {
+  background: rgba(0,0,0,0.1);
+}
+h1 {
+  font-weight: 100;
+  font-size: 2.7em;
+}
+h3 {
+  color: #111222;
+  font-size: 1.6em;
+}
+a {
+  color: RoyalBlue;
+  font-weight: normal;
+  text-decoration: none;
+}
+a:hover {
+  color: CornflowerBlue;
+}
+
+/* Circle Avatar Styles */
+
+.circle {
+	line-height: 0;
+	display: inline-block;
+	margin: -8px;
+	border: 2px solid rgba(255,255,255,0.4);
+	border-radius: 50%;
+	/* box-shadow: 0px 0px 5px rgba(0,0,0,0.4); */
+	transition: linear 0.25s;
+	height: 85px;
+	width: 85px;
+	margin-right: 8px;
+}
+.circle img {
+	border-radius: 50%;	/* relative value for
+				   adjustable image size */
+}
+.circle:hover {
+	transition: ease-out 0.2s;
+  border: 2px solid rgba(255,255,255,0.8);
+  -webkit-transition: ease-out 0.2s;
+}
+a.circle {
+  color: transparent;
+} /* IE fix: removes blue border */	
+
+
+/*Avatar Names*/
+
+.playerName{
+	margin-top: 4px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+	color: #ffffff;
+
+}
+#player1{
+	position: relative;
+	left: 153px;
+}
+#player2{
+	position: relative;
+	top: 617px;
+	left: 60px;
+}
+#player3{
+	position: relative;
+	left: 525px;
+	top: 330px;
+}
+#player4{
+	position: relative;
+	top: 330px;
+	right: 686px;
+}
+.circle img{
+	top: -1px;
+	position: relative;
+	left: -1px;
+}
+
+/*Cards*/
+  #table { height: 100%; position: relative; width: 100%; }
+  
+	.card { background-color: #fff; -moz-border-radius: 10px; -webkit-border-radius: 10px; -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); float: left; height: 280px; margin: 0 15px 15px 0; position: relative; width: 200px; z-index: 2; transition: all 0.5s ease; }
+	.card .back { background-color: red; -webkit-transform: rotateY(180deg); }
+	.card.flipped { -webkit-transform: rotateY(180deg); }
+	.card.heart, .card.diamond { color: red; }
+	
+	.card .corner { line-height: 1; overflow: hidden; position: absolute; text-align: center; }
+	.card .corner span { display: block; font-size: 24px; font-weight: bold; }
+	.card .corner .number { font-size: 30px; height: 32px; line-height: 32px; }
+	.card.ten .corner .number { font-size: 24px; letter-spacing: -1.8px; }
+	.card .corner.top { left: 8px; top: 6px; }
+	.card .corner.bottom { bottom: 2px; right: 8px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+	
+	.card .suit { font-size: 64px; font-weight: bold; height: 60px; line-height: 60px; overflow: hidden; position: absolute; text-align: center; width: 50px; }
+	.card .top_center { left: 76px; top: 24px; }
+	.card .top_left { left: 30px; top: 24px; }
+	.card .top_right { right: 30px; top: 24px; }
+ 
+	.card .middle_center { left: 76px; top: 110px; }
+	.card .middle_top { left: 76px; top: 70px; }
+	.card .middle_bottom { bottom: 70px; left: 76px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+	.card .middle_left { left: 30px; top: 110px; }
+	.card .middle_right { right: 30px; top: 110px; }
+	.card .middle_top_center { left: 76px; top: 60px; }
+	.card .middle_top_left { left: 30px; top: 80px; }
+	.card .middle_top_right { right: 30px; top: 80px; }
+	.card .middle_bottom_left { bottom: 80px; left: 30px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+	.card .middle_bottom_right { bottom: 80px; right: 30px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+	.card .middle_bottom_center { bottom: 60px; left: 76px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+	
+	.card .bottom_center { bottom: 24px; left: 76px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+	.card .bottom_left { bottom: 24px; left: 30px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+	.card .bottom_right { bottom: 24px; right: 30px; -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg); }	
+
+
+.midCards{
+	height: 135px !important;
+	width: 82px !important;
+}
+#middleHand{
+	font-size: 12px;
+	width: 600px;
+	height: 182px;
+	position: relative;
+	margin: auto;
+	top: 80px;
+	left: 80px;
+}
+#playerHand{
+	font-size: 12px;
+	width: 498px;
+	height: 182px;
+	position: relative;
+	margin: auto;
+	top: 165px;
+	left: 40px;
+}
+.pCard{
+	margin: 0 -40px 15px 0px !important;
+}
+#cardTop{
+	font-weight: bold;
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	width: 76px;
+	right: 0px;
+}
+#cardBot{
+	font-weight: bold;
+	display: inline-block;
+	position: relative;
+	top: 104px;
+	right: 0px;
+	-moz-transform: rotate(-180deg);
+	-webkit-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	-o-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+#number{
+	margin:3px !important;
+}
+.red{
+	color:red !important;
+}
+.black{
+	color:black;
+}
+.yellow{
+	color:yellow;
+}
+.green{
+	color:green;
+}
+
+.pCard:hover{
+  bottom: 36px;
+  z-index: 1000 !important;
+}
+
+.card:hover {
+ -webkit-transform: perspective(1px) scale(1.1);
+ -moz-transform: perspective(1px)    scale(1.1);
+ -o-transform:      scale(1.1);
+ -ms-transform:     scale(1.1);
+}
