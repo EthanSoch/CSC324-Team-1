@@ -64,7 +64,7 @@ public class Card implements Serializable{
 	public String toString()
 	{
 		String temp = "";
-		if(color.name()=="white")
+		if(color.name()=="white" || rank.getValue()==10.5)
 		{
 			temp+="Rook";
 		}
@@ -81,7 +81,6 @@ public class Card implements Serializable{
 				temp+=rank.getValue();
 			}
 		}
-		
 		return temp; 
 	}
 }
