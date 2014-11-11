@@ -12,7 +12,7 @@ myModule.controller('myController', function($scope, $location) {
   $scope.middleHand[1] = {num:1,color:"green"};
   $scope.middleHand[2] = {num:1,color:"black"};
   $scope.middleHand[3] = {num:1,color:"yellow"};
-  $scope.middleHand[4] = {num:1,color:"green"};
+  $scope.middleHand[4] = {num:10.5,color:"white"};
   
   $scope.playerHand[0] = {num:1,color:"red"};
   $scope.playerHand[1] = {num:1,color:"green"};

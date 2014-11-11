@@ -24,6 +24,7 @@
 							<div class="number">{{middleHand[<%= i %>].num}}</div>
 							<div class="color">{{middleHand[<%= i %>].color}}</div>
 						</div>
+						<div class="cardMiddle">{{middleHand[<%= i %>].num}}</div>
 						<div class="cardBottom">
 							<div class="number">{{middleHand[<%= i %>].num}}</div>
 							<div class="color">{{middleHand[<%= i %>].color}}</div>
@@ -38,6 +39,7 @@
 							<div class="number">{{playerHand[<%= i %>].num}}</div>
 							<div class="color">{{playerHand[<%= i %>].color}}</div>
 						</div>
+						<div class="cardMiddle">{{playerHand[<%= i %>].num}}</div>
 						<div class="cardBottom">
 							<div class="number">{{playerHand[<%= i %>].num}}</div>
 							<div class="color">{{playerHand[<%= i %>].color}}</div>

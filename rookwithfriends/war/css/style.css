@@ -399,9 +399,16 @@ a.circle {
 	width: 82px;
 	display:inline-block;
 }
-.cardTop, .cardBottom{
+.cardTop, .cardBottom, .cardMiddle{
 	display: block;
-	height:50%
+	height:33%
+}
+.cardMiddle{
+	font-size: 40px;
+	font-weight: bold;
+	border: solid 1px;
+	width: 45px;
+	display: inline-block;
 }
 .cardBottom{
 	-moz-transform: rotate(180deg); 
@@ -450,6 +457,17 @@ a.circle {
 }
 .green{
 	color:green;
+}
+.white{
+	background-image: url("../Rook_card.jpg");
+	background-size: 100%;
+	background-position: 0px 20px;
+	background-repeat: no-repeat;
+}
+.white .cardTop,
+.white .cardMiddle,
+.white .cardBottom{
+	visibility: hidden;
 }
 
 #middleHand{
