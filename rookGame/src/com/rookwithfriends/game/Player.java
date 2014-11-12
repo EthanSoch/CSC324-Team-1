@@ -157,11 +157,11 @@ public class Player implements Serializable{
 
 	public int setBid(int currentBid) {
 		//Scanner read = new Scanner(System.in);
-		System.out.println("Current bid is " + currentBid + ".\n");
+		/*System.out.println("Current bid is " + currentBid + ".\n");
 		System.out.println("Enter 1 to increase, enter 2 to pass.\n");
 
-		int answer = 1;//read.nextInt();
-		if (answer == 1) {
+		int answer = 1;//read.nextInt();*/
+		if (currentBid != 0) {
 			//System.out.println("What is your new bid. Must be a multiple of 5.\n");
 
 			int bid = currentBid+5;//read.nextInt();
@@ -171,7 +171,7 @@ public class Player implements Serializable{
 								//+ currentBid + "\n");
 			}
 		}
-		else
+		else //If currentBid == 0 then the bid was "passed"
 		{
 			hasPassed=true;
 		}

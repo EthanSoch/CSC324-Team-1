@@ -92,17 +92,17 @@ public class Game implements Serializable{
 		*/
 	}
 
-	public void setBid(Player curPlayer) {
+	public void setBid(Player curPlayer, int theBid) {
 		int tempbid;
 		// Step 4 -- Round of bidding?
 
-		System.out.println(curPlayer+": It's your turn to bid.\n");
+		//System.out.println(curPlayer+": It's your turn to bid.\n");
 		if(!curPlayer.getHasPassed())
 		{
 			if (gameBid >= 200) {
 				bettingIsDone=true;
 			}
-			tempbid = curPlayer.setBid(gameBid);
+			tempbid = curPlayer.setBid(theBid);
 			if(curPlayer.getHasPassed())
 			{
 				numPasses+=1;
