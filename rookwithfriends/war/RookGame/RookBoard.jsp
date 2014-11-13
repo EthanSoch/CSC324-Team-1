@@ -21,12 +21,12 @@
 					<div class="card three midCards" ng-class="card.color" ng-repeat="card in middleHand">
 						<div class="cardTop">
 							<div class="number">{{card.rank}}</div>
-							<div class="color">{{card.color}}</div>
+							<div class="color"></div>
 						</div>
 						<div class="cardMiddle">{{card.rank}}</div>
 						<div class="cardBottom">
 							<div class="number">{{card.rank}}</div>
-							<div class="color">{{card.color}}</div>
+							<div class="color"></div>
 						</div>
 					</div>
 				</div>
@@ -34,12 +34,12 @@
 					<div class="card pCard" ng-class="card.color" ng-repeat="card in playerHand">
 						<div class="cardTop">
 							<div class="number">{{card.rank}}</div>
-							<div class="color">{{card.color}}</div>
+							<div class="color"></div>
 						</div>
 						<div class="cardMiddle">{{card.rank}}</div>
 						<div class="cardBottom">
 							<div class="number">{{card.rank}}</div>
-							<div class="color">{{card.color}}</div>
+							<div class="color"></div>
 						</div>
 					</div>
 				</div>

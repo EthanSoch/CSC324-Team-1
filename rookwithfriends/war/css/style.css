@@ -452,14 +452,26 @@ a.circle {
 .red{
 	color:red;
 }
+.red .color:after{
+	content:"Red";
+}
 .black{
 	color:black;
 }
+.black .color:after{
+	content:"Black";
+}
 .yellow{
-	color:yellow;
+	color:Yellow;
+}
+.yellow .color:after{
+	content:"Yellow";
 }
 .green{
 	color:green;
+}
+.green .color:after{
+	content:"Green";
 }
 .white{
 	background-image: url("../Rook_card.jpg");
