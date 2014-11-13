@@ -6,16 +6,23 @@ import java.util.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.eclipse.persistence.jaxb.MarshallerProperties;
 
+@XmlRootElement
 public class Game implements Serializable{
 	private static final long serialVersionUID = 6986630091662956160L;
 	// Declare Class Members//
 	private int gameBid=100,numPasses;
 	private CardColor trump;
-	public CardSet allDeck, centerDeck, kitty;
+	public CardSet centerDeck, kitty;
+	@XmlTransient
+	public CardSet allDeck;
+	@XmlTransient
 	public List<Player> players;
+
 	public Player bidWinner, currentPlayer;
 	private Boolean bettingIsDone=false;
 
@@ -155,6 +162,10 @@ public class Game implements Serializable{
 
 	public List<Player> getPlayers() {
 		return players;
+	}
+	
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
 	
 	public Player getPlayer(int index){
@@ -344,5 +355,38 @@ public class Game implements Serializable{
 			}
 			
 		}
+	}
+	
+	public String toJSON(){
+		
+		try{
+			// Create a JaxBContext
+			JAXBContext jc = JAXBContext.newInstance(Game.class);
+	
+			// Create the Marshaller Object using the JaxB Context
+			Marshaller marshaller = jc.createMarshaller();
+			
+			// Set the Marshaller media type to JSON or XML
+			marshaller.setProperty(MarshallerProperties.MEDIA_TYPE, "application/json");
+			
+			// Set it to true if you need to include the JSON root element in the JSON output
+			marshaller.setProperty(MarshallerProperties.JSON_INCLUDE_ROOT, false);
+			
+			// Set it to true if you need the JSON output to formatted
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			
+			StringWriter stringWriter = new StringWriter();
+			
+			// Marshal the employee object to JSON and print the output to console
+			marshaller.marshal(this, stringWriter);
+			
+			return stringWriter.toString();
+		}
+		catch(JAXBException e){
+			System.err.println("toJson error\n" + e.getMessage());
+		}
+		
+		return "error";
+		
 	}
 }

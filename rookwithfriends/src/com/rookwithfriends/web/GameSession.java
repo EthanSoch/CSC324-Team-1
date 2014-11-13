@@ -12,7 +12,7 @@ public class GameSession implements Serializable{
 	private Game game;
 	private UUID gameId;
 	private List<UserSession> players;
-	private Player currentBidder = 0;
+	//private Player currentBidder = 0;
 	
 	public static GameSession getGameSession(UUID gameId){
 		CacheUtility util = new CacheUtility();
@@ -30,12 +30,6 @@ public class GameSession implements Serializable{
 	public void gameInstruction(Map<String,String[]> input){
 		
 		switch(input.get("op")[0]){
-		case "start":
-			startGame();
-			
-			Player firstBidder = game.getPlayerById(players.get(currentBidder).getGameID());
-			startBidding(firstBidder);
-			break;
 		case "msg":
 			Map<String,Object> msg = new HashMap<String,Object>();
 			msg.put("op","msg");
@@ -46,11 +40,11 @@ public class GameSession implements Serializable{
 			//Need to pull out bid and playerID
 			//input.get("msg")[0]);
 			//Get player ID
-			Game.setBid(playerID);
+			/*Game.setBid(playerID);
 			if(!Game.getBettingIsDone()) {
 				Player theBidder = game.getPlayerById(players.get(currentBidder).getGameID());
 				startBidding(theBidder);
-			}
+			}*/
 			break;
 			
 		}
@@ -65,25 +59,33 @@ public class GameSession implements Serializable{
 		}
 		
 		game.startGame();
+		updateGameBoard();
 		updateAllPlayersCards();
 	}
 	
 	public void updateAllPlayersCards(){
 		for(UserSession player : players){
 			Player gamePlayer = game.getPlayerById(player.getGameID());
-			String jsonString = gamePlayer.getPlayerHand().toJSON();
+			String jsonString = gamePlayer.toJSON();
 			player.sendMessage(jsonString);
 		}
 	}
 	
-	public void startBidding(Player currentPlayer){
+	public void updateGameBoard(){
+		for(UserSession player : players){
+			String jsonString = game.toJSON();
+			player.sendMessage(jsonString);
+		}
+	}
+	
+	/*public void startBidding(Player currentPlayer){
 		//currentPlayer.sendMessage(startBid); //Not sure what we specifically want to send
 		currentBidder++;
 		
 		if(currentBidder == 4){ //Make sure it loops around
 			currentBidder = 0;
 		}
-	}
+	}*/
 	
 	/*
 	 * Save this game instance
@@ -112,6 +114,10 @@ public class GameSession implements Serializable{
 		for(UserSession player : players){
 			if(!player.getChannelKey().equals(newPlayer.getChannelKey()))
 				player.sendMessage(responseJSON);
+		}
+
+		if(players.size() == 4){
+			startGame();
 		}
 		
 		return newPlayer;

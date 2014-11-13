@@ -64,7 +64,7 @@
                         <a href="#">Contact</a>
                     </li>
                     <li class="form-group">
-                      <input id="searchbox" type="text" class="form-control" type="text" ng-value="inviteUrl">
+                      <input id="searchbox" type="text" class="form-control" type="text" value="">
                     </li>
                 </ul>
             </div>

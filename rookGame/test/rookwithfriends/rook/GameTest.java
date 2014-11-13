@@ -39,7 +39,7 @@ public class GameTest {
 		for(int i=0;!game.getBettingIsDone();i=(i+1)%4)
 		{
 			currentPlayer=game.getPlayer(i);
-			game.setBid(currentPlayer);
+			//game.setBid(currentPlayer);
 		}
 
 		// Step 4 -- Find winner of bid - Pass control unto them?

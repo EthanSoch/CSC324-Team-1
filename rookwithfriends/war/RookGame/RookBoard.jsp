@@ -20,12 +20,12 @@
 				<div id="middleHand" >
 					<div class="card three midCards" ng-class="card.color" ng-repeat="card in middleHand">
 						<div class="cardTop">
-							<div class="number">{{card.num}}</div>
+							<div class="number">{{card.rank}}</div>
 							<div class="color">{{card.color}}</div>
 						</div>
-						<div class="cardMiddle">{{card.num}}</div>
+						<div class="cardMiddle">{{card.rank}}</div>
 						<div class="cardBottom">
-							<div class="number">{{card.num}}</div>
+							<div class="number">{{card.rank}}</div>
 							<div class="color">{{card.color}}</div>
 						</div>
 					</div>
@@ -33,12 +33,12 @@
 				<div id="playerHand">
 					<div class="card pCard" ng-class="card.color" ng-repeat="card in playerHand">
 						<div class="cardTop">
-							<div class="number">{{card.num}}</div>
+							<div class="number">{{card.rank}}</div>
 							<div class="color">{{card.color}}</div>
 						</div>
-						<div class="cardMiddle">{{card.num}}</div>
+						<div class="cardMiddle">{{card.rank}}</div>
 						<div class="cardBottom">
-							<div class="number">{{card.num}}</div>
+							<div class="number">{{card.rank}}</div>
 							<div class="color">{{card.color}}</div>
 						</div>
 					</div>

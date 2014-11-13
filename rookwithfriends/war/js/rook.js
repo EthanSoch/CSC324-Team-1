@@ -7,24 +7,7 @@ myModule.controller('myController', function($scope, $location) {
   $scope.playersConnected = true;
   $scope.middleHand = [];
   $scope.playerHand = [];
-  
-  $scope.middleHand[0] = {num:1,color:"red"};
-  $scope.middleHand[1] = {num:1,color:"green"};
-  $scope.middleHand[2] = {num:1,color:"black"};
-  $scope.middleHand[3] = {num:1,color:"yellow"};
-  $scope.middleHand[4] = {num:10.5,color:"white"};
-  
-  $scope.playerHand[0] = {num:1,color:"red"};
-  $scope.playerHand[1] = {num:1,color:"green"};
-  $scope.playerHand[2] = {num:1,color:"black"};
-  $scope.playerHand[3] = {num:1,color:"yellow"};
-  $scope.playerHand[4] = {num:1,color:"green"};
-  $scope.playerHand[5] = {num:14,color:"red"};
-  $scope.playerHand[6] = {num:1,color:"green"};
-  $scope.playerHand[7] = {num:1,color:"black"};
-  $scope.playerHand[8] = {num:1,color:"yellow"};
-  $scope.playerHand[9] = {num:1,color:"green"};
-  
+
   $scope.change = function() {
     $scope.numplayers = 0;
     $scope.players.forEach( function(player){
@@ -45,6 +28,16 @@ myModule.controller('myController', function($scope, $location) {
 
   $scope.onMessage = function(msg){
     var data = JSON.parse(msg.data);
+    console.log(data);
+
+    if(data.kitty != undefined){
+    	$scope.middleHand = data.kitty;
+    }
+    
+    if(data.hand != undefined){
+    	$scope.playerHand = data.hand;
+    }
+    
     $scope.players[data.playerConnected] = true;
     
     $scope.change();
@@ -57,11 +50,11 @@ myModule.controller('myController', function($scope, $location) {
   }
 
   $scope.onError = function(err) {
-      alert(err);
+	  console.log(err);
   }
 
   $scope.onClose = function() {
-      alert("Channel closed!");
+	  console.log("Channel closed!");
   }
   
   $scope.connect = function(){
@@ -97,6 +90,7 @@ myModule.controller('myController', function($scope, $location) {
         socket.onclose = $scope.onClose;
         
         $scope.inviteUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?gameId=" +serverMessage.gameId;
+        jQuery("#searchbox").val($scope.inviteUrl); 
   }
 });
 
@@ -105,14 +99,12 @@ myModule.config(function($routeProvider, $locationProvider) {
 
         // route for the home page
         .when('/', {
-            templateUrl : 'RookGame/lobby.html',
-            controller  : 'myController'
+            templateUrl : 'RookGame/lobby.html'
         })
 
         // route for the game page
         .when('/RookBoard', {
-            templateUrl : 'RookGame/RookBoard.jsp',
-            controller  : 'myController'
+            templateUrl : 'RookGame/RookBoard.jsp'
         });
 	 // use the HTML5 History API
 		$locationProvider.html5Mode(true);

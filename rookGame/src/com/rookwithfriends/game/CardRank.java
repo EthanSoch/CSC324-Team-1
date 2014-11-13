@@ -1,18 +1,24 @@
 package com.rookwithfriends.game;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(name = "CardRank")
+@XmlEnum
 public enum CardRank {
-	one(15),
-	five(5),
-	six(6),
-	seven(7),
-	eight(8),
-	nine(9),
-	ten(10),
-	eleven(11),
-	twelve(12),
-	thirteen(13),
-	fourteen(14),
-	rook(10.5);
+	@XmlEnumValue("1") one(15),
+	@XmlEnumValue("5") five(5),
+	@XmlEnumValue("6") six(6),
+	@XmlEnumValue("7") seven(7),
+	@XmlEnumValue("8") eight(8),
+	@XmlEnumValue("9") nine(9),
+	@XmlEnumValue("10") ten(10),
+	@XmlEnumValue("11") eleven(11),
+	@XmlEnumValue("12") twelve(12),
+	@XmlEnumValue("13") thirteen(13),
+	@XmlEnumValue("14") fourteen(14),
+	@XmlEnumValue("10.5") rook(10.5);
 	
 	private double value;    
 	
