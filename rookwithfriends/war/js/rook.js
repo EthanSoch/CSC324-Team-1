@@ -21,14 +21,13 @@ myModule.controller('myController', function($scope, $location) {
   };
 
   //Players
-  $scope.player1 = "player 1";
-  $scope.player2 = "player 2";
-  $scope.player3 = "player 3";
-  $scope.player4 = "player 4";
+  $scope.player1 = "Player 1";
+  $scope.player2 = "Player 2";
+  $scope.player3 = "Player 3";
+  $scope.player4 = "Player 4";
 
   $scope.onMessage = function(msg){
     var data = JSON.parse(msg.data);
-    console.log(data);
 
     if(data.kitty != undefined){
     	$scope.middleHand = data.kitty;
