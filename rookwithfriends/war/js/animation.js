@@ -66,7 +66,7 @@ $.draw = function() {
   });
 };
 
-$.init = function() {
+$.init = function(elm) {
   $.canvas = document.createElement( 'canvas' );
   $.ctx = $.canvas.getContext( '2d' );
   $.width = $.canvas.width = 300;
@@ -80,7 +80,7 @@ $.init = function() {
   $.TWO_PI = $.PI * 2;
   $.ctx.globalCompositeOperation = 'lighter';
   var loadingmessage = document.getElementById("loadingmessage");
-  document.getElementById("mainContainer").insertBefore($.canvas, loadingmessage);
+  elm.insertBefore($.canvas, loadingmessage);
   $.loop();
 };
 
@@ -90,5 +90,4 @@ $.loop = function() {
   $.draw();
   $.tick++;
 };
-
-$.init();
+var animationInit = $.init;
