@@ -146,7 +146,7 @@ public class Player implements Serializable{
 		int theVal;
 		Card theCard = null;
 		
-		theVal=read.nextInt();
+		theVal=0;//read.nextInt();
 		if(theVal<playerHand.size())
 		{
 			theCard=playerHand.get(theVal);

@@ -15,11 +15,13 @@ import org.eclipse.persistence.jaxb.MarshallerProperties;
 public class Game implements Serializable{
 	private static final long serialVersionUID = 6986630091662956160L;
 	// Declare Class Members//
-	private int gameBid=100,numPasses;
-	private CardColor trump;
+	private int gameBid=100,numPasses,totalTeam1Score=0,totalTeam2Score=0,team1Score=0,team2Score=0;
+	private CardColor trump, trickColor;
 	public CardSet centerDeck, kitty;
 	@XmlTransient
 	public CardSet allDeck;
+	
+
 	@XmlTransient
 	public List<Player> players;
 
@@ -135,6 +137,22 @@ public class Game implements Serializable{
 	public int getGameBid() {
 		return gameBid;
 	}
+	
+	public int getTotalTeam1Score() {
+		return totalTeam1Score;
+	}
+
+	public void setTotalTeam1Score(int totalTeam1Score) {
+		this.totalTeam1Score = totalTeam1Score;
+	}
+
+	public int getTotalTeam2Score() {
+		return totalTeam2Score;
+	}
+
+	public void setTotalTeam2Score(int totalTeam2Score) {
+		this.totalTeam2Score = totalTeam2Score;
+	}
 
 	public CardSet getAllDeck() {
 		return allDeck;
@@ -238,7 +256,8 @@ public class Game implements Serializable{
 
 	public void createDeck() {
 		allDeck = new CardSet();
-
+		
+		
 		for (CardColor color : CardColor.values()) {
 			for (CardRank rank : CardRank.values()) {
 				if (rank != CardRank.rook && color != CardColor.white) {
@@ -253,7 +272,7 @@ public class Game implements Serializable{
 	public void dealHands() {
 		for (Player player : players) {
 			CardSet hand = new CardSet();
-
+			
 			for (int i = 0; i < 10; i++) {
 				allDeck.front().setId(player.getPlayerID());
 				hand.add(allDeck.front());
@@ -262,6 +281,7 @@ public class Game implements Serializable{
 
 			hand.Sort();
 			player.setPlayerHand(hand);
+			player.getCardsWon().clear();
 		}
 
 		kitty = new CardSet();
@@ -308,12 +328,12 @@ public class Game implements Serializable{
 	{
 		currentPlayer=curPlayer;
 		centerDeck.clear();
-		CardColor trickColor=null;
+		trickColor=null;
 		for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
 		{
 			System.out.println("Player "+j+", Choose a card to play:");
 			currentPlayer.printHand();
-			Card temp = currentPlayer.chooseCard();
+			Card temp = findValidCard(currentPlayer);// currentPlayer.chooseCard();
 			if(i==0)
 			{
 				trickColor=temp.getColor();
@@ -389,4 +409,39 @@ public class Game implements Serializable{
 		return "error";
 		
 	}
+	
+	public Card findValidCard(Player curPlayer)
+	{
+		for(Card temp: curPlayer.getPlayerHand())
+		{
+			if(temp.getColor()==trickColor || temp.getColor()==trump || temp.getColor()==CardColor.white)
+			{
+				return temp;
+			}
+		}
+		return curPlayer.getPlayerHand().get(0);
+	}
+	
+	public void scoreGame()
+	{
+		team1Score=players.get(0).getCardsWon().getScore()+players.get(2).getCardsWon().getScore();
+		team2Score=players.get(1).getCardsWon().getScore()+players.get(3).getCardsWon().getScore();
+	}
+
+	public int getTeam1Score() {
+		return team1Score;
+	}
+
+	public void setTeam1Score(int team1Score) {
+		this.team1Score = team1Score;
+	}
+
+	public int getTeam2Score() {
+		return team2Score;
+	}
+
+	public void setTeam2Score(int team2Score) {
+		this.team2Score = team2Score;
+	}
+	
 }
