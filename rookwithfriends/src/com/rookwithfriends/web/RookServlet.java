@@ -44,8 +44,9 @@ public class RookServlet extends HttpServlet {
 		//Generate Client return object
 		Map<String,Object> returnObject = new HashMap<String, Object>();
 		returnObject.put("token", token);
-		returnObject.put("connectedPlayer", session.getPlayers().size());
+		returnObject.put("connectedPlayers", session.getPlayers().size());
 		returnObject.put("gameId", session.getGameId().toString());
+		returnObject.put("playerId", newPlayer.getChannelKey().toString());
 		
 		response.setContentType("text/plain");
 		response.getWriter().write(JSONUtility.convertToJson(returnObject));

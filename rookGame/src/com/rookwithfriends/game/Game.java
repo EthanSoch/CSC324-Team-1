@@ -17,13 +17,9 @@ public class Game implements Serializable{
 	// Declare Class Members//
 	private int gameBid=100,numPasses,totalTeam1Score=0,totalTeam2Score=0,team1Score=0,team2Score=0;
 	private CardColor trump, trickColor;
-	public CardSet centerDeck, kitty;
-	@XmlTransient
-	public CardSet allDeck;
-	
-
-	@XmlTransient
-	public List<Player> players;
+	public CardSet centerDeck;
+	@XmlTransient public CardSet allDeck,kitty;
+	@XmlTransient public List<Player> players;
 
 	public Player bidWinner, currentPlayer;
 	private Boolean bettingIsDone=false;

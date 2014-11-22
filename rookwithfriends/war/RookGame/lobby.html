@@ -15,18 +15,18 @@
 			<div id="boxContainer">
 				<div class="squaredOne" id="squared1">
 					<label for="squaredOne"
-						ng-class="{'squaredOneClicked': players[0] }"></label>
+						ng-class="{'squaredOneClicked': numplayers > 0 }"></label>
 				</div>
 				<div class="squaredOne" id="squared2">
-					<label for="squared2" ng-class="{'squaredOneClicked': players[1] }"></label>
+					<label for="squared2" ng-class="{'squaredOneClicked': numplayers > 1 }"></label>
 				</div>
 				<div class="squaredOne" id="squared3">
 					<label for="squaredOne"
-						ng-class="{'squaredOneClicked': players[2] }"></label>
+						ng-class="{'squaredOneClicked': numplayers > 2 }"></label>
 				</div>
 				<div class="squaredOne" id="squared4">
 					<label for="squaredOne"
-						ng-class="{'squaredOneClicked': players[3] }"></label>
+						ng-class="{'squaredOneClicked': numplayers > 3 }"></label>
 				</div>
 			</div>
 			<div id="players">There are currently {{numplayers}} of 4

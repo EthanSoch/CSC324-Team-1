@@ -1,115 +1,153 @@
+var rookGame = (function($){
+	return{
+		scope : {},
+		gameId: "",
+		playerId: "",
+		send : function(operation,data){
+			data = data == undefined ? {} : data;
+			data.op = operation;
+			data.gameId = rookGame.gameId;
+			data.playerId = rookGame.playerId;
+			$.post("rook/messages",data)
+		},
+		refresh : function(){
+			scope.$apply();
+		},
+		getQueryStringValue : function(key){
+			return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+		},
+		selectCards:function(numberOfCards){
+			$(".card").click(function(elm){
+				var card = $(elm.currentTarget);
+				if(card.attr("data-selected") == "true"){
+					card.css("bottom","");
+					card.attr("data-selected","false");
+				}
+				else if(rookGame.getSelectedCards().length < numberOfCards){
+					card.css("bottom","45px");
+					card.attr("data-selected","true");
+				}
+			});
+		},
+		getSelectedCards:function(){
+			var cardData = [];
+			 $(".card[data-selected='true']").each(function(i,card){
+				 var dataObj = JSON.parse($(card).attr("data-card"));
+				 cardData.push(dataObj)
+			 });
+			 
+			return cardData;
+		},
+		deselectAllCards : function(){
+			$(".card").attr("data-selected","false").css("bottom","").unbind("click");
+		}
+	}
+})(jQuery);
+
+rookGame.gameController = function($scope, $location){
+	$scope.numplayers = 0;
+	$scope.inviteUrl = "";
+	$scope.middleHand = [];
+	$scope.playerHand = [];
+	$scope.opponentNames = ["Player 1","Player 2","Player 3","Player 4"];
+	rookGame.scope = $scope;
+
+	onMessage = function(msg) {
+		var data = JSON.parse(msg.data);
+
+		if (data.centerDeck != undefined) {
+			$scope.middleHand = data.centerDeck;
+		}
+
+		if (data.hand != undefined) {
+			$scope.playerHand = data.hand;
+		}
+
+		if (data.playersConnected != undefined) {
+			$scope.numplayers = parseInt(data.playersConnected);
+			if ($scope.numplayers >= 4)
+				$location.path('/RookBoard');
+		}
+
+		$scope.$apply();
+  	}
+
+		  
+	onOpened = function() {
+		if ($scope.numplayers >= 4) {
+			rookGame.send("start");
+			$location.path('/RookBoard');
+		}
+
+		$scope.$apply();
+	}
+
+	onError = function(err) {
+		console.log(err);
+	}
+
+	onClose = function() {
+		console.log("Channel closed!");
+	}
+
+	$scope.connect = function() {
+		var gameId = rookGame.getQueryStringValue("gameId");
+		var data = {
+			"isNewGame" : true
+		};
+		// if url contains a game id Create new game
+		if (gameId != "") {
+			data.gameId = gameId;
+			data.isNewGame = false;
+		}
+
+		jQuery.ajax({
+			data : data,
+			type : "GET",
+			url : "rook/messages",
+			async : true
+		}).done(
+				function(msg) {
+					var serverMessage = JSON.parse(msg);
+
+					console.log(serverMessage.gameId);
+					rookGame.gameId = serverMessage.gameId;
+					rookGame.playerId = serverMessage.playerId;
+
+					$scope.numplayers = serverMessage.connectedPlayers;
+
+					channel = new goog.appengine.Channel(serverMessage.token);
+					socket = channel.open();
+					socket.onopen = onOpened;
+					socket.onmessage = onMessage;
+					socket.onerror = onError;
+					socket.onclose = onClose;
+
+					$scope.inviteUrl = window.location.protocol + "//"
+							+ window.location.host + window.location.pathname
+							+ "?gameId=" + serverMessage.gameId;
+					jQuery("#searchbox").val($scope.inviteUrl);
+				});
+	}
+};
+
+rookGame.routeProvider = function($routeProvider, $locationProvider) {
+    $routeProvider
+    // route for the home page
+    .when('/', {
+        templateUrl : 'RookGame/lobby.html'
+    })
+
+    // route for the game page
+    .when('/RookBoard', {
+        templateUrl : 'RookGame/RookBoard.jsp'
+    });
+ // use the HTML5 History API
+	$locationProvider.html5Mode(true);
+};
+
 var myModule = angular.module('rook', ['ngRoute']);
 
-myModule.controller('myController', function($scope, $location) {
-  $scope.players = [false,false,false,false];
-  $scope.numplayers = 0;
-  $scope.inviteUrl = "";
-  $scope.playersConnected = true;
-  $scope.middleHand = [];
-  $scope.playerHand = [];
+myModule.controller('myController', rookGame.gameController);
 
-  $scope.change = function() {
-    $scope.numplayers = 0;
-    $scope.players.forEach( function(player){
-      if(player)
-        $scope.numplayers++;
-      if($scope.numplayers == 4){
-	        //$scope.playersConnected = true; -- Used to add find when all players have connected if needed
-	        $location.path('/RookBoard'); // Fix this
-	      }
-    });
-  };
-
-  //Players
-  $scope.player1 = "Player 1";
-  $scope.player2 = "Player 2";
-  $scope.player3 = "Player 3";
-  $scope.player4 = "Player 4";
-
-  $scope.onMessage = function(msg){
-    var data = JSON.parse(msg.data);
-
-    if(data.kitty != undefined){
-    	$scope.middleHand = data.kitty;
-    }
-    
-    if(data.hand != undefined){
-    	$scope.playerHand = data.hand;
-    }
-    
-    $scope.players[data.playerConnected] = true;
-    
-    $scope.change();
-    $scope.$apply();
-  }
-  
-  $scope.onOpened = function() {
-      $scope.change();
-      $scope.$apply();
-  }
-
-  $scope.onError = function(err) {
-	  console.log(err);
-  }
-
-  $scope.onClose = function() {
-	  console.log("Channel closed!");
-  }
-  
-  $scope.connect = function(){
-      var gameId = getQueryStringValue("gameId");
-      var data = {"isNewGame" : true};
-      //if url contains a game id Create new game
-      if(gameId != ""){
-        data.gameId = gameId;
-        data.isNewGame = false;
-      }
-      
-      var serverMessage;
-      
-      jQuery.ajax({
-          data: data,
-          type: "GET",
-          url: "rook/messages",
-          async: false
-      }).done(function( msg ) {
-        serverMessage = JSON.parse(msg);
-        });
-      
-      console.log(serverMessage.gameId);
-      
-      for(var i = 0; i <  serverMessage.connectedPlayer; i++)
-        $scope.players[i] = true;
-      
-      channel = new goog.appengine.Channel(serverMessage.token);
-        socket = channel.open();
-        socket.onopen = $scope.onOpened;
-        socket.onmessage = $scope.onMessage;
-        socket.onerror = $scope.onError;
-        socket.onclose = $scope.onClose;
-        
-        $scope.inviteUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?gameId=" +serverMessage.gameId;
-        jQuery("#searchbox").val($scope.inviteUrl); 
-  }
-});
-
-myModule.config(function($routeProvider, $locationProvider) {
-    $routeProvider
-
-        // route for the home page
-        .when('/', {
-            templateUrl : 'RookGame/lobby.html'
-        })
-
-        // route for the game page
-        .when('/RookBoard', {
-            templateUrl : 'RookGame/RookBoard.jsp'
-        });
-	 // use the HTML5 History API
-		$locationProvider.html5Mode(true);
-});
-
-
-function getQueryStringValue (key) {  
-    return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
-}  
+myModule.config(rookGame.routeProvider);

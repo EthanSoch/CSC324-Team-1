@@ -36,6 +36,9 @@ public class GameSession implements Serializable{
 			msg.put("msg", input.get("msg")[0]);
 			sendToAll(msg);
 			break;
+		case "start":
+			startGame();
+			break;
 		case "bid":
 			//Need to pull out bid and playerID
 			//input.get("msg")[0]);
@@ -106,18 +109,14 @@ public class GameSession implements Serializable{
 		
 		//send player Connected messages to all other players
 		Map<String,Object> response = new HashMap<String, Object>();
-		String playerIdString = String.valueOf(newPlayer.getGameID());
-		response.put("playerConnected", playerIdString);
+		String numOfPlayers = String.valueOf(players.size());
+		response.put("playersConnected", numOfPlayers);
     	
 		String responseJSON = JSONUtility.convertToJson(response);
 		
 		for(UserSession player : players){
 			if(!player.getChannelKey().equals(newPlayer.getChannelKey()))
 				player.sendMessage(responseJSON);
-		}
-
-		if(players.size() == 4){
-			startGame();
 		}
 		
 		return newPlayer;
