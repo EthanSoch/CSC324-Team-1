@@ -5,14 +5,14 @@
 	<div class="avatarContainer">	
 		<a class="circle" id="player2"> 
 			<img height="83" width="83" src="avatarImg.png">
-			<h5 class="playerName">{{opponentNames[2]}}</h5>
+			<h5 class="playerName">{{opponentNames[1]}}</h5>
 		</a> 
 	</div>
 	<div>
 		<div class="centerStrip avatarContainer">
 			<a class="circle" id="player3"> 
 				<img height="83" width="83" src="avatarImg.png">
-				<h5 class="playerName">{{opponentNames[3]}}</h5>
+				<h5 class="playerName">{{opponentNames[2]}}</h5>
 			</a> 
 		</div>
 		<div id="table1" class="centerStrip">
@@ -48,14 +48,14 @@
 		<div class="centerStrip avatarContainer">
 			<a class="circle" id="player4"> 
 				<img height="83" width="83" src="avatarImg.png">
-				<h5 class="playerName">{{opponentNames[4]}}</h5>
+				<h5 class="playerName">{{opponentNames[3]}}</h5>
 			</a>
 		</div>
 	</div>
 	<div class="avatarContainer">
 		<a class="circle" id="player1">
 			<img height="83" width="83" src="avatarImg.png">
-			<h5 class="playerName">{{opponentNames[1]}}</h5>
+			<h5 class="playerName">{{opponentNames[0]}}</h5>
 		</a> 
 	</div>
 </div>
