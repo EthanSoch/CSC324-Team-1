@@ -44,13 +44,43 @@ var rookGame = (function($){
 	}
 })(jQuery);
 
-rookGame.gameController = function($scope, $location){
+rookGame.gameController = function($scope, $modal, $location, $log){
 	$scope.numplayers = 0;
 	$scope.inviteUrl = "";
 	$scope.middleHand = [];
 	$scope.playerHand = [];
 	$scope.opponentNames = ["Player 1","Player 2","Player 3","Player 4"];
 	rookGame.scope = $scope;
+	
+	$scope.selectedIndex = -1; /* Not Selected */
+	$scope.select= function(i) {
+	  $scope.selectedIndex=i;
+	};
+	
+	  $scope.items = ['item1', 'item2', 'item3'];
+
+	  $scope.open = function (){
+
+	     var modalInstance = $modal.open({
+	      templateUrl: 'myModalContent.html',
+	      controller: 'modalController',
+	      resolve: {
+	        items: function () {
+	          return $scope.items;
+	        }
+	      }
+	    });
+
+	    modalInstance.result.then(function (selectedItem) {
+	      $scope.selected = selectedItem;
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };
+
+	// Please note that $modalInstance represents a modal window (instance) dependency.
+	// It is not the same as the $modal service used above.
+
 
 	onMessage = function(msg) {
 		var data = JSON.parse(msg.data);
@@ -71,6 +101,7 @@ rookGame.gameController = function($scope, $location){
 
 		$scope.$apply();
   	}
+	
 
 		  
 	onOpened = function() {
@@ -131,6 +162,21 @@ rookGame.gameController = function($scope, $location){
 	}
 };
 
+rookGame.modalController = function($scope, $modalInstance, $modal, items){
+	$scope.topBid = 125;
+	$scope.value = 50;
+	$scope.items = items;
+	  $scope.selected = {
+	    item: $scope.items[0]
+	  };
+    $scope.ok = function () {
+	    $modalInstance.close($scope.selected.item);
+	  };
+
+	$scope.cancel = function () {
+	    $modalInstance.dismiss('cancel');
+	  };
+}
 rookGame.routeProvider = function($routeProvider, $locationProvider) {
     $routeProvider
     // route for the home page
@@ -146,8 +192,9 @@ rookGame.routeProvider = function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
 };
 
-var myModule = angular.module('rook', ['ngRoute']);
+var myModule = angular.module('rook', ['ngRoute','ui.bootstrap']);
 
 myModule.controller('myController', rookGame.gameController);
+myModule.controller('modalController', rookGame.modalController);
 
 myModule.config(rookGame.routeProvider);

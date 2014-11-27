@@ -64,7 +64,7 @@
                         <a href="#">Contact</a>
                     </li>
                     <li class="form-group">
-                      <input id="searchbox" type="text" class="form-control" type="text" value="">
+                      <input id="searchbox" type="text" class="form-control" type="text" value="" onclick="this.select();">
                     </li>
                 </ul>
             </div>
@@ -87,6 +87,7 @@
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.js"></script>
 <script src="js/angular-animate.min.js"></script>
+<script src="js/ui-bootstrap-0.12.0.min.js"></script>
 <script src="/_ah/channel/jsapi"></script>
 <script src="js/rook.js"></script>
 </html>
