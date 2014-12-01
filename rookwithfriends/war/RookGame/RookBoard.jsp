@@ -14,12 +14,39 @@
 		<h3>Your Bid is: {{value}}</h3> 
 		</div>
         </div>
-		<div class="alert alert-danger" role="alert" ng-show="bidWarning">Bid is out of bounds, please select again.</div>
+		<div class="alert alert-danger" role="alert" ng-show="bidWarning">Bid must be more than current bid, please select again.</div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+    <!-- Player Stat Boxes -->
+    <div class="box" id="player2StatBox">
+	  <div class="box__header">
+	    <h3 class="box__header-title">Team 1</h3>
+	  </div>
+	  <div class="box__body">
+	    <div class="stats stats--main" id="player2Points">
+	    <p>Score:</p>
+	    </div>
+	    <div class="stats" id="player2CB">
+	    <p>Current Bid:</p>
+	    </div>
+	  </div>
+	</div>
+	<div class="box" id="player1StatBox">
+	  <div class="box__header">
+	    <h3 class="box__header-title">Team 1</h3>
+	  </div>
+	  <div class="box__body">
+	    <div class="stats stats--main" id="player2Points">
+	    <p>Score:</p>
+	    </div>
+	    <div class="stats" id="player2CB">
+	    <p>Current Bid:</p>
+	    </div>
+	  </div>
+	</div>
 	<!--User Avatars and Names-->
 	<button class="btn btn-default" ng-click="open()">Open me!</button>
 	<div class="avatarContainer">	
