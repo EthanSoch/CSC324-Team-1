@@ -163,14 +163,22 @@ rookGame.gameController = function($scope, $modal, $location, $log){
 };
 
 rookGame.modalController = function($scope, $modalInstance, $modal, items){
-	$scope.topBid = 125;
-	$scope.value = 50;
+	$scope.topBid = 80;
+	$scope.bidWarning = false;
+	$scope.value = 100;
 	$scope.items = items;
 	  $scope.selected = {
 	    item: $scope.items[0]
 	  };
     $scope.ok = function () {
+    	if ($scope.value < $scope.topBid){
+    		$scope.bidWarning = true;
+    		console.log("Called");
+    		console.log("Value is " + value);
+    	}
+    	else{
 	    $modalInstance.close($scope.selected.item);
+    	}
 	  };
 
 	$scope.cancel = function () {

@@ -8,12 +8,13 @@
 		<div class="modal-body" id="modalMain">
 		<h3>Current Bid is: {{topBid}}</h3> 
 		<div id="slider">
-			<input step="5" class="bar" type="range" id="rangeinput" ng-model="value" onchange="rangevalue.value=value;"/>
+			<input step="5" min=0 max=200 class="bar" type="range" id="rangeinput" ng-model="value" onchange="rangevalue.value=value;"/>
 			<output id="rangevalue"><span>50</span></output>	
 		</div>
 		<h3>Your Bid is: {{value}}</h3> 
 		</div>
         </div>
+		<div class="alert alert-danger" role="alert" ng-show="bidWarning">Bid is out of bounds, please select again.</div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
