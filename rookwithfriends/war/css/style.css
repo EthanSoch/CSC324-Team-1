@@ -329,10 +329,10 @@ body {
   background: rgba(0,0,0,0.1);
 }
 
-#cardClicked{
-	top: -67px;
-	background-color: #999;
-	z-index: 1;
+.cardClicked{
+	top: -67px !important;
+	background-color: #999 !important;
+	z-index: 1 !important;
 }
 
 h1 {

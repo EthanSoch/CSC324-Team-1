@@ -19,6 +19,7 @@ var rookGame = (function($){
 		selectCards:function(numberOfCards){
 			$(".card").click(function(elm){
 				var card = $(elm.currentTarget);
+				$(elm.currentTarget).addClass("cardClicked");
 				if(card.attr("data-selected") == "true"){
 					card.css("bottom","");
 					card.attr("data-selected","false");
