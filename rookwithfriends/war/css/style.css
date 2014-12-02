@@ -253,7 +253,7 @@ sup  { font-size: 36px; font-weight: 100; line-height: 55px; }
 
 #player1Container{
 	position: relative !important;
-	top: 104px !important;
+	top: 115px !important;
 	display: inline-block;
 }
 
@@ -764,4 +764,56 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 	z-index: 0;
 	direction: rtl;
 	width: 275px;
+}
+#player3Container{
+	position: relative;
+	left: 32px;
+}
+#player2Container{
+	position: relative;
+	left: 12px;
+}
+.playerMidAlign{
+	position: relative;
+	left: 58px;	
+}
+.color-selection span{
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.color-selection ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  display: block;
+}
+  
+.color-selection ul li{
+  display: inline-block;
+  margin-right: 6px;
+}
+
+ .color-selection ul li a{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+}
+
+.color-selection ul li a.selected{
+  border: 3px solid #FFD700;
+  -moz-box-shadow: 0 0 5px #FFD700;
+  -webkit-box-shadow: 0 0 5px #FFD700;
+   box-shadow: 0px 0px 5px #FFD700;
+}
+
+#colorSelSpan{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.alert{
+	font-size: 16px !important;
 }

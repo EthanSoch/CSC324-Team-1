@@ -20,18 +20,41 @@
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+    <script type="text/ng-template" id="trumpContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Select a trump color!</h3>
+        </div>
+		<div class="modal-body" id="modalMain">
+		<div class="color-selection">
+  				<ul class="color-select">
+  				  <li><a ng-class="{'selected': selectedItem === 'red'}" ng-click="selectItem('red')" style="background: #FF0000;"></a></li>
+  				  <li><a ng-class="{'selected': selectedItem === 'black'}" ng-click="selectItem('black')" style="background: #000000;"></a></li>
+   				  <li><a ng-class="{'selected': selectedItem === 'green'}" ng-click="selectItem('green')" style="background: #008000;"></a></li>
+   				  <li><a ng-class="{'selected': selectedItem === 'yellow'}" ng-click="selectItem('yellow')" style="background: #FFFF00;"></a></li>
+  				</ul>
+			<span id="colorSelSpan">Please select a color for the trump.</span>
+			<div class="alert alert-danger" role="alert" ng-show="colorWarning">Please select a color first.</div>
+		</div><!--/ color-selection -->
+        </div>
+		<div class="alert alert-danger" role="alert" ng-show="bidWarning">Bid must be more than current bid, please select again.</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
     <!-- Player Stat Boxes -->
 	<!--User Avatars and Names-->
 	<button class="btn btn-default" ng-click="open()">Open me!</button>
+	<button class="btn btn-default" ng-click="openTrump()">Open me2!</button>
 	<div class="avatarContainer">
-		<div class="StatBox">
+		<div class="StatBox playerMidAlign">
 			<div class="box">
 				<div class="box__header">
 					<h3 class="box__header-title">Team 1</h3>
 				</div>
 				<div class="box__body">
-					<div class="stats stats--main" id="player2Points">Score:</div>
-					<div class="stats" id="player2CB">Current Bid:</div>
+					<div class="stats stats--main" id="player2Points">Score: {{team1Score}}</div>
+					<div class="stats" id="player2CB">Current Bid: {{p2CurrentBid}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player2"> <img height="83" width="83"
@@ -41,15 +64,15 @@
 		</div>
 	</div>
 	<div>
-		<div class="centerStrip avatarContainer">
+		<div class="centerStrip avatarContainer" id="player3Container">
 			<div class="StatBox">
 				<div class="box">
 					<div class="box__header">
 						<h3 class="box__header-title">Team 2</h3>
 					</div>
 					<div class="box__body">
-						<div class="stats stats--main" id="player2Points">Score:</div>
-						<div class="stats" id="player2CB">Current Bid:</div>
+						<div class="stats stats--main" id="player2Points">Score: {{team2Score}}</div>
+						<div class="stats" id="player2CB">Current Bid: {{p3CurrentBid}}</div>
 					</div>
 				</div>
 				<a class="circle" id="player3"> <img height="83" width="83"
@@ -127,15 +150,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="centerStrip avatarContainer">
+		<div class="centerStrip avatarContainer" id="player2Container">
 			<div class="StatBox">
 				<div class="box">
 					<div class="box__header">
 						<h3 class="box__header-title">Team 2</h3>
 					</div>
 					<div class="box__body">
-						<div class="stats stats--main" id="player2Points">Score:</div>
-						<div class="stats" id="player2CB">Current Bid:</div>
+						<div class="stats stats--main" id="player2Points">Score: {{team2Score}}</div>
+						<div class="stats" id="player2CB">Current Bid: {{p4CurrentBid}}</div>
 					</div>
 				</div>
 				<a class="circle" id="player4"> <img height="83" width="83"
@@ -146,14 +169,14 @@
 		</div>
 	</div>
 	<div class="avatarContainer" id="player1Container">
-		<div class="StatBox">
+		<div class="StatBox playerMidAlign">
 			<div class="box">
 				<div class="box__header">
 					<h3 class="box__header-title">Team 1</h3>
 				</div>
 				<div class="box__body">
-					<div class="stats stats--main" id="player2Points">Score:</div>
-					<div class="stats" id="player2CB">Current Bid:</div>
+					<div class="stats stats--main" id="player2Points">Score: {{team1Score}}</div>
+					<div class="stats" id="player2CB">Current Bid: {{p1CurrentBid}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player1"> <img height="83" width="83"

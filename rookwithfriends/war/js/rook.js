@@ -44,25 +44,36 @@ var rookGame = (function($){
 	}
 })(jQuery);
 
-rookGame.gameController = function($scope, $modal, $location, $log){
+rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.numplayers = 0;
 	$scope.inviteUrl = "";
 	$scope.middleHand = [];
 	$scope.playerHand = [];
+	$scope.modalID = "myModalContent.html";
 	$scope.opponentNames = ["Player 1","Player 2","Player 3","Player 4"];
 	rookGame.scope = $scope;
-	
 	$scope.selectedIndex = -1; /* Not Selected */
 	$scope.select= function(i) {
 	  $scope.selectedIndex=i;
 	};
+	//Values for Bids/Scores//
+		
+		$scope.team2Score = 350;
+		$scope.team1Score = 250;
+		
+		$scope.p1CurrentBid = 55;
+		$scope.p2CurrentBid = 140;
+		$scope.p3CurrentBid = 180;
+		$scope.p4CurrentBid = 15;
+		
+		$rootScope.topBid = 180;
+		
 	
 	  $scope.items = ['item1', 'item2', 'item3'];
-
 	  $scope.open = function (){
-
+		  $rootScope.modalVal = $scope.modalID;
 	     var modalInstance = $modal.open({
-	      templateUrl: 'myModalContent.html',
+	      templateUrl: $scope.modalID,
 	      controller: 'modalController',
 	      resolve: {
 	        items: function () {
@@ -70,6 +81,11 @@ rookGame.gameController = function($scope, $modal, $location, $log){
 	        }
 	      }
 	    });
+	     
+	   $scope.openTrump = function (){
+		   $scope.modalID = "trumpContent.html";
+		   $scope.open();
+		    };
 
 	    modalInstance.result.then(function (selectedItem) {
 	      $scope.selected = selectedItem;
@@ -162,19 +178,21 @@ rookGame.gameController = function($scope, $modal, $location, $log){
 	}
 };
 
-rookGame.modalController = function($scope, $modalInstance, $modal, items){
-	$scope.topBid = 80;
+rookGame.modalController = function($scope, $modalInstance, items, $rootScope){
 	$scope.bidWarning = false;
+	$scope.colorWarning = false;
 	$scope.value = 100;
+	$scope.selectedItem = null;
 	$scope.items = items;
 	  $scope.selected = {
 	    item: $scope.items[0]
 	  };
     $scope.ok = function () {
-    	if ($scope.value < $scope.topBid){
+    	if ($scope.value < $scope.topBid && $rootScope.modalVal != "trumpContent.html"){
     		$scope.bidWarning = true;
-    		console.log("Called");
-    		console.log("Value is " + value);
+    	}
+    	else if ($scope.selectedItem == null && $rootScope.modalVal != "myModalContent.html"){
+    		$scope.colorWarning = true;
     	}
     	else{
 	    $modalInstance.close($scope.selected.item);
@@ -184,6 +202,11 @@ rookGame.modalController = function($scope, $modalInstance, $modal, items){
 	$scope.cancel = function () {
 	    $modalInstance.dismiss('cancel');
 	  };
+
+    $scope.selectItem = function( item ) {
+        $scope.selectedItem = item;
+    };
+	 
 }
 rookGame.routeProvider = function($routeProvider, $locationProvider) {
     $routeProvider
