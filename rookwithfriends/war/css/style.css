@@ -254,6 +254,7 @@ sup  { font-size: 36px; font-weight: 100; line-height: 55px; }
 #player1Container{
 	position: relative !important;
 	top: 104px !important;
+	display: inline-block;
 }
 
 .button:hover span:after, .button:active span:after 
@@ -354,8 +355,6 @@ a:hover {
 /* Circle Avatar Styles */
 
 .avatarContainer{
-	padding: 60px;
-	padding-top:10px;
 	padding-bottom: 26px;
 }
 
@@ -555,6 +554,11 @@ a.circle {
     left: 60px;
 }
 
+#player1,
+#player2{
+
+}
+
 #slider {
 	width: 400px;
 	height: 17px;
@@ -685,36 +689,35 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 
 .box {
 	background: linear-gradient(#526494, #604484);
-	margin: 15px auto 0;
 	border-radius: 5px;
-	width: 300px;
+	height: 85px;
+	width: 175px;
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	left: -50px;
+	direction: ltr;
 }
 
-.box__header {
-	position: relative;
-	top: 6px;
-	width: 100%;
-	text-align: left;
-	padding-left: 27px;
-	border-bottom: 0.08em solid #fff;
-	height: 19px;
+.box .box__header-title{
+	margin: 4px;
 }
 
 .box__header-title {
 	color: #fff;
 	font-size: 18px;
+	border-bottom: 0.08em solid #fff;
 }
 
 .box__body {
-	padding: 0 25px;
+	text-align: left;
+	padding-left: 38px;
 }
 
 /* STATS */
 
 .stats {
 	color: #fff;
-	position: relative;
-	padding-bottom: 25px;
 }
 
 .stats__amount {
@@ -756,26 +759,9 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 	font-size: 54px;
 }
 
-#player2StatBox{
-	position: relative;
-	top: 239px;
-	left: 92px;
-	height: 90px;
-	width: 175px;
-
-}
-#player1StatBox{
-	position: relative;
-	top: 742px;
-	left: 92px;
-	height: 90px;
-	width: 175px;
-}
-#player2CB{
-	top: -22px;
-	left: -13px;
-}
-#player2Points{
-	top: 10px;
-	left: -30px;
+.StatBox{
+	display: inline-block;
+	z-index: 0;
+	direction: rtl;
+	width: 275px;
 }
