@@ -44,9 +44,6 @@
     </script>
     <!-- Player Stat Boxes -->
 	<!--User Avatars and Names-->
-	<button class="btn btn-default" ng-click="open('myModalContent.html')">Open me!</button>
-	<button class="btn btn-default" ng-click="open('trumpContent.html')">Open me2!</button>
-	<button class="btn btn-default" ng-click="openTrump()">Open me2!</button>
 	<div class="avatarContainer">
 		<div class="StatBox playerMidAlign">
 			<div class="box">
@@ -55,12 +52,12 @@
 				</div>
 				<div class="box__body">
 					<div class="stats stats--main" id="player2Points">Score: {{team1Score}}</div>
-					<div class="stats" id="player2CB">Current Bid: {{p2CurrentBid}}</div>
+					<div class="stats" id="player2CB">Current Bid: {{playerBids[3]}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player2"> <img height="83" width="83"
 				src="avatarImg.png">
-				<h5 class="playerName">{{opponentNames[1]}}</h5>
+				<h5 class="playerName">{{opponentNames[3]}}</h5>
 			</a>
 		</div>
 	</div>
@@ -73,7 +70,7 @@
 					</div>
 					<div class="box__body">
 						<div class="stats stats--main" id="player2Points">Score: {{team2Score}}</div>
-						<div class="stats" id="player2CB">Current Bid: {{p3CurrentBid}}</div>
+						<div class="stats" id="player2CB">Current Bid: {{playerBids[2]}}</div>
 					</div>
 				</div>
 				<a class="circle" id="player3"> <img height="83" width="83"
@@ -159,12 +156,12 @@
 					</div>
 					<div class="box__body">
 						<div class="stats stats--main" id="player2Points">Score: {{team2Score}}</div>
-						<div class="stats" id="player2CB">Current Bid: {{p4CurrentBid}}</div>
+						<div class="stats" id="player2CB">Current Bid: {{playerBids[1]}}</div>
 					</div>
 				</div>
 				<a class="circle" id="player4"> <img height="83" width="83"
 					src="avatarImg.png">
-					<h5 class="playerName">{{opponentNames[3]}}</h5>
+					<h5 class="playerName">{{opponentNames[1]}}</h5>
 				</a>
 			</div>
 		</div>
@@ -177,7 +174,7 @@
 				</div>
 				<div class="box__body">
 					<div class="stats stats--main" id="player2Points">Score: {{team1Score}}</div>
-					<div class="stats" id="player2CB">Current Bid: {{p1CurrentBid}}</div>
+					<div class="stats" id="player2CB">Current Bid: {{playerBids[0]}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player1"> <img height="83" width="83"

@@ -59,15 +59,17 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	};
 	//Values for Bids/Scores//
 		
-		$scope.team2Score = 350;
-		$scope.team1Score = 250;
+		$scope.team2Score = 0;
+		$scope.team1Score = 0;
 		
-		$scope.p1CurrentBid = 55;
+		$scope.playerBids = [0,0,0,0]
+		
+		/*$scope.p1CurrentBid = 55;
 		$scope.p2CurrentBid = 140;
 		$scope.p3CurrentBid = 180;
-		$scope.p4CurrentBid = 15;
+		$scope.p4CurrentBid = 15;*/
 		
-		$rootScope.topBid = 180;
+		$rootScope.topBid = 100;
 		
 	
 	  $scope.items = ['item1', 'item2', 'item3'];
@@ -113,7 +115,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		
 		if (data.startBidding != undefined) {
 						
-			$scope.open = function (modalInput){
+			/*$scope.open = function (modalInput){
 				  //$rootScope.modalVal = $scope.modalID;
 				  $rootScope.modalVal = modalInput;
 				  //$rootScope.value = data.theBid;
@@ -127,17 +129,13 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			      }
 			    });
 			     
-			   $scope.openTrump = function (){
-				   $scope.modalID = "trumpContent.html";
-				   $scope.open();
-				    };
 
 			    modalInstance.result.then(function (selectedItem) {
 			      $scope.selected = selectedItem;
 			    }, function () {
 			      $log.info('Modal dismissed at: ' + new Date());
 			    });
-			  };
+			  };*/
 			 $scope.open("myModalContent.html");
 		}
 		
@@ -168,7 +166,18 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			      $log.info('Modal dismissed at: ' + new Date());
 			    });
 			  };*/
-			 $scope.openTrump();
+			 $scope.open("trumpContent.html");
+		}
+		
+		if(data.newPlayerBid != undefined){
+			//#-BID
+			console.log(data.newPlayerBid);
+			var playerNumber = parseInt(data.newPlayerBid[0]);
+			console.log(data.newPlayerBid);
+			var playerBidNew = parseInt(data.newPlayerBid.substring(2, data.newPlayerBid.length));
+			$scope.playerBids[playerNumber] = playerBidNew;
+			$rootScope.topBid = playerBidNew;
+			
 		}
 
 		$scope.$apply();
@@ -244,7 +253,7 @@ rookGame.modalController = function($scope, $modalInstance, items, $rootScope){
 	    item: $scope.items[0]
 	  };
     $scope.ok = function () {
-    	if ($scope.value < $scope.topBid && $rootScope.modalVal != "trumpContent.html"){
+    	if ($scope.value <= $rootScope.topBid && $rootScope.modalVal != "trumpContent.html"){
     		$scope.bidWarning = true;
     	}
     	else if ($scope.selectedItem == null && $rootScope.modalVal != "myModalContent.html"){

@@ -117,6 +117,16 @@ public class GameSession implements Serializable{
 				whichPlayer = whichPlayer % 4;
 				UserSession player = players.get(whichPlayer);
 				startBidding(player,Integer.parseInt(input.get("playerBet")[0]));
+				
+				int newCount = 0;
+				for(UserSession theplayer : session.getPlayers()){
+					Map<String,Object> response = new HashMap<String, Object>();
+					response.put("newPlayerBid", player.getPlayerGameID()+"-"+input.get("playerBet")[0]);										
+					
+					theplayer.sendMessage(response);
+					newCount++;
+				}
+				
 			}
 			else{
 				whichPlayer = (whichPlayer-1) % 4;
@@ -165,7 +175,7 @@ public class GameSession implements Serializable{
 			player.sendMessage(jsonString);
 		}
 	}
-	
+		
 	public void startBidding(UserSession currentPlayer, int theBid){
 		
 		Map<String,Object> response = new HashMap<String, Object>();
