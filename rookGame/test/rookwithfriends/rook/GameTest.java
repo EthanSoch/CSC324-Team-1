@@ -53,7 +53,7 @@ public class GameTest {
 			game.bidWinner.getPlayerHand().Sort();
 			System.out.println("\nThe winners hand is: ");
 			game.bidWinner.printHand();
-			game.setTrump(game.bidWinner);
+			game.setTrump(game.bidWinner.setTrump());
 			System.out.println("The trump is " + game.getTrump());
 			game.kitty.clear();
 			for (int i = 0; i < 5; i++) {
@@ -66,7 +66,12 @@ public class GameTest {
 			}
 			game.currentPlayer = game.bidWinner;
 			for (int i = 0; i < 10; i++) {
-				game.playRound(game.currentPlayer);
+				game.centerDeck.clear();
+				for(int tea = 0; tea<4;tea++)
+				{
+					game.playRound(game.currentPlayer,game.currentPlayer.chooseCard());
+				}
+				game.trickColorSet=false;
 				Card winningCard = game.centerDeck.findWinningCard(game
 						.getTrump());
 				System.out.println("Winning card is: " + winningCard);

@@ -22,7 +22,7 @@ public class Game implements Serializable{
 	@XmlTransient public List<Player> players;
 
 	public Player bidWinner, currentPlayer;
-	private Boolean bettingIsDone=false;
+	public Boolean bettingIsDone=false,trickColorSet=false;
 
 	// vector of all players
 	// public Player bidWinner
@@ -291,43 +291,55 @@ public class Game implements Serializable{
 		//System.out.println("Hands have been created, and sorted.\n");
 	}
 	
-	public void setTrump(Player winner) {
-
-		String input = null;
-		String colorUp;
-		boolean correctInput = false;
+	public void setTrump(CardColor inTrump) {
 
 		// Keep prompting for input until a string has been entered
-		do {
-			System.out.println("Please enter the new trump.");
-			input = "RED";
-
-			colorUp = input.toUpperCase();
-
-			if (colorUp == "RED") {
-				correctInput = true;
-			} else if (colorUp == "BLACK") {
-				correctInput = true;
-			} else if (colorUp == "YELLOW") {
-				correctInput = true;
-			} else if (colorUp == "GREEN") {
-				correctInput = true;
-			}
-
-		} while (!correctInput);
+		switch(inTrump)
+		{
+		case red:
+			trump=CardColor.red;
+			break;
+		case black:
+			trump=CardColor.black;
+			break;
+		case yellow:
+			trump=CardColor.yellow;
+			break;
+		case green:
+			trump=CardColor.green;
+			break;
+		}
 
 		// Call Enum method to return the Enum cast of the input
-		trump = CardColor.returnColor(colorUp);
 	}
 	
-	public void playRound(Player curPlayer)
+	public void playRound(Player curPlayer, Card temp)
 	{
 		currentPlayer=curPlayer;
-		centerDeck.clear();
+		int j=players.indexOf(currentPlayer);
 		trickColor=null;
-		for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
+		
+		//First player
+		if(!trickColorSet)
 		{
-			System.out.println("Player "+j+", Choose a card to play:");
+			trickColor=temp.getColor();
+			centerDeck.add(temp);
+			currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
+			trickColorSet=true;
+			j=(j+1)%4;
+			currentPlayer=players.get(j);
+		}
+		//Not first player
+		else
+		{
+			centerDeck.add(temp);
+			currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
+			j=(j+1)%4;
+			currentPlayer=players.get(j);
+		}
+		/*for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
+		{
+
 			currentPlayer.printHand();
 			Card temp = findValidCard(currentPlayer);// currentPlayer.chooseCard();
 			if(i==0)
@@ -370,7 +382,7 @@ public class Game implements Serializable{
 				currentPlayer=players.get(j);
 			}
 			
-		}
+		}*/
 	}
 	
 	public String toJSON(){
