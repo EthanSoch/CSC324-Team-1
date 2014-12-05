@@ -104,7 +104,7 @@ public class Game implements Serializable{
 		//System.out.println(curPlayer+": It's your turn to bid.\n");
 		if(!curPlayer.getHasPassed())
 		{
-			if (gameBid >= 200) {
+			if (gameBid >= 200 || playerBet >= 200) {
 				bettingIsDone=true;
 			}
 			tempbid = curPlayer.setBid(playerBet);

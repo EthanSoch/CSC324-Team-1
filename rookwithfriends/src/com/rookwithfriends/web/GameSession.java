@@ -46,7 +46,7 @@ public class GameSession implements Serializable{
 			startGame();
 			break;
 		case "bid":
-			int bid = Integer.parseInt(input.get("bid")[0]);
+			/*int bid = Integer.parseInt(input.get("bid")[0]);
 			game.setBid(currentPlayer, bid);
 			 
 			if(!game.getBettingIsDone()){
@@ -77,30 +77,46 @@ public class GameSession implements Serializable{
 						player.sendMessage(startTurnResponse);
 					}
 				}
+			}*/
+			
+			String playerID = input.get("playerId")[0];
+			UUID gameID = UUID.fromString(input.get("gameId")[0]);
+			
+			GameSession session = GameSession.getGameSession(gameID);
+			
+			Game currentGame = session.getGame();
+			
+			int whichPlayer = 0;
+			
+			for(UserSession player : session.getPlayers()){
+				
+				
+				Player currentPlayer = currentGame.getPlayerById(player.getGameID());
+				int currentID = currentPlayer.getPlayerID();
+				
+				/*System.out.println("Current:"+currentID);
+				System.out.println(player.getChannelKey());
+				System.out.println(input.get("playerId")[0]);*/
+				
+				UUID playerUUID = player.getChannelKey();
+				String playerChannelKey = playerUUID.toString();
+				if(playerChannelKey.equals(input.get("playerId")[0])){
+					whichPlayer = currentID + 1;
+					game.setBid(currentPlayer,Integer.parseInt(input.get("playerBet")[0]));
+					//System.out.println("THE: " +whichPlayer);
+				}				
 			}
 			
-			//NOT SURE HOW TO FIND NEXT BIDDER
-			/*
-			if(!game.getBettingIsDone()) {
-				
-				for(int i = 0; i < players.size(); i++){
-					UserSession player = players.get(i);
-					System.out.println(player);
-					
-					
-					int currentID = currentPlayer.getPlayerID();
-					System.out.println("Current:"+currentID);
-					System.out.println("NEW"+input.get("playerId")[0]);
-					if(currentID == Integer.parseInt(input.get("playerId")[0])){
-						currentBidder = i+1;
-					}
-					
-				}
-				*/
 			
-				//Next player to bit
-				//UserSession player = players.get(currentBidder);
-				//startBidding(player);
+				//System.out.println("CURRENT BIDDER"+ whichPlayer);
+				
+				//Next player to bid
+			if(!game.getBettingIsDone()){
+				whichPlayer = whichPlayer % 4;
+				UserSession player = players.get(whichPlayer);
+				startBidding(player,Integer.parseInt(input.get("playerBet")[0]));
+			}
+
 				break;
 			case "playCard":
 				String[] cardJSON = input.get("card");
@@ -125,7 +141,7 @@ public class GameSession implements Serializable{
 		updateAllPlayersCards();
 		
 		UserSession player = players.get(currentBidder);
-		startBidding(player);
+		startBidding(player,0);
 	}
 	
 	public void updateAllPlayersCards(){
@@ -143,10 +159,11 @@ public class GameSession implements Serializable{
 		}
 	}
 	
-	public void startBidding(UserSession currentPlayer){
+	public void startBidding(UserSession currentPlayer, int theBid){
 		
 		Map<String,Object> response = new HashMap<String, Object>();
 		response.put("startBidding", "true");
+		response.put("theBid", theBid);
     	
 		String responseJSON = JSONUtility.convertToJson(response);
 		
@@ -205,6 +222,10 @@ public class GameSession implements Serializable{
 	
 	public void sendToAll(Map<String,Object> data){
 		sendToAll(JSONUtility.convertToJson(data));
+	}
+	
+	public Game getGame(){
+		return game;
 	}
 	
 	public void sendToAll(String message){
