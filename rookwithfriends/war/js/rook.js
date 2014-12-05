@@ -71,10 +71,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		
 	
 	  $scope.items = ['item1', 'item2', 'item3'];
-	  $scope.open = function (){
-		  $rootScope.modalVal = $scope.modalID;
+	  $scope.open = function (page){
+		  $rootScope.modalVal = page;
 	     var modalInstance = $modal.open({
-	      templateUrl: $scope.modalID,
+	      templateUrl: page,
 	      controller: 'modalController',
 	      resolve: {
 	        items: function () {
@@ -82,11 +82,6 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	        }
 	      }
 	    });
-	     
-	   $scope.openTrump = function (){
-		   $scope.modalID = "trumpContent.html";
-		   $scope.open();
-		    };
 
 	    modalInstance.result.then(function (selectedItem) {
 	      $scope.selected = selectedItem;

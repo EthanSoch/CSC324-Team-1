@@ -44,7 +44,8 @@
     </script>
     <!-- Player Stat Boxes -->
 	<!--User Avatars and Names-->
-	<button class="btn btn-default" ng-click="open()">Open me!</button>
+	<button class="btn btn-default" ng-click="open('myModalContent.html')">Open me!</button>
+	<button class="btn btn-default" ng-click="open('trumpContent.html')">Open me2!</button>
 	<button class="btn btn-default" ng-click="openTrump()">Open me2!</button>
 	<div class="avatarContainer">
 		<div class="StatBox playerMidAlign">
