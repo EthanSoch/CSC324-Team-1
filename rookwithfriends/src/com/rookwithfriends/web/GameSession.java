@@ -28,6 +28,12 @@ public class GameSession implements Serializable{
 	}
 	
 	public void gameInstruction(Map<String,String[]> input){
+		//get sending players UserSession and playerid 
+		//(these are the 0-3 ids) 
+		//the cliends have the channel key which is a UUID that is sent up with every request
+		UserSession currentPlayerSession = getUserSessionByChannelKey(UUID.fromString(input.get("playerId")[0]));
+		int playerID = currentPlayerSession.getPlayerGameID();
+		Player currentPlayer = game.getPlayerById(playerID);
 		
 		switch(input.get("op")[0]){
 		case "msg":
@@ -40,22 +46,48 @@ public class GameSession implements Serializable{
 			startGame();
 			break;
 		case "bid":
-			//Need to pull out bid and playerID
-			
-			
-			//NOT SURE HOW TO GET PLAYER
-			int playerID = Integer.parseInt(input.get("playerId")[0]);
-			//game.setBid(THEPLAYER,Integer.parseInt(input.get("playerBet")[0]);
-			
+			int bid = Integer.parseInt(input.get("bid")[0]);
+			game.setBid(currentPlayer, bid);
+			 
+			if(!game.getBettingIsDone()){
+				//send message to next player asking for their bid
+				Player nextPlayer = game.getCurrentPlayer();
+				UserSession nextPlayerSession = getUserSessionByPlayerId(nextPlayer.getPlayerID());
+				
+				Map<String,Object> response = new HashMap<String, Object>();
+				response.put("op", "bid");
+				
+				nextPlayerSession.sendMessage(response);
+			}
+			else{
+				//start the main game
+				Map<String,Object> startGameMessage = new HashMap<String, Object>();
+				startGameMessage.put("op", "startgame");
+				
+				Player nextPlayer = game.getCurrentPlayer();
+				
+				for(UserSession player: players){
+					if(nextPlayer.getPlayerID() != player.getPlayerGameID())
+						//tell players that the main game has started
+						player.sendMessage(startGameMessage);
+					else{
+						//tell first player to make a move and send it up
+						Map<String,Object> startTurnResponse = new HashMap<String, Object>();
+						startTurnResponse.put("op", "youTurn");
+						player.sendMessage(startTurnResponse);
+					}
+				}
+			}
 			
 			//NOT SURE HOW TO FIND NEXT BIDDER
-			/*if(!game.getBettingIsDone()) {
+			/*
+			if(!game.getBettingIsDone()) {
 				
 				for(int i = 0; i < players.size(); i++){
 					UserSession player = players.get(i);
 					System.out.println(player);
 					
-					Player currentPlayer = game.getPlayerById(player.getGameID());
+					
 					int currentID = currentPlayer.getPlayerID();
 					System.out.println("Current:"+currentID);
 					System.out.println("NEW"+input.get("playerId")[0]);
@@ -63,15 +95,19 @@ public class GameSession implements Serializable{
 						currentBidder = i+1;
 					}
 					
-				}*/
-				
+				}
+				*/
 			
 				//Next player to bit
 				//UserSession player = players.get(currentBidder);
 				//startBidding(player);
-			//}
-			break;
-			
+				break;
+			case "playCard":
+				String[] cardJSON = input.get("card");
+				
+				//i dont understant why this method only takes one argument
+				game.playRound(currentPlayer);
+				break;
 		}
 	}
 
@@ -81,7 +117,7 @@ public class GameSession implements Serializable{
 
 		//set user ids
 		for(int i = 0 ; i < players.size() ; i++){
-			players.get(i).setGameID(i);
+			players.get(i).setPlayerGameID(i);
 		}
 		
 		game.startGame();
@@ -94,7 +130,7 @@ public class GameSession implements Serializable{
 	
 	public void updateAllPlayersCards(){
 		for(UserSession player : players){
-			Player gamePlayer = game.getPlayerById(player.getGameID());
+			Player gamePlayer = game.getPlayerById(player.getPlayerGameID());
 			String jsonString = gamePlayer.toJSON();
 			player.sendMessage(jsonString);
 		}
@@ -149,6 +185,24 @@ public class GameSession implements Serializable{
 		return newPlayer;
 	}
 	
+	private UserSession getUserSessionByChannelKey(UUID id){
+		for(UserSession player : players){
+			if(player.getChannelKey().equals(id))
+				return player;
+		}
+		
+		return null;
+	}
+	
+	private UserSession getUserSessionByPlayerId(int id){
+		for(UserSession player : players){
+			if(player.getPlayerGameID() == id)
+				return player;
+		}
+		
+		return null;
+	}
+	
 	public void sendToAll(Map<String,Object> data){
 		sendToAll(JSONUtility.convertToJson(data));
 	}
@@ -158,10 +212,6 @@ public class GameSession implements Serializable{
 			player.sendMessage(message);
 		}
 	}
-	
-//	public Game getGame(){
-//		return game;
-//	}
 	
 	public UUID getGameId() {
 		return gameId;

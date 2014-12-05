@@ -1,12 +1,14 @@
 package com.rookwithfriends.web;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.UUID;
 
 import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.rookwithfriends.game.CardSet;
+import com.rookwithfriends.util.JSONUtility;
 
 public class UserSession implements Serializable{
 	/**
@@ -25,15 +27,20 @@ public class UserSession implements Serializable{
 		
 	}
 	
+	public void sendMessage(Map response){
+		String responseJSON = JSONUtility.convertToJson(response);
+		sendMessage(responseJSON);
+	}
+	
 	public void sendMessage(String message){
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
 		channelService.sendMessage(new ChannelMessage(getChannelKey().toString(), message));
 	}
 	
-	public int getGameID() {
+	public int getPlayerGameID() {
 		return gamePlayerID;
 	}
-	public void setGameID(int gamePlayerID) {
+	public void setPlayerGameID(int gamePlayerID) {
 		this.gamePlayerID = gamePlayerID;
 	}
 	public UUID getChannelKey() {
