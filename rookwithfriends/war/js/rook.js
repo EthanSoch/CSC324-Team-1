@@ -115,6 +115,34 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			if ($scope.numplayers >= 4)
 				$location.path('/RookBoard');
 		}
+		
+		if (data.startBidding != undefined) {
+						
+			$scope.open = function (){
+				  $rootScope.modalVal = $scope.modalID;
+			     var modalInstance = $modal.open({
+			      templateUrl: $scope.modalID,
+			      controller: 'modalController',
+			      resolve: {
+			        items: function () {
+			          return $scope.items;
+			        }
+			      }
+			    });
+			     
+			   $scope.openTrump = function (){
+				   $scope.modalID = "trumpContent.html";
+				   $scope.open();
+				    };
+
+			    modalInstance.result.then(function (selectedItem) {
+			      $scope.selected = selectedItem;
+			    }, function () {
+			      $log.info('Modal dismissed at: ' + new Date());
+			    });
+			  };
+			 $scope.open();
+		}
 
 		$scope.$apply();
   	}
@@ -195,7 +223,15 @@ rookGame.modalController = function($scope, $modalInstance, items, $rootScope){
     	else if ($scope.selectedItem == null && $rootScope.modalVal != "myModalContent.html"){
     		$scope.colorWarning = true;
     	}
-    	else{
+    	else{    		
+    		if($rootScope.modalVal == "myModalContent.html"){
+    			var data = {
+    					"isNewGame" : false,
+    					"playerBet" : $scope.value
+    				};
+    			rookGame.send("bid",{"isNewGame" : false,"playerBet" : $scope.value});
+    		}
+			
 	    $modalInstance.close($scope.selected.item);
     	}
 	  };

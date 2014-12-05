@@ -12,7 +12,7 @@ public class GameSession implements Serializable{
 	private Game game;
 	private UUID gameId;
 	private List<UserSession> players;
-	//private Player currentBidder = 0;
+	private int currentBidder;
 	
 	public static GameSession getGameSession(UUID gameId){
 		CacheUtility util = new CacheUtility();
@@ -41,13 +41,35 @@ public class GameSession implements Serializable{
 			break;
 		case "bid":
 			//Need to pull out bid and playerID
-			//input.get("msg")[0]);
-			//Get player ID
-			/*Game.setBid(playerID);
-			if(!Game.getBettingIsDone()) {
-				Player theBidder = game.getPlayerById(players.get(currentBidder).getGameID());
-				startBidding(theBidder);
-			}*/
+			
+			
+			//NOT SURE HOW TO GET PLAYER
+			int playerID = Integer.parseInt(input.get("playerId")[0]);
+			//game.setBid(THEPLAYER,Integer.parseInt(input.get("playerBet")[0]);
+			
+			
+			//NOT SURE HOW TO FIND NEXT BIDDER
+			/*if(!game.getBettingIsDone()) {
+				
+				for(int i = 0; i < players.size(); i++){
+					UserSession player = players.get(i);
+					System.out.println(player);
+					
+					Player currentPlayer = game.getPlayerById(player.getGameID());
+					int currentID = currentPlayer.getPlayerID();
+					System.out.println("Current:"+currentID);
+					System.out.println("NEW"+input.get("playerId")[0]);
+					if(currentID == Integer.parseInt(input.get("playerId")[0])){
+						currentBidder = i+1;
+					}
+					
+				}*/
+				
+			
+				//Next player to bit
+				//UserSession player = players.get(currentBidder);
+				//startBidding(player);
+			//}
 			break;
 			
 		}
@@ -55,7 +77,8 @@ public class GameSession implements Serializable{
 
 	public void startGame(){
 		game = new Game();
-		
+		currentBidder = 0;
+
 		//set user ids
 		for(int i = 0 ; i < players.size() ; i++){
 			players.get(i).setGameID(i);
@@ -64,6 +87,9 @@ public class GameSession implements Serializable{
 		game.startGame();
 		updateGameBoard();
 		updateAllPlayersCards();
+		
+		UserSession player = players.get(currentBidder);
+		startBidding(player);
 	}
 	
 	public void updateAllPlayersCards(){
@@ -81,14 +107,15 @@ public class GameSession implements Serializable{
 		}
 	}
 	
-	/*public void startBidding(Player currentPlayer){
-		//currentPlayer.sendMessage(startBid); //Not sure what we specifically want to send
-		currentBidder++;
+	public void startBidding(UserSession currentPlayer){
 		
-		if(currentBidder == 4){ //Make sure it loops around
-			currentBidder = 0;
-		}
-	}*/
+		Map<String,Object> response = new HashMap<String, Object>();
+		response.put("startBidding", "true");
+    	
+		String responseJSON = JSONUtility.convertToJson(response);
+		
+		currentPlayer.sendMessage(responseJSON);
+	}
 	
 	/*
 	 * Save this game instance
