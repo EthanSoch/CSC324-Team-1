@@ -118,8 +118,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		
 		if (data.startBidding != undefined) {
 						
-			$scope.open = function (){
-				  $rootScope.modalVal = $scope.modalID;
+			$scope.open = function (modalInput){
+				  //$rootScope.modalVal = $scope.modalID;
+				  $rootScope.modalVal = modalInput;
+				  //$rootScope.value = data.theBid;
 			     var modalInstance = $modal.open({
 			      templateUrl: $scope.modalID,
 			      controller: 'modalController',
@@ -141,7 +143,37 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			      $log.info('Modal dismissed at: ' + new Date());
 			    });
 			  };
-			 $scope.open();
+			 $scope.open("myModalContent.html");
+		}
+		
+		if (data.chooseTrump != undefined) {
+			
+			/*$scope.open = function (modalInput){
+				  //$rootScope.modalVal = $scope.modalID;
+				  $rootScope.modalVal = modalInput;
+				  //$rootScope.value = data.theBid;
+			     var modalInstance = $modal.open({
+			      templateUrl: $scope.modalID,
+			      controller: 'modalController',
+			      resolve: {
+			        items: function () {
+			          return $scope.items;
+			        }
+			      }
+			    });
+			     
+			   $scope.openTrump = function (){
+				   $scope.modalID = "trumpContent.html";
+				   $scope.open();
+				    };
+
+			    modalInstance.result.then(function (selectedItem) {
+			      $scope.selected = selectedItem;
+			    }, function () {
+			      $log.info('Modal dismissed at: ' + new Date());
+			    });
+			  };*/
+			 $scope.openTrump();
 		}
 
 		$scope.$apply();

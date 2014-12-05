@@ -31,9 +31,10 @@ public class GameSession implements Serializable{
 		//get sending players UserSession and playerid 
 		//(these are the 0-3 ids) 
 		//the cliends have the channel key which is a UUID that is sent up with every request
-		UserSession currentPlayerSession = getUserSessionByChannelKey(UUID.fromString(input.get("playerId")[0]));
+		
+		/*UserSession currentPlayerSession = getUserSessionByChannelKey(UUID.fromString(input.get("playerId")[0]));
 		int playerID = currentPlayerSession.getPlayerGameID();
-		Player currentPlayer = game.getPlayerById(playerID);
+		Player currentPlayer = game.getPlayerById(playerID);*/
 		
 		switch(input.get("op")[0]){
 		case "msg":
@@ -117,13 +118,18 @@ public class GameSession implements Serializable{
 				UserSession player = players.get(whichPlayer);
 				startBidding(player,Integer.parseInt(input.get("playerBet")[0]));
 			}
+			else{
+				whichPlayer = (whichPlayer-1) % 4;
+				UserSession player = players.get(whichPlayer);
+				chooseTrump(player);
+			}
 
 				break;
 			case "playCard":
 				String[] cardJSON = input.get("card");
 				
 				//i dont understant why this method only takes one argument
-				game.playRound(currentPlayer);
+				//game.playRound(currentPlayer);
 				break;
 		}
 	}
@@ -165,6 +171,16 @@ public class GameSession implements Serializable{
 		Map<String,Object> response = new HashMap<String, Object>();
 		response.put("startBidding", "true");
 		response.put("theBid", theBid);
+    	
+		String responseJSON = JSONUtility.convertToJson(response);
+		
+		currentPlayer.sendMessage(responseJSON);
+	}
+	
+	public void chooseTrump(UserSession currentPlayer){
+		
+		Map<String,Object> response = new HashMap<String, Object>();
+		response.put("chooseTrump", "true");
     	
 		String responseJSON = JSONUtility.convertToJson(response);
 		
