@@ -79,7 +79,7 @@ public class GameSession implements Serializable{
 				}
 			}*/
 			
-			String playerID = input.get("playerId")[0];
+			String thePlayerID = input.get("playerId")[0];
 			UUID gameID = UUID.fromString(input.get("gameId")[0]);
 			
 			GameSession session = GameSession.getGameSession(gameID);
@@ -91,8 +91,9 @@ public class GameSession implements Serializable{
 			for(UserSession player : session.getPlayers()){
 				
 				
-				Player currentPlayer = currentGame.getPlayerById(player.getGameID());
-				int currentID = currentPlayer.getPlayerID();
+				//Player theCurrentPlayer = currentGame.getPlayerById(player.getGameID());
+				Player theCurrentPlayer = currentGame.getPlayerById(player.getPlayerGameID());
+				int currentID = theCurrentPlayer.getPlayerID();
 				
 				/*System.out.println("Current:"+currentID);
 				System.out.println(player.getChannelKey());
@@ -102,7 +103,7 @@ public class GameSession implements Serializable{
 				String playerChannelKey = playerUUID.toString();
 				if(playerChannelKey.equals(input.get("playerId")[0])){
 					whichPlayer = currentID + 1;
-					game.setBid(currentPlayer,Integer.parseInt(input.get("playerBet")[0]));
+					game.setBid(theCurrentPlayer,Integer.parseInt(input.get("playerBet")[0]));
 					//System.out.println("THE: " +whichPlayer);
 				}				
 			}
