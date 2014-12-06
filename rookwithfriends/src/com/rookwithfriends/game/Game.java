@@ -21,8 +21,8 @@ public class Game implements Serializable{
 	@XmlTransient public CardSet allDeck,kitty;
 	@XmlTransient public List<Player> players;
 
-	public Player bidWinner, currentPlayer;
-	public Boolean bettingIsDone=false,trickColorSet=false;
+	@XmlTransient private int bidWinnerId, currentPlayerId;
+	@XmlTransient public Boolean bettingIsDone=false;
 
 	// vector of all players
 	// public Player bidWinner
@@ -118,7 +118,7 @@ public class Game implements Serializable{
 			}
 			
 			if (tempbid > gameBid) {
-				bidWinner = curPlayer;
+				//bidWinner = curPlayer;
 				gameBid = tempbid;
 			}
 		}
@@ -198,23 +198,14 @@ public class Game implements Serializable{
 		return trump;
 	}
 
-
-	public Player getBidWinner() {
-		return bidWinner;
+	public Player getBidWinner(){
+		return players.get(currentPlayerId);
 	}
 
-	public void setBidWinner(Player bidWinner) {
-		this.bidWinner = bidWinner;
+	public Player getCurrentPlayer(){
+		return players.get(currentPlayerId);
 	}
-
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-
-	public void setCurrentPlayer(Player currentPlayer) {
-		this.currentPlayer = currentPlayer;
-	}
-
+	
 	public Boolean getBettingIsDone() {
 		return bettingIsDone;
 	}
@@ -293,50 +284,18 @@ public class Game implements Serializable{
 	
 	public void setTrump(CardColor inTrump) {
 
+		trump = inTrump;
 		// Keep prompting for input until a string has been entered
-		switch(inTrump)
-		{
-		case red:
-			trump=CardColor.red;
-			break;
-		case black:
-			trump=CardColor.black;
-			break;
-		case yellow:
-			trump=CardColor.yellow;
-			break;
-		case green:
-			trump=CardColor.green;
-			break;
-		}
-
-		// Call Enum method to return the Enum cast of the input
 	}
 	
 	public void playRound(Player curPlayer, Card temp)
 	{
-		currentPlayer=curPlayer;
-		int j=players.indexOf(currentPlayer);
-		trickColor=null;
+		Player currentPlayer = getCurrentPlayer();
 		
 		//First player
-		if(!trickColorSet)
-		{
-			trickColor=temp.getColor();
-			centerDeck.add(temp);
-			currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
-			trickColorSet=true;
-			j=(j+1)%4;
-			currentPlayer=players.get(j);
-		}
-		//Not first player
-		else
-		{
-			centerDeck.add(temp);
-			currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
-			j=(j+1)%4;
-			currentPlayer=players.get(j);
-		}
+		centerDeck.add(temp);
+		currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
+		currentPlayerId= (currentPlayerId + 1) % 4;
 		/*for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
 		{
 
@@ -384,7 +343,7 @@ public class Game implements Serializable{
 			
 		}*/
 	}
-	
+
 	public String toJSON(){
 		
 		try{
