@@ -62,13 +62,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		$scope.team2Score = 0;
 		$scope.team1Score = 0;
 		
-		$scope.playerBids = [0,0,0,0]
-		
-		/*$scope.p1CurrentBid = 55;
-		$scope.p2CurrentBid = 140;
-		$scope.p3CurrentBid = 180;
-		$scope.p4CurrentBid = 15;*/
-		
+		$scope.playerBids = [0,0,0,0]	
 		$rootScope.topBid = 100;
 		
 	
@@ -114,58 +108,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		}
 		
 		if (data.startBidding != undefined) {
-						
-			/*$scope.open = function (modalInput){
-				  //$rootScope.modalVal = $scope.modalID;
-				  $rootScope.modalVal = modalInput;
-				  //$rootScope.value = data.theBid;
-			     var modalInstance = $modal.open({
-			      templateUrl: $scope.modalID,
-			      controller: 'modalController',
-			      resolve: {
-			        items: function () {
-			          return $scope.items;
-			        }
-			      }
-			    });
-			     
-
-			    modalInstance.result.then(function (selectedItem) {
-			      $scope.selected = selectedItem;
-			    }, function () {
-			      $log.info('Modal dismissed at: ' + new Date());
-			    });
-			  };*/
 			 $scope.open("myModalContent.html");
 		}
 		
 		if (data.chooseTrump != undefined) {
-			
-			/*$scope.open = function (modalInput){
-				  //$rootScope.modalVal = $scope.modalID;
-				  $rootScope.modalVal = modalInput;
-				  //$rootScope.value = data.theBid;
-			     var modalInstance = $modal.open({
-			      templateUrl: $scope.modalID,
-			      controller: 'modalController',
-			      resolve: {
-			        items: function () {
-			          return $scope.items;
-			        }
-			      }
-			    });
-			     
-			   $scope.openTrump = function (){
-				   $scope.modalID = "trumpContent.html";
-				   $scope.open();
-				    };
-
-			    modalInstance.result.then(function (selectedItem) {
-			      $scope.selected = selectedItem;
-			    }, function () {
-			      $log.info('Modal dismissed at: ' + new Date());
-			    });
-			  };*/
 			 $scope.open("trumpContent.html");
 		}
 		
