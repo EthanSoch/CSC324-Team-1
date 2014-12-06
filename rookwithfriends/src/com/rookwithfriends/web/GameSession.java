@@ -101,12 +101,21 @@ public class GameSession extends GameSessionBase {
 	}
 	
 	public void setTrump(Map<String, String[]> input){
-		CardColor color = CardColor.valueOf(("trump"));
+		String tempTrump = input.get("theTrump")[0].toUpperCase();
+		CardColor trump = CardColor.returnColor(tempTrump);
 		
-		game.setTrump(color);
+		//Set the trump
+		game.setTrump(trump);
+		Player bidWinner = game.getBidWinner();
+				System.out.println(bidWinner.getPlayerID());
 		
-		Map<String,Object> response = new HashMap<String, Object>();
-		response.put("startBidding", "true");
-		response.put("theBid", theBid);
+		bidWinner.combineHand(game.getKitty());
+		bidWinner.getPlayerHand().Sort();
+	
+		String jsonString = bidWinner.toJSON();
+		int winnerID = bidWinner.getPlayerID();
+		
+		UserSession winnerSession = players.get(winnerID);
+		winnerSession.sendMessage(jsonString);
 	}
 }
