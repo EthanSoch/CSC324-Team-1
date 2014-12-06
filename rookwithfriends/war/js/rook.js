@@ -213,8 +213,11 @@ rookGame.modalController = function($scope, $modalInstance, items, $rootScope){
     				};
     			rookGame.send("bid",{"isNewGame" : false,"playerBet" : $scope.value});
     		}
-			
-	    $modalInstance.close($scope.selected.item);
+    		else{
+    			rookGame.send("trump",{"isNewGame" : false, "theTrump" : $scope.selectedItem});
+    		}
+    		
+    		$modalInstance.close($scope.selected.item);
     	}
 	  };
 
