@@ -23,6 +23,12 @@ public class Card implements Serializable{
 		this.rank = rank;
 		this.id = id;
 	}
+	
+	public Card(String[] cardArray){
+		this.color = CardColor.valueOf(cardArray[0]);
+		this.rank = CardRank.returnRank(Double.valueOf(cardArray[1]));
+		this.id = Integer.valueOf(cardArray[3]);
+	}
 
 	public CardColor getColor() {
 		return color;

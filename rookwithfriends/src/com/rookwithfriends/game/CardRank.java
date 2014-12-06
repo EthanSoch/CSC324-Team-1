@@ -31,47 +31,26 @@ public enum CardRank {
 	}
 	
 	//This method preserves the Enum Type -- Created by Ethan, and Josh -- Refactor when not Cmd Line Based
-	 public static CardRank returnRank(double val)
-			{
-				int num;
-				
-			 	CardRank theValue = null;
-				if (val == 10.5){
-					 num = 15;
-				}
-				else{
-					 num = (int) val;
-				}
-				
-			  switch (num) {
-			//I don't know if this has been tested, but if there are errors with just one,
-			//it might have to be CardRank.one
-			  
-	            case 1:  theValue = one;
-	                     break;
-	            case 5:  theValue = five;
-	                     break;
-	            case 6:  theValue = six;
-	                     break;
-	            case 7:  theValue = seven;
-	                     break;
-	            case 8:  theValue = eight;
-	                     break;
-	            case 9:  theValue = nine;
-	                     break;
-	            case 10: theValue = ten;
-	                     break;
-	            case 11: theValue = eleven;
-	                     break;
-	            case 12: theValue = thirteen;
-	                     break;
-	            case 13: theValue = fourteen;
-	            	     break;
-	            case 15: theValue = rook;
-	   		 			 break;
-	        }
-	  return theValue;
+	public static CardRank returnRank(int val) {
+		switch (val) {
+		case 1:return one;
+		case 5:return five;
+		case 6:return six;
+		case 7:return seven;
+		case 8:return eight;
+		case 9:return nine;
+		case 10:return ten;
+		case 11:return eleven;
+		case 12:return thirteen;
+		case 13:return fourteen;
+		}
+		return null;
 	}
 	 
-	 
+	public static CardRank returnRank(double val) {
+		if(val == 10.5)
+			return rook;
+		else
+			return returnRank((int)val);
+	}
 }// End of Class

@@ -98,7 +98,6 @@ public class Game implements Serializable{
 	}
 
 	public void setBid(Player curPlayer, int playerBet) {
-		int tempbid;
 		// Step 4 -- Round of bidding?
 
 		//System.out.println(curPlayer+": It's your turn to bid.\n");
@@ -106,24 +105,30 @@ public class Game implements Serializable{
 		{
 			if (gameBid >= 200 || playerBet >= 200) {
 				bettingIsDone=true;
+				finnishBetting(curPlayer);
 			}
-			tempbid = curPlayer.setBid(playerBet);
+			
 			if(curPlayer.getHasPassed())
 			{
 				numPasses+=1;
 				if(numPasses==4)
 				{
 					bettingIsDone=true;
+					finnishBetting(curPlayer);
 				}
 			}
 			
-			if (tempbid > gameBid) {
+			int currentPlayerBid = curPlayer.setBid(playerBet);
+			
+			if (currentPlayerBid > gameBid) {
 				//bidWinner = curPlayer;
-				gameBid = tempbid;
+				gameBid = currentPlayerBid;
 			}
 		}
-		
-
+	}
+	
+	public void endTurn(){
+		currentPlayerId = (currentPlayerId + 1) % 4;
 	}
 
 	// Methods for Game
@@ -206,12 +211,13 @@ public class Game implements Serializable{
 		return players.get(currentPlayerId);
 	}
 	
-	public Boolean getBettingIsDone() {
+	public Boolean isBettingDone() {
 		return bettingIsDone;
 	}
 
-	public void setBettingIsDone(Boolean bettingIsDone) {
+	private void finnishBetting(Player winner) {
 		this.bettingIsDone = bettingIsDone;
+		winner.getPlayerHand().addAll(kitty);
 	}
 
 	public int getNumPasses() {
@@ -295,7 +301,6 @@ public class Game implements Serializable{
 		//First player
 		centerDeck.add(temp);
 		currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
-		currentPlayerId= (currentPlayerId + 1) % 4;
 		/*for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
 		{
 

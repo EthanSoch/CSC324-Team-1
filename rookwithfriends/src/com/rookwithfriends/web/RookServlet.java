@@ -65,10 +65,6 @@ public class RookServlet extends HttpServlet {
 		GameSession session = GameSession.getGameSession(gameID);
 		session.gameInstruction(paramaters);
 		session.saveToCache();
-		
-		//for(UserSession player : session.getPlayers()){
-		//	player.sendMessage(message);
-		//}
 	}
 
 	private UUID createNewGame() {

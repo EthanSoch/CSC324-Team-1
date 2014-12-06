@@ -107,40 +107,6 @@ public class Player implements Serializable{
 		this.hasPassed = hasPassed;
 	}
 
-	public CardColor setTrump() {
-		//Scanner read = new Scanner(System.in);
-		String input = null;
-		String colorUp;
-		boolean correctInput = false;
-
-		// Keep prompting for input until a string has been entered
-		do {
-			//System.out.println("Please enter the new trump.");
-			input = "RED";//read.next();
-
-			colorUp = input.toUpperCase();
-
-			if (colorUp.equals("RED")) {
-				correctInput = true;
-			} else if (colorUp.equals("BLACK")) {
-				correctInput = true;
-			} else if (colorUp.equals("YELLOW")) {
-				correctInput = true;
-			} else if (colorUp.equals("GREEN")) {
-				correctInput = true;
-			} else if (colorUp.equals("WHITE")) {
-				correctInput = true;
-			}
-
-		} while (!correctInput);
-
-		// Call Enum method to return the Enum cast of the input
-		CardColor trump = CardColor.returnColor(colorUp);
-
-		//read.close();
-		return trump;
-	}
-
 	public Card chooseCard() {
 		Scanner read = new Scanner(System.in);
 		int theVal;
@@ -156,26 +122,16 @@ public class Player implements Serializable{
 	}
 
 	public int setBid(int currentBid) {
-		//Scanner read = new Scanner(System.in);
-		/*System.out.println("Current bid is " + currentBid + ".\n");
-		System.out.println("Enter 1 to increase, enter 2 to pass.\n");
-
-		int answer = 1;//read.nextInt();*/
 		if (currentBid != 0) {
-			//System.out.println("What is your new bid. Must be a multiple of 5.\n");
-
-			int bid = currentBid+5;//read.nextInt();
+			int bid = currentBid+5;
 			if (bid % 5 == 0 && bid > currentBid) {
 				currentBid = bid;
-				//System.out.println("Thank you, your bid has been set. New bid is: "
-								//+ currentBid + "\n");
 			}
 		}
 		else //If currentBid == 0 then the bid was "passed"
 		{
 			hasPassed=true;
 		}
-		// read.close();
 		return currentBid;
 	}
 

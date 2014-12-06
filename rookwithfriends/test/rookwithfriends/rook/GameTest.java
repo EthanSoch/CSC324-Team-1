@@ -37,7 +37,7 @@ public class GameTest {
 
 			game.setNumPasses(0);
 			Player currentPlayer;
-			for (int i = 0; !game.getBettingIsDone(); i = (i + 1) % 4) {
+			for (int i = 0; !game.isBettingDone(); i = (i + 1) % 4) {
 				currentPlayer = game.getPlayer(i);
 				game.setBid(currentPlayer);
 			}
