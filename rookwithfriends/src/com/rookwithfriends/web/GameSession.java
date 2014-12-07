@@ -39,6 +39,12 @@ public class GameSession extends GameSessionBase {
 			//i dont understant why this method only takes one argument
 			//game.playRound(currentPlayer);
 			break;
+			
+		case "discardFive":
+			System.out.println("Discarding");
+			System.out.println(input);
+			
+			break;
 		}
 	}
 	
@@ -117,5 +123,11 @@ public class GameSession extends GameSessionBase {
 		
 		UserSession winnerSession = players.get(winnerID);
 		winnerSession.sendMessage(jsonString);
+		
+		//Have winner discard the five cards
+		Map<String,Object> response = new HashMap<String, Object>();
+		response.put("discardFive", "true");	    	
+		String responseJSON = JSONUtility.convertToJson(response);
+		winnerSession.sendMessage(responseJSON);
 	}
 }
