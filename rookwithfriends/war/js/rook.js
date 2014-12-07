@@ -141,7 +141,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		$scope.$apply();
   	}
 	
-	$scope.submitCards = fuction(){
+	$scope.submitCards = function(){
 		var cards = rookGame.getSelectedCards();
 		rookGame.send("cards", cards);
 		rookGame.getSelectedCards();
