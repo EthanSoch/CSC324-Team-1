@@ -39,7 +39,7 @@
         </div>
 		<div class="alert alert-danger" role="alert" ng-show="bidWarning">Bid must be more than current bid, please select again.</div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="okTrump()">OK</button>
+            <button class="btn btn-primary" ng-click="okColor()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
