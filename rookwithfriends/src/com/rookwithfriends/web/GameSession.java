@@ -32,15 +32,10 @@ public class GameSession extends GameSessionBase {
 			setTrump(input);
 			break;
 		case "playCard":
-			String[] cardJSON = input.get("card");
-			
-			//i dont understant why this method only takes one argument
-			//game.playRound(currentPlayer);
+			playCard(input);
 			break;
 		case "discardFive":
-			System.out.println("Discarding");
-			System.out.println(input);
-			
+			discardFive(input);
 			break;
 		}
 	}
@@ -127,5 +122,52 @@ public class GameSession extends GameSessionBase {
 		response.put("discardFive", "true");	    	
 		String responseJSON = JSONUtility.convertToJson(response);
 		winnerSession.sendMessage(responseJSON);
+	}
+	
+	private void discardFive(Map<String, String[]> input) {
+		CardSet discardCards = new CardSet();
+		
+		for(int i = 0 ; i < 5 ; i++){
+			 String color = input.get("cards[" + i +"][color]")[0];
+			 String rank = input.get("cards[" + i +"][rank]")[0];
+			 String id =input.get("cards[" + i +"][id]")[0];
+			 Card card = new Card(color,rank,id);
+			 
+			 discardCards.add(card);
+		}
+		
+		Player bidWinner = game.getBidWinner();
+		bidWinner.getPlayerHand().removeAll(discardCards);
+		
+		UserSession bidWinnerSession = getUserSession(bidWinner);
+		bidWinnerSession.sendMessage(bidWinner.toJSON());
+		
+		requestNextPlayerCard();
+	}
+	
+	private void requestNextPlayerCard(){
+		Player currentPlayer = game.getCurrentPlayer();
+		UserSession currentPlayerSession = getUserSession(currentPlayer);
+		
+		Map<String,Object> response = new HashMap<String, Object>();
+		response.put("playCard", "true");
+		currentPlayerSession.sendMessage(response);
+	}
+	
+	private void playCard(Map<String, String[]> input) {
+		UserSession currentPlayerSession = getUserSession(UUID.fromString(input.get("playerId")[0]));
+		int playerID = currentPlayerSession.getPlayerGameID();
+		Player currentPlayer = game.getPlayerById(playerID);
+		
+		String color = input.get("cards[0][color]")[0];
+		String rank = input.get("cards[0][rank]")[0];
+		String id =input.get("cards[0][id]")[0];
+		Card card = new Card(color,rank,id);
+		
+		game.playRound(currentPlayer, card);
+		
+		currentPlayerSession.sendMessage(currentPlayer.toJSON());
+		updateGameBoard();
+		requestNextPlayerCard();
 	}
 }

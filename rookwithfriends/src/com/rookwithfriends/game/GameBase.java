@@ -128,7 +128,7 @@ public abstract class GameBase implements Serializable{
 	}
 
 	public Player getBidWinner(){
-		return players.get(currentPlayerId);
+		return players.get(bidWinnerId);
 	}
 
 	public Player getCurrentPlayer(){

@@ -24,10 +24,10 @@ public class Card implements Serializable{
 		this.id = id;
 	}
 	
-	public Card(String[] cardArray){
-		this.color = CardColor.valueOf(cardArray[0]);
-		this.rank = CardRank.returnRank(Double.valueOf(cardArray[1]));
-		this.id = Integer.valueOf(cardArray[3]);
+	public Card(String color, String rank, String id){
+		this.color = CardColor.valueOf(color);
+		this.rank = CardRank.returnRank(Double.valueOf(rank));
+		this.id = Integer.valueOf(id);
 	}
 
 	public CardColor getColor() {

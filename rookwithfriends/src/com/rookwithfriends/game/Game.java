@@ -47,6 +47,7 @@ public class Game extends GameBase{
 		//assume current player has not passed
 		if (gameBid >= 200 || playerBet >= 200) {
 			finnishBetting();
+			return;
 		//player has passed
 		}else if(playerBet == 0){
 			numPasses++;
@@ -60,6 +61,7 @@ public class Game extends GameBase{
 		//if only one player is left
 		if(numPasses == 3){
 			finnishBetting();
+			return;
 		}
 		
 		endTurn();
@@ -67,6 +69,7 @@ public class Game extends GameBase{
 	
 	private void finnishBetting() {
 		this.stage = GameStage.mainGame;
+		currentPlayerId = bidWinnerId;
 	}
 	
 	public Boolean isBettingDone() {
@@ -93,59 +96,21 @@ public class Game extends GameBase{
 		}
 	}
 	
-	public void playRound(Player curPlayer, Card temp)
+	public void playRound(Player curPlayer, Card card)
 	{
 		Player currentPlayer = getCurrentPlayer();
 		
 		//First player
-		centerDeck.add(temp);
-		currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
-		/*for(int j=players.indexOf(currentPlayer),i=0;i<4;i++)
-		{
-
-			currentPlayer.printHand();
-			Card temp = findValidCard(currentPlayer);// currentPlayer.chooseCard();
-			if(i==0)
-			{
-				trickColor=temp.getColor();
-				centerDeck.add(temp);
-				currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
-				j=(j+1)%4;
-				currentPlayer=players.get(j);
-			}
-			else if(temp.getColor()!=trickColor && temp.getColor()!=trump && temp.getColor()!=CardColor.white)
-			{
-				boolean hasGoodColor = false;
-				for(Card card : currentPlayer.getPlayerHand())
-				{
-					if(card.getColor()==trickColor)
-					{
-						hasGoodColor=true;
-					}
-				}
-				if(hasGoodColor)
-				{
-					System.out.println("Card invalid. Please choose another");
-					i--;
-				}
-				else
-				{
-					centerDeck.add(temp);
-					currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
-					j=(j+1)%4;
-					currentPlayer=players.get(j);
-				}
-				
-			}
-			else
-			{
-				centerDeck.add(temp);
-				currentPlayer.getPlayerHand().remove(currentPlayer.getPlayerHand().indexOf(temp));
-				j=(j+1)%4;
-				currentPlayer=players.get(j);
-			}
-			
-		}*/
+		centerDeck.add(card);
+		currentPlayer.getPlayerHand().remove(card);
+		
+		if(centerDeck.size() == 4){
+			Card winningCard = centerDeck.findWinningCard(trump);
+			players.get(winningCard.getId()).getCardsWon().addAll(centerDeck);
+			centerDeck.clear();
+		}
+		
+		endTurn();
 	}
 	
 	public Card findValidCard(Player curPlayer){

@@ -41,8 +41,9 @@ public enum CardRank {
 		case 9:return nine;
 		case 10:return ten;
 		case 11:return eleven;
-		case 12:return thirteen;
-		case 13:return fourteen;
+		case 12:return twelve;
+		case 13:return thirteen;
+		case 14:return fourteen;
 		}
 		return null;
 	}

@@ -148,7 +148,7 @@
 				src="avatarImg.png">
 				<h5 class="playerName">{{opponents[0].name}}</h5>
 			</a>
-			<input id="playCardsButtom" type="button" ng-show="canSubmitCards" ng-click="submitCards" value="Player Cards">
+			<input id="playCardsButtom" type="button" ng-show="canSubmitCards" ng-click="submitCards(cardsToSubmit)" value="Player Cards">
 		</div>
 	</div>
 </div>

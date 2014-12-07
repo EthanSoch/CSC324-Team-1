@@ -23,10 +23,6 @@ public class UserSession implements Serializable{
 		this.channelKey = channelKey;
 	}
 	
-	public void sendMessage(CardSet cards){
-		
-	}
-	
 	public void sendMessage(Map response){
 		String responseJSON = JSONUtility.convertToJson(response);
 		sendMessage(responseJSON);

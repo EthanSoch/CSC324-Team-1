@@ -28,6 +28,7 @@ var rookGame = (function($){
 			});
 			
 			rookGame.scope.canSubmitCards = true;
+			rookGame.scope.cardsToSubmit = numberOfCards;
 		},
 		getSelectedCards:function(){
 			var cardData = [];
@@ -55,6 +56,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	rookGame.scope = $scope;
 	$scope.selectedIndex = -1; /* Not Selected */
 	$scope.canSubmitCards = false;
+	$scope.cardsToSubmit = 0;
 	
 	$scope.select= function(i) {
 	  $scope.selectedIndex=i;
@@ -137,15 +139,23 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		if(data.discardFive != undefined){
 			rookGame.selectCards(5);
 		}
+		
+		if(data.playCard != undefined){
+			rookGame.selectCards(1);
+		}
 
 		$scope.$apply();
   	}
 	
-	$scope.submitCards = function(){
+	$scope.submitCards = function(cardsToSubmit){
 		var cards = rookGame.getSelectedCards();
-		rookGame.send("cards", cards);
-		rookGame.getSelectedCards();
-		rookGame.deselectAllCards();
+		if(cards.length == cardsToSubmit){
+			var operation = cardsToSubmit == 5 ? "discardFive" : "playCard";
+			rookGame.send(operation, {"cards":cards});
+			rookGame.deselectAllCards();
+		}else{
+			alert("You must select " + cardsToSubmit +" cards");
+		}
 	}
 		  
 	onOpened = function() {
