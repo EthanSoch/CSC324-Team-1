@@ -44,6 +44,7 @@
     </script>
     <!-- Player Stat Boxes -->
 	<!--User Avatars and Names-->
+	<button class="btn btn-default" ng-click="discardTheFive()">Choose!</button>
 	<div class="avatarContainer">
 		<div class="StatBox playerMidAlign">
 			<div class="box">

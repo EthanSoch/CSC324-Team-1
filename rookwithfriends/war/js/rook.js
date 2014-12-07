@@ -88,7 +88,9 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 
 	// Please note that $modalInstance represents a modal window (instance) dependency.
 	// It is not the same as the $modal service used above.
-
+	$scope.discardTheFive = function(){
+		rookGame.send("discardFive", {"theFive" : rookGame.getSelectedCards()});
+	}
 
 	onMessage = function(msg) {
 		var data = JSON.parse(msg.data);
@@ -124,6 +126,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			$scope.playerBids[playerNumber] = playerBidNew;
 			$rootScope.topBid = playerBidNew;
 			
+		}
+		
+		if(data.discardFive != undefined){
+			rookGame.selectCards(5);
 		}
 
 		$scope.$apply();
