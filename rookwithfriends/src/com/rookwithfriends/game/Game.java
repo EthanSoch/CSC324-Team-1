@@ -11,18 +11,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.eclipse.persistence.jaxb.MarshallerProperties;
 
-@XmlRootElement
-public class Game implements Serializable{
+public class Game extends GameBase{
 	private static final long serialVersionUID = 6986630091662956160L;
-	// Declare Class Members//
-	private int gameBid=100,numPasses,totalTeam1Score=0,totalTeam2Score=0,team1Score=0,team2Score=0;
-	private CardColor trump, trickColor;
-	public CardSet centerDeck;
-	@XmlTransient public CardSet allDeck,kitty;
-	@XmlTransient public List<Player> players;
-
-	@XmlTransient private int bidWinnerId, currentPlayerId;
-	@XmlTransient public Boolean bettingIsDone=false;
 
 	// vector of all players
 	// public Player bidWinner
@@ -33,264 +23,74 @@ public class Game implements Serializable{
 	}
 
 	public Game(int playerId1, int playerId2, int playerId3, int playerId4) {
-		
 		players = new ArrayList<Player>(4);
 		players.add(new Player(playerId1));
 		players.add(new Player(playerId2));
 		players.add(new Player(playerId3));
 		players.add(new Player(playerId4));
 		centerDeck=new CardSet();
-		/*for(int i = 0 ; i < players.length ; i++){
-			players[i] = new Player();
-			System.out.println("Player["+i+"]"+" created.");
-		}*/
+		stage = GameStage.bidding;
 	}
 
 	public void startGame() {
-		//System.out.println("Starting Game\n");
-		// Step 1 -- Shuffle Cards
-		// create Deck that holds all cards
-		createDeck(); // Moved the code that instantiates allDeck to separate
-						// method
-
-		// instantiate hand with all cards
+		createDeck(); 
 		shuffleAllDeck();
-
-		// Step 2 -- Deal & Sort Cards
-		dealHands(); // Moved the code that deals hands into separate method
-
-		// Step 3 -- Print all the hands out
-		//System.out.println("Here are the hands\n");
-		//printHands(); // Moved the print hands into a different method
-		/*
-		numPasses=0;
-		for(int i=0;!bettingIsDone;i=(i+1)%4)
-		{
-			currentPlayer=getPlayer(i);
-			setBid(currentPlayer);
-			
-		}
-		
-
-		// Step 4 -- Find winner of bid - Pass control unto them?
-		// Player bidWinner is a public variable -- Create Gameboard, add needed
-		// methods.
-		
-		//System.out.println("The winner of the bid was: " + bidWinner.getPlayerID());
-		bidWinner.combineHand(kitty);
-		bidWinner.getPlayerHand().Sort();
-		//System.out.println("\nThe winners hand is: ");
-		bidWinner.printHand();
-		setTrump(bidWinner);
-		
-		
-		kitty.clear();
-		for(int i=0;i<5;i++)
-		{
-			Card temp = bidWinner.chooseCard();
-			kitty.add(temp);
-			bidWinner.getPlayerHand().remove(bidWinner.getPlayerHand().indexOf(temp));
-		}
-		
-		//bidwinner starts game
-		playRound();
-		*/
+		dealHands();
 	}
 
+	/**
+	 * Step 4 -- Round of bidding
+	 * @param curPlayer
+	 * @param playerBet
+	 */
 	public void setBid(Player curPlayer, int playerBet) {
-		// Step 4 -- Round of bidding?
-
-		//System.out.println(curPlayer+": It's your turn to bid.\n");
-		if(!curPlayer.getHasPassed())
-		{
-			if (gameBid >= 200 || playerBet >= 200) {
-				bettingIsDone=true;
-				finnishBetting(curPlayer);
-			}
-			
-			if(curPlayer.getHasPassed())
-			{
-				numPasses+=1;
-				if(numPasses==4)
-				{
-					bettingIsDone=true;
-					finnishBetting(curPlayer);
-				}
-			}
-			
-			int currentPlayerBid = curPlayer.setBid(playerBet);
-			
-			if (currentPlayerBid > gameBid) {
-				//bidWinner = curPlayer;
-				gameBid = currentPlayerBid;
-			}
+		//assume current player has not passed
+		if (gameBid >= 200 || playerBet >= 200) {
+			finnishBetting();
+		//player has passed
+		}else if(playerBet == 0){
+			numPasses++;
+			curPlayer.setHasPassed(true);
+		}else if(playerBet > gameBid){
+			bidWinnerId = curPlayer.getPlayerID();
+			gameBid = playerBet;
+			curPlayer.setBid(playerBet);//i don't thing this is being used
 		}
+		
+		//if only one player is left
+		if(numPasses == 3){
+			finnishBetting();
+		}
+		
+		endTurn();
 	}
 	
-	public void endTurn(){
-		currentPlayerId = (currentPlayerId + 1) % 4;
-	}
-
-	// Methods for Game
-	public void shuffleAllDeck(){
-		allDeck.Shuffle();
-	}
-	public int getGameBid() {
-		return gameBid;
-	}
-	
-	public int getTotalTeam1Score() {
-		return totalTeam1Score;
-	}
-
-	public void setTotalTeam1Score(int totalTeam1Score) {
-		this.totalTeam1Score = totalTeam1Score;
-	}
-
-	public int getTotalTeam2Score() {
-		return totalTeam2Score;
-	}
-
-	public void setTotalTeam2Score(int totalTeam2Score) {
-		this.totalTeam2Score = totalTeam2Score;
-	}
-
-	public CardSet getAllDeck() {
-		return allDeck;
-	}
-
-	public void setAllDeck(CardSet allDeck) {
-		this.allDeck = allDeck;
-	}
-
-	public CardSet getCenterDeck() {
-		return centerDeck;
-	}
-
-	public void setCenterDeck(CardSet centerDeck) {
-		this.centerDeck = centerDeck;
-	}
-
-	public CardSet getKitty() {
-		return kitty;
-	}
-
-	public void setKitty(CardSet kitty) {
-		this.kitty = kitty;
-	}
-
-	public List<Player> getPlayers() {
-		return players;
-	}
-	
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
-	
-	public Player getPlayer(int index){
-		return players.get(index);
-	}
-
-	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
-	}
-
-	public void setGameBid(int gameBid) {
-		this.gameBid = gameBid;
-	}
-
-	public CardColor getTrump() {
-		return trump;
-	}
-
-	public Player getBidWinner(){
-		return players.get(currentPlayerId);
-	}
-
-	public Player getCurrentPlayer(){
-		return players.get(currentPlayerId);
+	private void finnishBetting() {
+		this.stage = GameStage.mainGame;
 	}
 	
 	public Boolean isBettingDone() {
-		return bettingIsDone;
-	}
-
-	private void finnishBetting(Player winner) {
-		this.bettingIsDone = bettingIsDone;
-	}
-
-	public int getNumPasses() {
-		return numPasses;
-	}
-
-	public void setNumPasses(int numPasses) {
-		this.numPasses = numPasses;
+		return this.stage != GameStage.bidding;
 	}
 	
-	public Player getPlayerById(int id){
-		for(Player player : players){
-			if(player.getPlayerID() == id)
-				return player;
-		}
-		
-		return null;
-	}
-
-	public void printHands() {
-		for (Player player : players) {
-			//System.out.println("\nPlayer " + player.getPlayerID() + ": " );
+	public void endTurn(){
+		switch(stage){
+		case mainGame:
+			currentPlayerId = (currentPlayerId + 1) % 4;
+			break;
+		case bidding:
+		default:
+			int nextPlayerId = currentPlayerId;
 			
-			player.printHand();
-		}
-		//System.out.println("The Kitty: ");
-		//System.out.println(kitty);
-	}
-
-	public void createDeck() {
-		allDeck = new CardSet();
-		
-		
-		for (CardColor color : CardColor.values()) {
-			for (CardRank rank : CardRank.values()) {
-				if (rank != CardRank.rook && color != CardColor.white) {
-					allDeck.add(new Card(color, rank, 0));
+			for(int i = 0 ; i < players.size() ; i++){
+				nextPlayerId = (nextPlayerId + 1) % 4;
+				
+				if(!players.get(nextPlayerId).getHasPassed()){
+					currentPlayerId = nextPlayerId;
+					break;
 				}
 			}
 		}
-
-		allDeck.add(new Card(CardColor.white, CardRank.rook, 0));
-	}
-
-	public void dealHands() {
-		for (Player player : players) {
-			CardSet hand = new CardSet();
-			
-			for (int i = 0; i < 10; i++) {
-				allDeck.front().setId(player.getPlayerID());
-				hand.add(allDeck.front());
-				allDeck.pop();
-			}
-
-			hand.Sort();
-			player.setPlayerHand(hand);
-			player.getCardsWon().clear();
-		}
-
-		kitty = new CardSet();
-		
-		// kitty deal hand
-		for (int i = 0; i < 5; i++) {
-			kitty.add(allDeck.front());
-			allDeck.pop();
-		}
-		kitty.Sort();
-		//System.out.println("Hands have been created, and sorted.\n");
-	}
-	
-	public void setTrump(CardColor inTrump) {
-
-		trump = inTrump;
-		// Keep prompting for input until a string has been entered
 	}
 	
 	public void playRound(Player curPlayer, Card temp)
@@ -347,42 +147,8 @@ public class Game implements Serializable{
 			
 		}*/
 	}
-
-	public String toJSON(){
-		
-		try{
-			// Create a JaxBContext
-			JAXBContext jc = JAXBContext.newInstance(Game.class);
 	
-			// Create the Marshaller Object using the JaxB Context
-			Marshaller marshaller = jc.createMarshaller();
-			
-			// Set the Marshaller media type to JSON or XML
-			marshaller.setProperty(MarshallerProperties.MEDIA_TYPE, "application/json");
-			
-			// Set it to true if you need to include the JSON root element in the JSON output
-			marshaller.setProperty(MarshallerProperties.JSON_INCLUDE_ROOT, false);
-			
-			// Set it to true if you need the JSON output to formatted
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			
-			StringWriter stringWriter = new StringWriter();
-			
-			// Marshal the employee object to JSON and print the output to console
-			marshaller.marshal(this, stringWriter);
-			
-			return stringWriter.toString();
-		}
-		catch(JAXBException e){
-			System.err.println("toJson error\n" + e.getMessage());
-		}
-		
-		return "error";
-		
-	}
-	
-	public Card findValidCard(Player curPlayer)
-	{
+	public Card findValidCard(Player curPlayer){
 		for(Card temp: curPlayer.getPlayerHand())
 		{
 			if(temp.getColor()==trickColor || temp.getColor()==trump || temp.getColor()==CardColor.white)
@@ -393,26 +159,19 @@ public class Game implements Serializable{
 		return curPlayer.getPlayerHand().get(0);
 	}
 	
-	public void scoreGame()
-	{
-		team1Score=players.get(0).getCardsWon().getScore()+players.get(2).getCardsWon().getScore();
-		team2Score=players.get(1).getCardsWon().getScore()+players.get(3).getCardsWon().getScore();
+	/**
+	 * calculates the score for team 0 or 1
+	 * @param team 0 or 1
+	 * @return team score
+	 */
+	public int getScoreByTeam(int team){
+		if(team == 0 || team == 1){
+			int player1Score = players.get(team).getCardsWon().getScore(),
+				player2Score = players.get(team + 2).getCardsWon().getScore();
+			
+			return player1Score + player2Score;
+		}else{
+			throw new IllegalArgumentException("team must be 0 or 1");
+		}
 	}
-
-	public int getTeam1Score() {
-		return team1Score;
-	}
-
-	public void setTeam1Score(int team1Score) {
-		this.team1Score = team1Score;
-	}
-
-	public int getTeam2Score() {
-		return team2Score;
-	}
-
-	public void setTeam2Score(int team2Score) {
-		this.team2Score = team2Score;
-	}
-	
 }

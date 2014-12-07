@@ -51,7 +51,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.middleHand = [];
 	$scope.playerHand = [];
 	$scope.modalID = "myModalContent.html";
-	$scope.opponentNames = ["Player 1","Player 2","Player 3","Player 4"];
+	$scope.opponents = [{name:"Player 1",bid:0},{name:"Player 2",bid:0},{name:"Player 3",bid:0},{name:"Player 4",bid:0}];
 	rookGame.scope = $scope;
 	$scope.selectedIndex = -1; /* Not Selected */
 	$scope.select= function(i) {
@@ -62,7 +62,6 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		$scope.team2Score = 0;
 		$scope.team1Score = 0;
 		
-		$scope.playerBids = [0,0,0,0]	
 		$rootScope.topBid = 100;
 		
 	
@@ -123,8 +122,13 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			var playerNumber = parseInt(data.newPlayerBid[0]);
 			console.log(data.newPlayerBid);
 			var playerBidNew = parseInt(data.newPlayerBid.substring(2, data.newPlayerBid.length));
-			$scope.playerBids[playerNumber] = playerBidNew;
-			$rootScope.topBid = playerBidNew;
+			
+			if(playerBidNew == 0){
+				$scope.opponents[playerNumber].bid = "pass";
+			}else{
+				$scope.opponents[playerNumber].bid = playerBidNew;
+				$rootScope.topBid = playerBidNew;
+			}
 			
 		}
 		
@@ -171,27 +175,27 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			url : "rook/messages",
 			async : true
 		}).done(
-				function(msg) {
-					var serverMessage = JSON.parse(msg);
+			function(msg) {
+				var serverMessage = JSON.parse(msg);
 
-					console.log(serverMessage.gameId);
-					rookGame.gameId = serverMessage.gameId;
-					rookGame.playerId = serverMessage.playerId;
+				console.log(serverMessage.gameId);
+				rookGame.gameId = serverMessage.gameId;
+				rookGame.playerId = serverMessage.playerId;
 
-					$scope.numplayers = serverMessage.connectedPlayers;
+				$scope.numplayers = serverMessage.connectedPlayers;
 
-					channel = new goog.appengine.Channel(serverMessage.token);
-					socket = channel.open();
-					socket.onopen = onOpened;
-					socket.onmessage = onMessage;
-					socket.onerror = onError;
-					socket.onclose = onClose;
+				channel = new goog.appengine.Channel(serverMessage.token);
+				socket = channel.open();
+				socket.onopen = onOpened;
+				socket.onmessage = onMessage;
+				socket.onerror = onError;
+				socket.onclose = onClose;
 
-					$scope.inviteUrl = window.location.protocol + "//"
-							+ window.location.host + window.location.pathname
-							+ "?gameId=" + serverMessage.gameId;
-					jQuery("#searchbox").val($scope.inviteUrl);
-				});
+				$scope.inviteUrl = window.location.protocol + "//"
+						+ window.location.host + window.location.pathname
+						+ "?gameId=" + serverMessage.gameId;
+				jQuery("#searchbox").val($scope.inviteUrl);
+			});
 	}
 };
 
@@ -201,31 +205,32 @@ rookGame.modalController = function($scope, $modalInstance, items, $rootScope){
 	$scope.value = 100;
 	$scope.selectedItem = null;
 	$scope.items = items;
-	  $scope.selected = {
-	    item: $scope.items[0]
-	  };
-    $scope.ok = function () {
-    	if ($scope.value <= $rootScope.topBid && $rootScope.modalVal != "trumpContent.html"){
-    		$scope.bidWarning = true;
-    	}
-    	else if ($scope.selectedItem == null && $rootScope.modalVal != "myModalContent.html"){
+	$scope.selected = {
+			item: $scope.items[0]
+	};
+	  
+    $scope.okBet = function (bet) {
+    	if (bet <= $rootScope.topBid && bet != 0) {
+			$scope.bidWarning = true;
+		} else {
+			var data = {
+				"playerBet" : bet
+			};
+			rookGame.send("bid", data);
+
+			$modalInstance.close($scope.selected.item);
+		}
+	};
+	  
+    $scope.okColor = function () {
+    	if ($scope.selectedItem == null){
     		$scope.colorWarning = true;
     	}
-    	else{    		
-    		if($rootScope.modalVal == "myModalContent.html"){
-    			var data = {
-    					"isNewGame" : false,
-    					"playerBet" : $scope.value
-    				};
-    			rookGame.send("bid",{"isNewGame" : false,"playerBet" : $scope.value});
-    		}
-    		else{
-    			rookGame.send("trump",{"isNewGame" : false, "theTrump" : $scope.selectedItem});
-    		}
-    		
+    	else{
+			rookGame.send("trump",{"theTrump" : $scope.selectedItem});
     		$modalInstance.close($scope.selected.item);
-    	}
-	  };
+		}
+    };
 
 	$scope.cancel = function () {
 	    $modalInstance.dismiss('cancel');

@@ -1,9 +1,7 @@
 package com.rookwithfriends.web;
 
 import java.util.*;
-import java.io.*;
 
-import com.google.gson.Gson;
 import com.rookwithfriends.game.*;
 import com.rookwithfriends.util.*;
 
@@ -74,7 +72,6 @@ public class GameSession extends GameSessionBase {
 
 		//Next player to bid
 		if(!game.isBettingDone()){
-			game.endTurn();
 			Player nextPlayer = game.getCurrentPlayer();
 			UserSession nextPlayerSession = getUserSession(nextPlayer);
 			
@@ -86,7 +83,7 @@ public class GameSession extends GameSessionBase {
 			sendToAll(response);
 		}
 		else{
-			requestTrumpAndDiscards(currentPlayerSession,currentPlayer);
+			requestTrumpAndDiscards();
 		}
 	}
 		
@@ -98,12 +95,15 @@ public class GameSession extends GameSessionBase {
 		currentPlayer.sendMessage(response);
 	}
 	
-	public void requestTrumpAndDiscards(UserSession currentPlayer, Player player){
+	public void requestTrumpAndDiscards(){
+		Player winningPlayer = game.getBidWinner();
+		UserSession winningPlayerSession = getUserSession(winningPlayer);
+		
 		Map<String,Object> response = new HashMap<String, Object>();
 		response.put("chooseTrump", "true");
 		
-		currentPlayer.sendMessage(response);
-		currentPlayer.sendMessage(player.toJSON());
+		winningPlayerSession.sendMessage(response);
+		winningPlayerSession.sendMessage(winningPlayer.toJSON());
 	}
 	
 	public void setTrump(Map<String, String[]> input){
@@ -113,9 +113,8 @@ public class GameSession extends GameSessionBase {
 		//Set the trump
 		game.setTrump(trump);
 		Player bidWinner = game.getBidWinner();
-				System.out.println(bidWinner.getPlayerID());
 		
-		bidWinner.combineHand(game.getKitty());
+		bidWinner.getPlayerHand().addAll(game.getKitty());
 		bidWinner.getPlayerHand().Sort();
 	
 		String jsonString = bidWinner.toJSON();

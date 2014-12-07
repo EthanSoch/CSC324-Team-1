@@ -50,14 +50,6 @@ public class Player implements Serializable{
 
 	}
 
-	// combineHand(); -- This method allows the user to combine cards from the
-	// Kitty into playerHand
-	// NEEDS REFACTORING//
-
-	public void combineHand(CardSet theKitty) {
-		playerHand.addAll(theKitty);
-	}
-
 	// Class Setters and Getters for Player//
 	public int getPlayerBid() {
 		return playerBid;
@@ -121,18 +113,13 @@ public class Player implements Serializable{
 		return theCard;
 	}
 
-	public int setBid(int currentBid) {
+	public void setBid(int currentBid) {
+		// If currentBid == 0 then the bid was "passed"
 		if (currentBid != 0) {
-			int bid = currentBid+5;
-			if (bid % 5 == 0 && bid > currentBid) {
-				currentBid = bid;
-			}
+			playerBid = currentBid;
+		} else {
+			hasPassed = true;
 		}
-		else //If currentBid == 0 then the bid was "passed"
-		{
-			hasPassed=true;
-		}
-		return currentBid;
 	}
 
 	public void printHand() {
@@ -140,7 +127,6 @@ public class Player implements Serializable{
 	}
 	
 	public String toJSON(){
-		
 		try{
 			// Create a JaxBContext
 			JAXBContext jc = JAXBContext.newInstance(Player.class);
