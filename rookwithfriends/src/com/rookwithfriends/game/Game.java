@@ -217,7 +217,6 @@ public class Game implements Serializable{
 
 	private void finnishBetting(Player winner) {
 		this.bettingIsDone = bettingIsDone;
-		winner.getPlayerHand().addAll(kitty);
 	}
 
 	public int getNumPasses() {
