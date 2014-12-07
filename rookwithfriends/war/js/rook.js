@@ -19,16 +19,15 @@ var rookGame = (function($){
 		selectCards:function(numberOfCards){
 			$(".card").click(function(elm){
 				var card = $(elm.currentTarget);
-				$(elm.currentTarget).addClass("cardClicked");
 				if(card.attr("data-selected") == "true"){
-					card.css("bottom","");
 					card.attr("data-selected","false");
 				}
 				else if(rookGame.getSelectedCards().length < numberOfCards){
-					card.css("bottom","45px");
 					card.attr("data-selected","true");
 				}
 			});
+			
+			rookGame.scope.canSubmitCards = true;
 		},
 		getSelectedCards:function(){
 			var cardData = [];
@@ -41,6 +40,7 @@ var rookGame = (function($){
 		},
 		deselectAllCards : function(){
 			$(".card").attr("data-selected","false").css("bottom","").unbind("click");
+			rookGame.scope.canSubmitCards = false;
 		}
 	}
 })(jQuery);
@@ -54,6 +54,8 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.opponents = [{name:"Player 1",bid:0},{name:"Player 2",bid:0},{name:"Player 3",bid:0},{name:"Player 4",bid:0}];
 	rookGame.scope = $scope;
 	$scope.selectedIndex = -1; /* Not Selected */
+	$scope.canSubmitCards = false;
+	
 	$scope.select= function(i) {
 	  $scope.selectedIndex=i;
 	};
@@ -139,7 +141,12 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		$scope.$apply();
   	}
 	
-
+	$scope.submitCards = fuction(){
+		var cards = rookGame.getSelectedCards();
+		rookGame.send("cards", cards);
+		rookGame.getSelectedCards();
+		rookGame.deselectAllCards();
+	}
 		  
 	onOpened = function() {
 		if ($scope.numplayers >= 4) {
