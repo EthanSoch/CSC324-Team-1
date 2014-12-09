@@ -51,6 +51,8 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.inviteUrl = "";
 	$scope.middleHand = [];
 	$scope.playerHand = [];
+	$scope.trump = "";
+	$scope.trickColor = "";
 	$scope.modalID = "myModalContent.html";
 	$scope.opponents = [{name:"Player 1",bid:0},{name:"Player 2",bid:0},{name:"Player 3",bid:0},{name:"Player 4",bid:0}];
 	rookGame.scope = $scope;
@@ -124,6 +126,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			 $scope.open("trumpContent.html");
 		}
 		
+		if(data.trump != undefined){
+			$scope.trump = data.trump;
+		}
+		
 		if(data.newPlayerBid != undefined){
 			//#-BID
 			console.log(data.newPlayerBid);
@@ -144,6 +150,9 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			rookGame.selectCards(5);
 		}
 		
+		if(data.trickColor != undefined){
+			$scope.trickColor = data.trickColor;
+		}
 		if(data.playCard != undefined){
 			rookGame.selectCards(1);
 		}
@@ -152,9 +161,49 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
   	}
 	
 	$scope.submitCards = function(cardsToSubmit){
+		var cardIsGood = false;
 		var cards = rookGame.getSelectedCards();
+			
 		if(cards.length == cardsToSubmit){
 			var operation = cardsToSubmit == 5 ? "discardFive" : "playCard";
+			if(operation=="playCard")
+			{
+				while(!cardIsGood)
+				{
+					if(cards[0].color != $scope.trump && cards[0].color != $scope.trickColor && cards[0].color != "white")
+					{	//card wasn't valid
+						// loop through $scope.playerHand
+						
+						var hasGoodColor = false;
+						//check if they have a valid card
+						for(var i = 0; i < $scope.playerHand.length; i++)
+						{
+							var temp = $scope.playerHand[i];
+							if(temp.color == $scope.trickColor)
+							{
+								hasGoodColor=true;
+							}
+						}
+						
+						//they have a valid card
+						if(hasGoodColor)
+						{
+						// they need to choose card again
+							cardIsGood = false;
+							cards = rookGame.getSelectedCards();
+						}
+						//they don't have a valid card, let them play it
+						else
+						{
+							cardIsGood = true;
+						}
+					}
+					else
+					{
+						cardIsGood = true;
+					}
+				}
+			}
 			rookGame.send(operation, {"cards":cards});
 			rookGame.deselectAllCards();
 		}else{
@@ -223,7 +272,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 rookGame.modalController = function($scope, $modalInstance, items, $rootScope){
 	$scope.bidWarning = false;
 	$scope.colorWarning = false;
-	$scope.value = 100;
+	$scope.value = 150;
 	$scope.selectedItem = null;
 	$scope.items = items;
 	$scope.selected = {

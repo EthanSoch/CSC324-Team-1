@@ -46,6 +46,7 @@ public class Game extends GameBase{
 	public void setBid(Player curPlayer, int playerBet) {
 		//assume current player has not passed
 		if (gameBid >= 200 || playerBet >= 200) {
+			bidWinnerId = curPlayer.getPlayerID();
 			finnishBetting();
 			return;
 		//player has passed
