@@ -1,4 +1,38 @@
-
+<style>
+	#chatWindow{
+		float: left;
+		display: inline-block;
+		border:solid 3px black;
+		border-radius: 5px;
+		margin-left: 62px;
+		margin-top: -100px;
+		margin-bottom: 62px;
+		background-color: #222;
+		
+		
+	}
+	
+	#messages{
+		height:300px;
+		width:422px;
+		color: #ffffff;
+		background-color: #222;
+		text-align: left;
+		
+	}
+	
+	#buttonBar{
+		border-top:solid 1px black;
+		background-color: #222;
+		
+	}
+	
+	#messageInput{
+		width:350px;
+		border-radius: 5px;
+		
+	}
+</style>
 <!-- Page Content -->
 <div style="margin: 0 auto 0 auto;width:1300px;">
 	<script type="text/ng-template" id="myModalContent.html">
@@ -45,7 +79,7 @@
     </script>
     <!-- Player Stat Boxes -->
 	<!--User Avatars and Names-->
-	<button class="btn btn-default" ng-click="discardTheFive()">Choose!</button>
+	
 	<div class="avatarContainer">
 		<div class="StatBox playerMidAlign">
 			<div class="box">
@@ -152,4 +186,65 @@
 		</div>
 	</div>
 </div>
+<!-- add chat box, position a relative -->
+<div id="chatWindow">
+		<div id="messages"></div>
+		<div id="buttonBar">
+			<input type="text" id="messageInput">
+			<input type="button" id="sendButton" value="send" onclick="sendMessage()">
+		</div>
+	</div>
+	
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+	<script>
+	function sendMessage(){
+		var msg = {"message": $("#messageInput").val()};
+		
+		rookGame.send("msg",{msg:$("#messageInput").val()});
+	}
+	
+	function printToConsole(message){
+		var node = document.createElement("div");
+		node.innerHTML = message
+		$("#messages")[0].appendChild(node);
+	}
+	
+	function onOpened() {
+	    printToConsole("Channel opened!");
+	}
+
+	function onMessage(msg) {
+		printToConsole(msg.data);
+	}
+
+	function onError(err) {
+	    alert(err);
+	}
+
+	function onClose() {
+	    alert("Channel closed!");
+	}
+	
+	function connect(){
+		var token;
+		
+		$.ajax({
+			  type: "GET",
+			  url: "chat/message",
+			  async: false
+		}).done(function( msg ) {
+			token = msg;
+	  	});
+		
+		
+		channel = new goog.appengine.Channel(token);
+	    socket = channel.open();
+	    socket.onopen = onOpened;
+	    socket.onmessage = onMessage;
+	    socket.onerror = onError;
+	    socket.onclose = onClose;
+	}
+	</script>
+
 <!--End Player Hand-->

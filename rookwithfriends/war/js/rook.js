@@ -98,6 +98,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	onMessage = function(msg) {
 		var data = JSON.parse(msg.data);
 
+		if(data.msg != undefined) {
+			printToConsole(data.msg);
+		}
+		
 		if (data.centerDeck != undefined) {
 			$scope.middleHand = data.centerDeck;
 		}

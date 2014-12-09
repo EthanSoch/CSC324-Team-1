@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <style>
 	#chatWindow{
+		position: relative;
 		display: inline-block;
 		border:solid 1px black;
 	}
