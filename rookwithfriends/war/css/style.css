@@ -186,7 +186,8 @@ canvas {
 	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
 }
 #searchbox{
-	margin-top: 8px;
+	height: 35px;
+	margin-top: -1px;
 	background-color: #2D3135;
 	border-color: black;
 	color: #AEAEAE;
@@ -907,4 +908,10 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 
 #dropUpMenu{
 	left: -142px;
+}
+#drpSearch{
+	left: 270px;
+	height: 35px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
