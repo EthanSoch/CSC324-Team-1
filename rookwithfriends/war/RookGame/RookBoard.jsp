@@ -1,38 +1,3 @@
-<style>
-	#chatWindow{
-		float: left;
-		display: inline-block;
-		border:solid 3px black;
-		border-radius: 5px;
-		margin-left: 62px;
-		margin-top: -100px;
-		margin-bottom: 62px;
-		background-color: #222;
-		
-		
-	}
-	
-	#messages{
-		height:300px;
-		width:422px;
-		color: #ffffff;
-		background-color: #222;
-		text-align: left;
-		
-	}
-	
-	#buttonBar{
-		border-top:solid 1px black;
-		background-color: #222;
-		
-	}
-	
-	#messageInput{
-		width:350px;
-		border-radius: 5px;
-		
-	}
-</style>
 <!-- Page Content -->
 <div style="margin: 0 auto 0 auto;width:1300px;">
 	<script type="text/ng-template" id="myModalContent.html">
@@ -51,8 +16,7 @@
 		<div class="alert alert-danger" role="alert" ng-show="bidWarning">Bid must be more than current bid, please select again.</div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="okBet(value)">OK</button>
-			<button class="btn btn-primary" ng-click="okBet(0)">Pass</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-warning" ng-click="okBet(0)">Pass</button>
         </div>
     </script>
     <script type="text/ng-template" id="trumpContent.html">
@@ -74,7 +38,6 @@
 		<div class="alert alert-danger" role="alert" ng-show="bidWarning">Bid must be more than current bid, please select again.</div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="okColor()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
     <!-- Player Stat Boxes -->
@@ -185,22 +148,33 @@
 			<input id="playCardsButtom" type="button" ng-show="canSubmitCards" ng-click="submitCards(cardsToSubmit)" value="Player Cards">
 		</div>
 	</div>
-</div>
-<!-- add chat box, position a relative -->
-<div id="chatWindow">
-		<div id="messages"></div>
-		<div id="buttonBar">
-			<input type="text" id="messageInput">
-			<input type="button" id="sendButton" value="send" onclick="sendMessage()">
+	<menu id="chtMenu" class="dropup">
+	  <button class="set menuBtn" data-toggle="dropdown"></button> 
+	  <button class="msg menuBtn" ng-click="showChat = !showChat"></button>
+	  <ul class="dropdown-menu dropup" id="dropUpMenu" role="menu">
+	    <li><a href="#" ng-click="open('trumpContent.html')">Show Trump Selection</a></li>
+	    <li class="divider"></li>
+	    <li><a href="#" ng-click="open('myModalContent.html')">Show Bid Selection</a></li>
+	  </ul>
+	</menu>
+	<div id="chatWindow" ng-show="showChat">
+	<div id="messages"></div>
+	<div id="buttonBar">
+		<div class="input-group" id="chatInput">
+	     	<input type="text" id="messageInput" class="form-control">
+	       <span class="input-group-btn">
+	          <button class="btn btn-default" id="sendButton" value="send" onclick="sendMessage(this)" type="button">Send!</button>
+	       </span>
+	       </div><!-- /input-group --> 
 		</div>
 	</div>
-	
+</div>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="/_ah/channel/jsapi"></script>
 	<script>
 	function sendMessage(){
 		var msg = {"message": $("#messageInput").val()};
-		
+		this.value=''
 		rookGame.send("msg",{msg:$("#messageInput").val()});
 	}
 	
@@ -225,6 +199,7 @@
 	function onClose() {
 	    alert("Channel closed!");
 	}
+	
 	
 	function connect(){
 		var token;

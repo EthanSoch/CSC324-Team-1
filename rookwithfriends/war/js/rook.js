@@ -51,6 +51,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.inviteUrl = "";
 	$scope.middleHand = [];
 	$scope.playerHand = [];
+	$scope.showChat = false;
 	$scope.trump = "";
 	$scope.trickColor = "";
 	$scope.modalID = "myModalContent.html";

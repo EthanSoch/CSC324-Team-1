@@ -817,3 +817,94 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 .alert{
 	font-size: 16px !important;
 }
+
+#chatWindow{
+	display: inline-block;
+	border: solid 3px black;
+	border-radius: 5px;
+	margin-left: 1060px;
+	margin-top: -250px;
+	margin-bottom: 62px;
+	background-color: #222;
+	width: 235px;	
+}
+
+#messages{
+	height:300px;
+	width: 230px;
+	color: #ffffff;
+	background-color: #222;
+	text-align: left;
+	padding-left: 5px;
+}
+
+#buttonBar{
+	border-top:solid 1px black;
+	background-color: #222;
+	
+}
+#sendButton{
+	height: 34px;
+}
+#chatInput{
+	margin-top: 1px;
+}
+
+#messageInput{
+	
+}
+
+
+#chtMenu {
+	display: -webkit-inline-flex;
+	display: inline-flex;
+	background: #fff;
+	border-radius: .5rem;
+	padding-left: 0px;
+	position: relative;
+	top: 148px;
+	left: 465px;
+}
+.vertical { flex-direction:column; }
+
+.menuBtn {
+  width:100%;
+  flex:1;
+  width:4rem;
+  height:4rem;
+  background:white;
+  font:1.5rem/3rem 'icon';
+  color:#777;
+  transition:.35s;
+  cursor:pointer;
+
+}
+
+.menuBtn:focus {
+  outline: 0;
+}
+
+.add { background:#00AEEF; color:#fff; }
+
+.set:after { content:"W"; }
+.star:after { content:"e"; }
+.msg:after { content:"g"; }
+.add:after { content:"9"; }
+
+
+.set:hover { color:#333; }
+.star:hover { color:orange; }
+.msg:hover { color:green; }
+.add:hover { background:#008ABD; }
+
+.set:active { color:#fff; background:gray; }
+.star:active { color:#fff; background:orange; }
+.msg:active { color:#fff; background:green; }
+
+.menuBtn:active { transform:scale(1.5); opacity:0.15; transition:0; border-radius:8px; }
+
+@font-face { font-family:'icon'; src: url('//bennettfeely.com/labs/bigclick/sosa.eot?') format('eot'), url('//bennettfeely.com/labs/bigclick/sosa.woff') format('woff'), url('//bennettfeely.com/labs/bigclick/sosa.ttf') format('truetype'); }
+
+#dropUpMenu{
+	left: -142px;
+}
