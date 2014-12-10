@@ -17,9 +17,12 @@ public class GameSession extends GameSessionBase {
 	public void gameInstruction(Map<String,String[]> input){
 		switch(input.get("op")[0]){
 		case "msg":
+			UserSession currentPlayerSession = getUserSession(UUID.fromString(input.get("playerId")[0]));
+			
 			Map<String,Object> msg = new HashMap<String,Object>();
 			msg.put("op","msg");
-			msg.put("msg", input.get("msg")[0]);
+			msg.put("msg","Player " + currentPlayerSession.getPlayerGameID() + " : " + input.get("msg")[0]);
+			
 			sendToAll(msg);
 			break;
 		case "start":

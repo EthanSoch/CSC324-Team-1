@@ -140,7 +140,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			var playerBidNew = parseInt(data.newPlayerBid.substring(2, data.newPlayerBid.length));
 			
 			if(playerBidNew == 0){
-				$scope.opponents[playerNumber].bid = "pass";
+				$scope.opponents[playerNumber].bid = "Pass";
 			}else{
 				$scope.opponents[playerNumber].bid = playerBidNew;
 				$rootScope.topBid = playerBidNew;
@@ -268,7 +268,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 						+ window.location.host + window.location.pathname
 						+ "?gameId=" + serverMessage.gameId;
 				jQuery("#searchbox").val($scope.inviteUrl);
-			});
+		});
 	}
 };
 

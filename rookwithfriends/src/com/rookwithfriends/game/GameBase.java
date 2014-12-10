@@ -8,6 +8,7 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -18,12 +19,17 @@ public abstract class GameBase implements Serializable{
 	private static final long serialVersionUID = -3186136871484467548L;
 	// Declare Class Members//
 	protected int gameBid=100,numPasses;
-	protected CardColor trump, trickColor;
+	protected CardColor trump;
+	protected CardColor trickColor;
 	protected CardSet centerDeck;
-	@XmlTransient protected CardSet allDeck,kitty;
-	@XmlTransient protected List<Player> players;
-	@XmlTransient protected int bidWinnerId, currentPlayerId;
-	@XmlTransient GameStage stage;
+	@XmlTransient 
+	protected CardSet allDeck,kitty;
+	@XmlTransient 
+	protected List<Player> players;
+	@XmlTransient 
+	protected int bidWinnerId, currentPlayerId;
+	@XmlTransient 
+	GameStage stage;
 	
 	//CRUD
 	public void createDeck() {
@@ -166,7 +172,7 @@ public abstract class GameBase implements Serializable{
 		
 		try{
 			// Create a JaxBContext
-			JAXBContext jc = JAXBContext.newInstance(Game.class);
+			JAXBContext jc = JAXBContext.newInstance(GameBase.class);
 	
 			// Create the Marshaller Object using the JaxB Context
 			Marshaller marshaller = jc.createMarshaller();

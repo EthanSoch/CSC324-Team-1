@@ -179,7 +179,7 @@
 		<div class="input-group" id="chatInput">
 	     	<input type="text" id="messageInput" class="form-control">
 	       <span class="input-group-btn">
-	          <button class="btn btn-default" id="sendButton" value="send" onclick="sendMessage(this)" type="button">Send!</button>
+	          <button class="btn btn-default" id="sendButton" value="send" onclick="sendMessage()" type="button">Send!</button>
 	       </span>
 	       </div><!-- /input-group --> 
 		</div>
@@ -190,7 +190,7 @@
 	<script>
 	function sendMessage(){
 		var msg = {"message": $("#messageInput").val()};
-		this.value=''
+		//this.value='';
 		rookGame.send("msg",{msg:$("#messageInput").val()});
 	}
 	
@@ -200,41 +200,8 @@
 		$("#messages")[0].appendChild(node);
 	}
 	
-	function onOpened() {
-	    printToConsole("Channel opened!");
-	}
-
 	function onMessage(msg) {
 		printToConsole(msg.data);
-	}
-
-	function onError(err) {
-	    alert(err);
-	}
-
-	function onClose() {
-	    alert("Channel closed!");
-	}
-	
-	
-	function connect(){
-		var token;
-		
-		$.ajax({
-			  type: "GET",
-			  url: "chat/message",
-			  async: false
-		}).done(function( msg ) {
-			token = msg;
-	  	});
-		
-		
-		channel = new goog.appengine.Channel(token);
-	    socket = channel.open();
-	    socket.onopen = onOpened;
-	    socket.onmessage = onMessage;
-	    socket.onerror = onError;
-	    socket.onclose = onClose;
 	}
 	</script>
 
