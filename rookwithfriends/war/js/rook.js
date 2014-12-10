@@ -60,6 +60,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.selectedIndex = -1; /* Not Selected */
 	$scope.canSubmitCards = false;
 	$scope.cardsToSubmit = 0;
+	$rootScope.winningTeam = "PlaceHolder"
 	
 	$scope.select= function(i) {
 	  $scope.selectedIndex=i;

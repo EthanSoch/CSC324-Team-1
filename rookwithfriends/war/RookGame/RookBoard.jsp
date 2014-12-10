@@ -19,6 +19,22 @@
             <button class="btn btn-warning" ng-click="okBet(0)">Pass</button>
         </div>
     </script>
+    <script type="text/ng-template" id="gameOver.html">
+        <div class="modal-header">
+            <h3 class="modal-title">The Game Is Over!</h3>
+        </div>
+		<div class="modal-body" id="modalMain">
+			<h3 id="winningHeader">The Winning Team Is: {{winningTeam}}</h3> 
+		<div id ="balloonDiv">
+			<div class="balloon" id="balloonLeft"></div>
+            <div class="balloon" id="balloonRight"></div>
+		</div>
+		</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="okBet(0)">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Close</button>
+        </div>
+    </script>
     <script type="text/ng-template" id="trumpContent.html">
         <div class="modal-header">
             <h3 class="modal-title">Select a trump color!</h3>
@@ -152,7 +168,7 @@
 	  <button class="set menuBtn" data-toggle="dropdown"></button> 
 	  <button class="msg menuBtn" ng-click="showChat = !showChat"></button>
 	  <ul class="dropdown-menu dropup" id="dropUpMenu" role="menu">
-	    <li><a href="#" ng-click="open('trumpContent.html')">Show Trump Selection</a></li>
+	    <li><a href="#" ng-click="open('gameOver.html')">Show Trump Selection</a></li>
 	    <li class="divider"></li>
 	    <li><a href="#" ng-click="open('myModalContent.html')">Show Bid Selection</a></li>
 	  </ul>
