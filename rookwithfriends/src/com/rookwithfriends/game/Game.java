@@ -105,6 +105,10 @@ public class Game extends GameBase{
 		centerDeck.add(card);
 		currentPlayer.getPlayerHand().remove(card);
 		
+		if(centerDeck.size() == 0) {
+			trickColor = card.getColor();
+		}
+		
 		if(centerDeck.size() == 4){
 			Card winningCard = centerDeck.findWinningCard(trump);
 			players.get(winningCard.getId()).getCardsWon().addAll(centerDeck);

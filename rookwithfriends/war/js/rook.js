@@ -155,6 +155,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		if(data.trickColor != undefined){
 			$scope.trickColor = data.trickColor;
 		}
+
 		if(data.playCard != undefined){
 			rookGame.selectCards(1);
 		}
