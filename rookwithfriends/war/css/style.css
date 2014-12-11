@@ -904,8 +904,6 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 
 .menuBtn:active { transform:scale(1.5); opacity:0.15; transition:0; border-radius:8px; }
 
-@font-face { font-family:'icon'; src: url('//bennettfeely.com/labs/bigclick/sosa.eot?') format('eot'), url('//bennettfeely.com/labs/bigclick/sosa.woff') format('woff'), url('//bennettfeely.com/labs/bigclick/sosa.ttf') format('truetype'); }
-
 #dropUpMenu{
 	left: -142px;
 }

@@ -6,6 +6,7 @@ import java.util.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -110,13 +111,17 @@ public class Game extends GameBase{
 		centerDeck.add(card);
 		currentPlayer.getPlayerHand().remove(card);
 		
+		endTurn();
+	}
+	
+	public void endRound(){
 		if(centerDeck.size() == 4){
 			Card winningCard = centerDeck.findWinningCard(trump);
 			players.get(winningCard.getId()).getCardsWon().addAll(centerDeck);
 			centerDeck.clear();
+			
+			trick = null;
 		}
-		
-		endTurn();
 	}
 	
 	public Card findValidCard(Player curPlayer){

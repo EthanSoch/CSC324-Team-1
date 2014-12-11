@@ -30,7 +30,7 @@ public class PlayerTest {
 		cs1.add(c3);
 		
 		p=new Player();
-		p.combineHand(cs1);
+		//p.combineHand(cs1);
 	}
 
 	
@@ -70,8 +70,8 @@ public class PlayerTest {
 	@Test
 	public void testSetTrump() {
 		Player p2=new Player();
-		CardColor newcard = p2.setTrump();
-		System.out.println(newcard);
+		//CardColor newcard = p2.setTrump();
+		//System.out.println(newcard);
 	}
 
 	@Test

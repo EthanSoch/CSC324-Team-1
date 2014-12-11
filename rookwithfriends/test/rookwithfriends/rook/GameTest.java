@@ -11,7 +11,7 @@ import com.rookwithfriends.game.*;
 
 public class GameTest {
 	Game game;
-	
+	/*
 	@Before
 	public void setUp() throws Exception {
 		game = new Game(0, 1, 2, 3);
@@ -107,7 +107,7 @@ public class GameTest {
 			System.out.println("Team 2 Wins");
 		}
 	}
-	
+	*/
 
 	@Test
 	public void testDeckCreation() {

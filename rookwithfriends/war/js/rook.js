@@ -77,6 +77,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	  $scope.open = function (page){
 		  $rootScope.modalVal = page;
 	     var modalInstance = $modal.open({
+	      backdrop : 'static',
 	      templateUrl: page,
 	      controller: 'modalController',
 	      resolve: {
@@ -101,6 +102,16 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 
 	onMessage = function(msg) {
 		var data = JSON.parse(msg.data);
+		
+		if(data.team1Score != undefined){
+			$scope.opponents[0].score = data.team1Score;
+			$scope.opponents[2].score = data.team1Score;
+		}
+		
+		if(data.team2Score != undefined){
+			$scope.opponents[1].score = data.team2Score;
+			$scope.opponents[3].score = data.team2Score;
+		}
 
 		if(data.playerID != undefined) {
 			$scope.currentPlayer = data.playerID;
@@ -112,6 +123,14 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		
 		if (data.centerDeck != undefined) {
 			$scope.middleHand = data.centerDeck;
+			
+			if(data.centerDeck.length == 4){
+				setTimeout(function(){ 
+					$scope.trickColor = ""
+					$scope.middleHand = {};
+					$scope.$apply(); 
+				}, 3000);
+			}
 		}
 
 		if (data.hand != undefined) {
@@ -168,51 +187,32 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
   	}
 	
 	$scope.submitCards = function(cardsToSubmit){
-		var cardIsGood = false;
 		var cards = rookGame.getSelectedCards();
 			
 		if(cards.length == cardsToSubmit){
 			var operation = cardsToSubmit == 5 ? "discardFive" : "playCard";
-			if(operation=="playCard")
+			var hasTrickColoredCard = false;
+			
+			if(operation == "playCard")
 			{
-				while(!cardIsGood)
-				{
-					if(cards[0].color != $scope.trump && cards[0].color != $scope.trickColor && cards[0].color != "white")
-					{	//card wasn't valid
-						// loop through $scope.playerHand
-						
-						var hasGoodColor = false;
-						//check if they have a valid card
-						for(var i = 0; i < $scope.playerHand.length; i++)
-						{
-							var temp = $scope.playerHand[i];
-							if(temp.color == $scope.trickColor)
-							{
-								hasGoodColor=true;
-							}
+				if(cards[0].color != $scope.trump && cards[0].color != $scope.trickColor && cards[0].color != "white"){
+					
+					
+					jQuery($scope.playerHand).each(function(i,e){
+						if(e.color == $scope.trickColor){
+							alert("You have a card of the same color as the trick you must play that instead");
+							hasTrickColoredCard = true;
+							return false;
 						}
-						
-						//they have a valid card
-						if(hasGoodColor)
-						{
-						// they need to choose card again
-							cardIsGood = false;
-							cards = rookGame.getSelectedCards();
-						}
-						//they don't have a valid card, let them play it
-						else
-						{
-							cardIsGood = true;
-						}
-					}
-					else
-					{
-						cardIsGood = true;
-					}
+					});
 				}
 			}
-			rookGame.send(operation, {"cards":cards});
-			rookGame.deselectAllCards();
+			
+			if(!hasTrickColoredCard){
+				rookGame.send(operation, {"cards":cards});
+				rookGame.deselectAllCards();
+			}
+			
 		}else{
 			alert("You must select " + cardsToSubmit +" cards");
 		}
