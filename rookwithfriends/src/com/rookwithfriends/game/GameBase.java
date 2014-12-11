@@ -18,9 +18,9 @@ import org.eclipse.persistence.jaxb.MarshallerProperties;
 public abstract class GameBase implements Serializable{
 	private static final long serialVersionUID = -3186136871484467548L;
 	// Declare Class Members//
-	protected int gameBid=100,numPasses;
+	protected CardColor trick;
 	protected CardColor trump;
-	protected CardColor trickColor;
+	protected int gameBid=100,numPasses;
 	protected CardSet centerDeck;
 	@XmlTransient 
 	protected CardSet allDeck,kitty;
@@ -81,6 +81,7 @@ public abstract class GameBase implements Serializable{
 		return gameBid;
 	}
 
+	@XmlTransient 
 	public CardSet getAllDeck() {
 		return allDeck;
 	}
@@ -105,6 +106,15 @@ public abstract class GameBase implements Serializable{
 		this.kitty = kitty;
 	}
 
+	public CardColor getTrick() {
+		return trick;
+	}
+
+	public void setTrick(CardColor trick) {
+		this.trick = trick;
+	}
+
+	@XmlTransient 
 	public List<Player> getPlayers() {
 		return players;
 	}

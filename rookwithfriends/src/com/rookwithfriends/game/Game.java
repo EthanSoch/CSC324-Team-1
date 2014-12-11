@@ -102,12 +102,13 @@ public class Game extends GameBase{
 		Player currentPlayer = getCurrentPlayer();
 		
 		//First player
+		if(centerDeck.size() == 0) {
+			trick = card.getColor();
+		}
+		
+		
 		centerDeck.add(card);
 		currentPlayer.getPlayerHand().remove(card);
-		
-		if(centerDeck.size() == 0) {
-			trickColor = card.getColor();
-		}
 		
 		if(centerDeck.size() == 4){
 			Card winningCard = centerDeck.findWinningCard(trump);
@@ -121,7 +122,7 @@ public class Game extends GameBase{
 	public Card findValidCard(Player curPlayer){
 		for(Card temp: curPlayer.getPlayerHand())
 		{
-			if(temp.getColor()==trickColor || temp.getColor()==trump || temp.getColor()==CardColor.white)
+			if(temp.getColor()==trick || temp.getColor()==trump || temp.getColor()==CardColor.white)
 			{
 				return temp;
 			}

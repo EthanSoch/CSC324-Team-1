@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.rookwithfriends.game.Game;
+import com.rookwithfriends.game.GameBase;
 import com.rookwithfriends.game.Player;
 import com.rookwithfriends.util.CacheUtility;
 import com.rookwithfriends.util.JSONUtility;
@@ -83,8 +84,8 @@ public abstract class GameSessionBase implements Serializable {
 	}
 	
 	protected void updateGameBoard(){
+		String jsonString = ((GameBase)game).toJSON();
 		for(UserSession player : players){
-			String jsonString = game.toJSON();
 			player.sendMessage(jsonString);
 		}
 	}

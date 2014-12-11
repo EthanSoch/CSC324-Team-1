@@ -66,13 +66,13 @@
 					<h3 class="box__header-title">Team 1</h3>
 				</div>
 				<div class="box__body">
-					<div class="stats stats--main" id="player2Points">Score: {{team1Score}}</div>
-					<div class="stats" id="player2CB">Current Bid: {{opponents[3].bid}}</div>
+					<div class="stats stats--main" id="player2Points">Score: {{opponents[(3 + currentPlayer) % 4].score}}</div>
+					<div class="stats" id="player2CB">Current Bid: {{opponents[(3 + currentPlayer) % 4].bid}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player2"> <img height="83" width="83"
 				src="avatarImg.png">
-				<h5 class="playerName">{{opponents[3].name}}</h5>
+				<h5 class="playerName">{{opponents[(3 + currentPlayer) % 4].name}}</h5>
 			</a>
 		</div>
 	</div>
@@ -84,13 +84,13 @@
 						<h3 class="box__header-title">Team 2</h3>
 					</div>
 					<div class="box__body">
-						<div class="stats stats--main" id="player2Points">Score: {{team2Score}}</div>
-						<div class="stats" id="player2CB">Current Bid: {{opponents[2].bid}}</div>
+						<div class="stats stats--main" id="player2Points">Score: {{opponents[(2 + currentPlayer) % 4].score}}</div>
+						<div class="stats" id="player2CB">Current Bid: {{opponents[(2 + currentPlayer) % 4].bid}}</div>
 					</div>
 				</div>
 				<a class="circle" id="player3"> <img height="83" width="83"
 					src="avatarImg.png">
-					<h5 class="playerName">{{opponents[2].name}}</h5>
+					<h5 class="playerName">{{opponents[(2 + currentPlayer) % 4].name}}</h5>
 				</a>
 			</div>
 		</div>
@@ -135,31 +135,31 @@
 						<h3 class="box__header-title">Team 2</h3>
 					</div>
 					<div class="box__body">
-						<div class="stats stats--main" id="player2Points">Score: {{team2Score}}</div>
-						<div class="stats" id="player2CB">Current Bid: {{opponents[1].bid}}</div>
+						<div class="stats stats--main" id="player2Points">Score: {{opponents[(1 + currentPlayer) % 4].score}}</div>
+						<div class="stats" id="player2CB">Current Bid: {{opponents[(1 + currentPlayer) % 4].bid}}</div>
 					</div>
 				</div>
 				<a class="circle" id="player4"> <img height="83" width="83"
 					src="avatarImg.png">
-					<h5 class="playerName">{{opponents[1].name}}</h5>
+					<h5 class="playerName">{{opponents[(1 + currentPlayer) % 4].name}}</h5>
 				</a>
 			</div>
 		</div>
 	</div>
 	<div class="avatarContainer" id="player1Container">
-		<div class="StatBox playerMidAlign">
+		<div class="StatBox playerMidAlign" >
 			<div class="box">
 				<div class="box__header">
 					<h3 class="box__header-title">Team 1</h3>
 				</div>
 				<div class="box__body">
-					<div class="stats stats--main" id="player2Points">Score: {{team1Score}}</div>
-					<div class="stats" id="player2CB">Current Bid: {{opponents[0].bid}}</div>
+					<div class="stats stats--main" id="player2Points">Score: {{opponents[currentPlayer].score}}</div>
+					<div class="stats" id="player2CB">Current Bid: {{opponents[currentPlayer].bid}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player1"> <img height="83" width="83"
 				src="avatarImg.png">
-				<h5 class="playerName">{{opponents[0].name}}</h5>
+				<h5 class="playerName">{{opponents[currentPlayer].name}}</h5>
 			</a>
 			<input id="playCardsButtom" type="button" ng-show="canSubmitCards" ng-click="submitCards(cardsToSubmit)" value="Player Cards">
 		</div>

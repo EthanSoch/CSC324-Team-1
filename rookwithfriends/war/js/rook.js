@@ -55,7 +55,8 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.trump = "";
 	$scope.trickColor = "";
 	$scope.modalID = "myModalContent.html";
-	$scope.opponents = [{name:"Player 1",bid:0},{name:"Player 2",bid:0},{name:"Player 3",bid:0},{name:"Player 4",bid:0}];
+	$scope.opponents = [{name:"Player 1",bid:0,score:0},{name:"Player 2",bid:0,score:0},{name:"Player 3",bid:0,score:0},{name:"Player 4",bid:0,score:0}];
+	$scope.currentPlayer = 0;
 	rookGame.scope = $scope;
 	$scope.selectedIndex = -1; /* Not Selected */
 	$scope.canSubmitCards = false;
@@ -65,11 +66,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.select= function(i) {
 	  $scope.selectedIndex=i;
 	};
+	
+	//for the view
+	
 	//Values for Bids/Scores//
-		
-		$scope.team2Score = 0;
-		$scope.team1Score = 0;
-		
 		$rootScope.topBid = 100;
 		
 	
@@ -102,6 +102,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	onMessage = function(msg) {
 		var data = JSON.parse(msg.data);
 
+		if(data.playerID != undefined) {
+			$scope.currentPlayer = data.playerID;
+		}
+		
 		if(data.msg != undefined) {
 			printToConsole(data.msg);
 		}
@@ -152,8 +156,8 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			rookGame.selectCards(5);
 		}
 		
-		if(data.trickColor != undefined){
-			$scope.trickColor = data.trickColor;
+		if(data.trick != undefined){
+			$scope.trickColor = data.trick;
 		}
 
 		if(data.playCard != undefined){
