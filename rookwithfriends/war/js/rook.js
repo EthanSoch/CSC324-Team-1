@@ -175,7 +175,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		
 		if(data.discardFive != undefined){
 			rookGame.selectCards(5);
-			$rootScope.cardsNeeded = 5;
+			$scope.cardsNeeded = 5;
 		}
 		
 		if(data.trick != undefined){
@@ -184,7 +184,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 
 		if(data.playCard != undefined){
 			rookGame.selectCards(1);
-			$rootScope.cardsNeeded = 1;
+			$scope.cardsNeeded = 1;
 		}
 
 		$scope.$apply();
