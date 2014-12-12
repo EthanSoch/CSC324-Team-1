@@ -61,7 +61,9 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$scope.selectedIndex = -1; /* Not Selected */
 	$scope.canSubmitCards = false;
 	$scope.cardsToSubmit = 0;
-	$rootScope.winningTeam = "PlaceHolder"
+	$rootScope.winningTeam = "PlaceHolder";
+	$scope.cardsChoosen = 0;
+	$scope.cardsNeeded = 0;
 	
 	$scope.select= function(i) {
 	  $scope.selectedIndex=i;
@@ -129,7 +131,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 					$scope.trickColor = ""
 					$scope.middleHand = {};
 					$scope.$apply(); 
-				}, 3000);
+				}, 2000);
 			}
 		}
 
@@ -173,14 +175,16 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		
 		if(data.discardFive != undefined){
 			rookGame.selectCards(5);
+			$rootScope.cardsNeeded = 5;
 		}
 		
 		if(data.trick != undefined){
-			$scope.trickColor = data.trick;
+			$scope.trickColor = data.trick.substring(0,1).toUpperCase() + data.trick.substring(1);
 		}
 
 		if(data.playCard != undefined){
 			rookGame.selectCards(1);
+			$rootScope.cardsNeeded = 1;
 		}
 
 		$scope.$apply();

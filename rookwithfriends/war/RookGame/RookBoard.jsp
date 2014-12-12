@@ -58,7 +58,6 @@
     </script>
     <!-- Player Stat Boxes -->
 	<!--User Avatars and Names-->
-	
 	<div class="avatarContainer">
 		<div class="StatBox playerMidAlign">
 			<div class="box">
@@ -97,7 +96,7 @@
 		<div id="table1" class="centerStrip">
 			<div id="table2">
 				<div id="middleHand">
-					<div class="card pCard" ng-class="card.color"
+					<div class="card pCard repeatCards" ng-class="card.color"
 						ng-click="select($index)" ng-repeat="card in middleHand"
 						data-card="{{card}}">
 						<div class="cardTop">
@@ -155,23 +154,17 @@
 				<div class="box__body">
 					<div class="stats stats--main" id="player2Points">Score: {{opponents[currentPlayer].score}}</div>
 					<div class="stats" id="player2CB">Current Bid: {{opponents[currentPlayer].bid}}</div>
+					<div class="stats" id="trickCol">Trick Color: {{trickColor}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player1"> <img height="83" width="83"
 				src="avatarImg.png">
 				<h5 class="playerName">{{opponents[currentPlayer].name}}</h5>
 			</a>
-			<input id="playCardsButtom" type="button" ng-show="canSubmitCards" ng-click="submitCards(cardsToSubmit)" value="Player Cards">
 		</div>
 	</div>
 	<menu id="chtMenu" class="dropup">
-	  <button class="set menuBtn" data-toggle="dropdown"></button> 
-	  <button class="msg menuBtn" ng-click="showChat = !showChat"></button>
-	  <ul class="dropdown-menu dropup" id="dropUpMenu" role="menu">
-	    <li><a href="#" ng-click="open('gameOver.html')">Show Trump Selection</a></li>
-	    <li class="divider"></li>
-	    <li><a href="#" ng-click="open('myModalContent.html')">Show Bid Selection</a></li>
-	  </ul>
+	  <button class="msg glyphicon glyphicon-comment menuBtn" ng-click="showChat = !showChat"></button>
 	</menu>
 	<div id="chatWindow" ng-show="showChat">
 	<div id="messages"></div>
@@ -184,6 +177,7 @@
 	       </div><!-- /input-group --> 
 		</div>
 	</div>
+	<a href="#" class='button button3' ng-click="submitCards(cardsToSubmit)" ng-show="canSubmitCards" id="selectCardBtn" >Select Cards! <span id="cardCount"> {{cardsChoosen}} of {{cardsNeeded}} Selected.</span></a>
 </div>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="/_ah/channel/jsapi"></script>

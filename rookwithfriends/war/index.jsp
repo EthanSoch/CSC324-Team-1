@@ -50,15 +50,13 @@
                     <span class="icon-bar"></span>
                 </button>
                  <a class="navbar-brand" data-toggle="dropdown">Share Game</a>
-                 <ul class="dropdown-menu" role="menu" id="drpSearch">
-				      <li class="form-group">
-				          <input id="searchbox" type="text" class="form-control" type="text" value="" onclick="this.select();">
-				      </li>
-				 </ul>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                	<li>
+                    <input id="searchbox" type="text" class="form-control" type="text" value="" onclick="this.select();">
+                    </li>
                     <li>
                         <a href="#">About</a>
                     </li>

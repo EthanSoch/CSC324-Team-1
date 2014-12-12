@@ -187,7 +187,7 @@ canvas {
 }
 #searchbox{
 	height: 35px;
-	margin-top: -1px;
+	margin-top: 8px;
 	background-color: #2D3135;
 	border-color: black;
 	color: #AEAEAE;
@@ -255,7 +255,6 @@ sup  { font-size: 36px; font-weight: 100; line-height: 55px; }
 #player1Container{
 	position: relative !important;
 	top: 115px !important;
-	display: inline-block;
 }
 
 .button:hover span:after, .button:active span:after 
@@ -864,7 +863,7 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 	padding-left: 0px;
 	position: relative;
 	top: 148px;
-	left: 465px;
+	left: 524px;
 }
 .vertical { flex-direction:column; }
 
@@ -874,10 +873,11 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
   width:4rem;
   height:4rem;
   background:white;
-  font:1.5rem/3rem 'icon';
+  font:1.5rem/3rem;
   color:#777;
   transition:.35s;
   cursor:pointer;
+  top:0px;
 
 }
 
@@ -886,12 +886,6 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 }
 
 .add { background:#00AEEF; color:#fff; }
-
-.set:after { content:"W"; }
-.star:after { content:"e"; }
-.msg:after { content:"g"; }
-.add:after { content:"9"; }
-
 
 .set:hover { color:#333; }
 .star:hover { color:orange; }
@@ -980,4 +974,61 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 #balloonDiv{
 	position: relative;
 	top: -80px;
+}
+
+#selectCardBtn{
+	height: 75px;
+	width: 155px;
+	left: 238px;
+	position: relative;
+	font-size: 1.1em;
+	font-family: Gill Sans, "Gill Sans", sans-serif;
+	font-weight: 700;
+	top: -98px;
+	letter-spacing: -1px;
+	text-transform: uppercase;
+	text-decoration: none;
+	border: solid 2px $color;
+	color: color;
+	border-radius: 0.4em;
+	transition: all 0.3s linear;
+	animation-iteration-count: infinite;
+  
+  &:hover{
+    color:#ffffff;
+    background:$color;
+    animation:none;
+  }
+}
+
+
+.button3{
+   animation-duration: 1.5s;
+   animation-name: shrink;
+}
+#cardCount{
+	font: sans-serif;
+	padding-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: none;
+}
+.repeatCards:nth-child(1){
+	top: 194px;
+	left: 57px;
+}
+.repeatCards:nth-child(2){
+    left: 10px;
+}
+.repeatCards:nth-child(3){
+	left: 60px;
+	top: 92px;
+}
+.repeatCards:nth-child(4){
+    left: -184px;
+	top: 93px;
+}
+
+#trickCol{
+	font-weight: 600;
 }
