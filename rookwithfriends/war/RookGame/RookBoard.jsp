@@ -96,9 +96,7 @@
 		<div id="table1" class="centerStrip">
 			<div id="table2">
 				<div id="middleHand">
-					<div class="card pCard repeatCards" ng-class="card.color"
-						ng-click="select($index)" ng-repeat="card in middleHand"
-						data-card="{{card}}">
+					<div class="card pCard repeatCards" ng-class="card.color" ng-click="select($index)" ng-repeat="card in middleHand" data-card="{{card}}">
 						<div class="cardTop">
 							<div class="number">{{card.rank}}</div>
 							<div class="color"></div>
@@ -161,6 +159,7 @@
 				src="avatarImg.png">
 				<h5 class="playerName">{{opponents[currentPlayer].name}}</h5>
 			</a>
+			<a href="#" class='button button3' ng-click="submitCards(cardsToSubmit)" ng-show="canSubmitCards" id="selectCardBtn" >Select Cards! <span id="cardCount"> {{cardsChoosen}} of {{cardsNeeded}} Selected.</span></a>
 		</div>
 	</div>
 	<menu id="chtMenu" class="dropup">
@@ -177,7 +176,6 @@
 	       </div><!-- /input-group --> 
 		</div>
 	</div>
-	<a href="#" class='button button3' ng-click="submitCards(cardsToSubmit)" ng-show="canSubmitCards" id="selectCardBtn" >Select Cards! <span id="cardCount"> {{cardsChoosen}} of {{cardsNeeded}} Selected.</span></a>
 </div>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="/_ah/channel/jsapi"></script>

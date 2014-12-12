@@ -977,14 +977,15 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 }
 
 #selectCardBtn{
+	direction: ltr;
 	height: 75px;
 	width: 155px;
-	left: 238px;
+	left: 180px;
 	position: relative;
 	font-size: 1.1em;
 	font-family: Gill Sans, "Gill Sans", sans-serif;
 	font-weight: 700;
-	top: -98px;
+	top: -118px;
 	letter-spacing: -1px;
 	text-transform: uppercase;
 	text-decoration: none;
@@ -993,12 +994,6 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 	border-radius: 0.4em;
 	transition: all 0.3s linear;
 	animation-iteration-count: infinite;
-  
-  &:hover{
-    color:#ffffff;
-    background:$color;
-    animation:none;
-  }
 }
 
 
