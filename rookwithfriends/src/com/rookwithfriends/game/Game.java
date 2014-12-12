@@ -31,6 +31,7 @@ public class Game extends GameBase{
 		players.add(new Player(playerId4));
 		centerDeck=new CardSet();
 		stage = GameStage.bidding;
+		roundNumber = 0;
 	}
 
 	public void startGame() {
@@ -121,6 +122,15 @@ public class Game extends GameBase{
 			centerDeck.clear();
 			
 			trick = null;
+			
+			if(roundNumber < 10){
+				roundNumber += 1;
+			}
+			else{
+				roundNumber = 0;
+				stage = stage.bidding;
+				bidWinnerId = 0;
+			}
 		}
 	}
 	

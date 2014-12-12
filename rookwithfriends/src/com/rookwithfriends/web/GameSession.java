@@ -174,10 +174,11 @@ public class GameSession extends GameSessionBase {
 		if(game.getCenterDeck().size() == 4){
 			game.endRound();
 			
-			Map<String,Object> response = new HashMap<String, Object>();
-			response.put("team1Score", game.getScoreByTeam(0));
-			response.put("team2Score", game.getScoreByTeam(1));
-			sendToAll(response);
+			if(game.getStage().equals(GameStage.bidding)){
+				updateScores();
+				
+				//startBidding();
+			}
 		}
 		
 		currentPlayerSession.sendMessage(currentPlayer.toJSON());

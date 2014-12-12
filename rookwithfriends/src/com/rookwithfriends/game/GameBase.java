@@ -31,6 +31,25 @@ public abstract class GameBase implements Serializable{
 	@XmlTransient 
 	GameStage stage;
 	
+	public GameStage getStage() {
+		return stage;
+	}
+
+	public void setStage(GameStage stage) {
+		this.stage = stage;
+	}
+
+	public int getRoundNumber() {
+		return roundNumber;
+	}
+
+	public void setRoundNumber(int roundNumber) {
+		this.roundNumber = roundNumber;
+	}
+
+	@XmlTransient 
+	protected int roundNumber;
+	
 	//CRUD
 	public void createDeck() {
 		allDeck = new CardSet();

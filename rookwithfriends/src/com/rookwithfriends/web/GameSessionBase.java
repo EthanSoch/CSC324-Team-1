@@ -65,6 +65,13 @@ public abstract class GameSessionBase implements Serializable {
 		return newPlayer;
 	}
 	
+	protected void updateScores() {
+		Map<String,Object> response = new HashMap<String, Object>();
+		response.put("team1Score", game.getScoreByTeam(0));
+		response.put("team2Score", game.getScoreByTeam(1));
+		sendToAll(response);
+	}
+	
 	protected void sendToAll(Map<String,Object> data){
 		sendToAll(JSONUtility.convertToJson(data));
 	}
