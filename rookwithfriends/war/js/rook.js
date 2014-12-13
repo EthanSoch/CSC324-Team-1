@@ -146,7 +146,8 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		}
 		
 		if (data.startBidding != undefined) {
-			 $scope.open("myModalContent.html");
+			$rootScope.topBid = 100;
+			$scope.open("myModalContent.html");
 		}
 		
 		if (data.chooseTrump != undefined) {
