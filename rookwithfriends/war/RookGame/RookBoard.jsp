@@ -152,7 +152,7 @@
 				<div class="box__body">
 					<div class="stats stats--main" id="player2Points">Score: {{opponents[currentPlayer].score}}</div>
 					<div class="stats" id="player2CB">Current Bid: {{opponents[currentPlayer].bid}}</div>
-					<div class="stats" id="trickCol">Trick Color: {{trickColor}}</div>
+					<div class="stats" id="trickCol">Trump Color: {{trump}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player1"> <img height="83" width="83"
