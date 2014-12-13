@@ -205,11 +205,11 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			
 			if(operation == "playCard")
 			{
-				if(cards[0].color != $scope.trump && cards[0].color != $scope.trickColor && cards[0].color != "white"){
+				if(cards[0].color.toUpperCase() != $scope.trump.toUpperCase() && cards[0].color.toUpperCase() != $scope.trickColor.toUpperCase() && cards[0].color.toUpperCase() != "white"){
 					
 					
 					jQuery($scope.playerHand).each(function(i,e){
-						if(e.color == $scope.trickColor){
+						if(e.color.toUpperCase() == $scope.trickColor.toUpperCase()){
 							alert("You have a card of the same color as the trick you must play that instead");
 							hasTrickColoredCard = true;
 							return false;
