@@ -172,12 +172,13 @@ public class GameSession extends GameSessionBase {
 		updateGameBoard();
 		
 		if(game.getCenterDeck().size() == 4){
-			game.endRound();
+			game.endTrick();
 			
 			if(game.getStage().equals(GameStage.bidding)){
 				updateScores();
 				
-				//startBidding();
+				UserSession playerWinner = players.get(game.getCurrentPlayer().getPlayerID());
+				startBidding(playerWinner,0);
 			}
 		}
 		

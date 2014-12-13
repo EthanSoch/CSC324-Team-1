@@ -115,10 +115,11 @@ public class Game extends GameBase{
 		endTurn();
 	}
 	
-	public void endRound(){
+	public void endTrick(){
 		if(centerDeck.size() == 4){
 			Card winningCard = centerDeck.findWinningCard(trump);
 			players.get(winningCard.getId()).getCardsWon().addAll(centerDeck);
+			currentPlayerId = winningCard.getId();
 			centerDeck.clear();
 			
 			trick = null;
@@ -127,6 +128,12 @@ public class Game extends GameBase{
 				roundNumber += 1;
 			}
 			else{
+				roundNumber = 0;
+				stage = stage.bidding;
+				bidWinnerId = 0;
+			}
+			
+			if(roundNumber >= 10){
 				roundNumber = 0;
 				stage = stage.bidding;
 				bidWinnerId = 0;
