@@ -171,18 +171,58 @@ public class GameSession extends GameSessionBase {
 		
 		updateGameBoard();
 		
+		//If round ended
+		boolean roundEnded = false;
+		
 		if(game.getCenterDeck().size() == 4){
 			game.endTrick();
-			
+
 			if(game.getStage().equals(GameStage.bidding)){
 				updateScores();
 				
-				UserSession playerWinner = players.get(game.getCurrentPlayer().getPlayerID());
-				startBidding(playerWinner,0);
+				roundEnded = true;
 			}
 		}
 		
-		currentPlayerSession.sendMessage(currentPlayer.toJSON());
-		requestNextPlayerCard();
+		if(!roundEnded){
+			currentPlayerSession.sendMessage(currentPlayer.toJSON());
+			requestNextPlayerCard();
+		}
+		else{
+			roundEnded();
+		}
+	}
+	
+	private void roundEnded(){
+		//See if game is over
+		int team1Score = game.getScoreByTeam(0);
+		int team2Score = game.getScoreByTeam(1);
+
+		if(team1Score >= 500 || team2Score >= 500){
+			if(team1Score > team2Score){
+				System.out.println("Team 0 Wins");
+				
+				Map<String,Object> msg = new HashMap<String,Object>();
+				msg.put("winningTeam","0");
+				
+				sendToAll(msg);
+			}
+			else{
+				System.out.println("Team 1 Wins");
+				
+				Map<String,Object> msg = new HashMap<String,Object>();
+				msg.put("winningTeam","1");
+				
+				sendToAll(msg);
+			}
+		}
+		else{
+			game.startGame();
+			updateGameBoard();
+			updateAllPlayersCards();
+			
+			UserSession playerWinner = players.get(game.getCurrentPlayer().getPlayerID());
+			startBidding(playerWinner,0);
+		}
 	}
 }

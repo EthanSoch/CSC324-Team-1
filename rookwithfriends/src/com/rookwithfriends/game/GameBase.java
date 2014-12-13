@@ -21,6 +21,7 @@ public abstract class GameBase implements Serializable{
 	protected CardColor trick;
 	protected CardColor trump;
 	protected int gameBid=100,numPasses;
+	protected int[] teamScores = new int[2];
 	protected CardSet centerDeck;
 	@XmlTransient 
 	protected CardSet allDeck,kitty;

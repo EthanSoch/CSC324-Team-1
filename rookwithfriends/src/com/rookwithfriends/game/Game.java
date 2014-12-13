@@ -137,6 +137,9 @@ public class Game extends GameBase{
 				roundNumber = 0;
 				stage = stage.bidding;
 				bidWinnerId = 0;
+				
+				//Give the winner of the last trick the kitty so that it can be added to teams score
+				players.get(currentPlayerId).getCardsWon().addAll(kitty);
 			}
 		}
 	}
@@ -162,7 +165,10 @@ public class Game extends GameBase{
 			int player1Score = players.get(team).getCardsWon().getScore(),
 				player2Score = players.get(team + 2).getCardsWon().getScore();
 			
-			return player1Score + player2Score;
+			//Update the team score
+			teamScores[team] += player1Score + player2Score;
+			
+			return teamScores[team];
 		}else{
 			throw new IllegalArgumentException("team must be 0 or 1");
 		}

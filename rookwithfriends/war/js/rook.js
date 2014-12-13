@@ -186,6 +186,11 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 			rookGame.selectCards(1);
 			$scope.cardsNeeded = 1;
 		}
+		
+		if(data.winningTeam != undefined){
+			$rootScope.winningTeam = "Team " + data.winningTeam[0];
+			$scope.open("gameOver.html");
+		}
 
 		$scope.$apply();
   	}
