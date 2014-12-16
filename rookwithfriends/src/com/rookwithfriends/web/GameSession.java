@@ -204,6 +204,7 @@ public class GameSession extends GameSessionBase {
 				
 				Map<String,Object> msg = new HashMap<String,Object>();
 				msg.put("winningTeam","0");
+				msg.put("winningScore", team1Score);
 				
 				sendToAll(msg);
 			}
@@ -212,6 +213,7 @@ public class GameSession extends GameSessionBase {
 				
 				Map<String,Object> msg = new HashMap<String,Object>();
 				msg.put("winningTeam","1");
+				msg.put("winningScore", team2Score);
 				
 				sendToAll(msg);
 			}

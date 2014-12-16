@@ -24,7 +24,8 @@
             <h3 class="modal-title">The Game Is Over!</h3>
         </div>
 		<div class="modal-body" id="modalMain">
-			<h3 id="winningHeader">The Winning Team Is: {{winningTeam}}</h3> 
+			<h3 id="winningHeader">The Winning Team Is: {{winningTeam}}</h3>
+			<h3 id="winningScoreHeader">With a score of: {{winningScore}}</h3>
 		<div id ="balloonDiv">
 			<div class="balloon" id="balloonLeft"></div>
             <div class="balloon" id="balloonRight"></div>
