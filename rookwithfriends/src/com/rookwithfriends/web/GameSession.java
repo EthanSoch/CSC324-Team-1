@@ -21,7 +21,7 @@ public class GameSession extends GameSessionBase {
 			
 			Map<String,Object> msg = new HashMap<String,Object>();
 			msg.put("op","msg");
-			msg.put("msg","Player " + currentPlayerSession.getPlayerGameID() + " : " + input.get("msg")[0]);
+			msg.put("msg","Player " + (currentPlayerSession.getPlayerGameID()+1) + " : " + input.get("msg")[0]);
 			
 			sendToAll(msg);
 			break;
