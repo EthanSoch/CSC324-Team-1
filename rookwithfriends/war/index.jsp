@@ -66,6 +66,15 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <li>
+                   		<a id="bidHeader" ng-cloak ng-show="showBidCounter">Current Player Bidding: {{theBidder}}</a>
+                    </li>
+                    <li>
+                    	<a id="bidHeader2" ng-cloak ng-show="showBidCounter">Time Left:</a>
+                    </li>
+                    <li>
+                    	<a id="counter" ng-cloak ng-show="showBidCounter"></a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

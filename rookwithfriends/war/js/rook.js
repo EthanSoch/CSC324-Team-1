@@ -47,6 +47,10 @@ var rookGame = (function($){
 })(jQuery);
 
 rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
+	
+	//Scope variable to show the bid counter
+	$scope.showBidCounter = true;
+	
 	$scope.numplayers = 0;
 	$scope.inviteUrl = "";
 	$scope.middleHand = [];
@@ -65,6 +69,10 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	$rootScope.winningScore = 0;
 	$scope.cardsChoosen = 0;
 	$scope.cardsNeeded = 0;
+	$scope.theBidder = "PlaceHolder";
+	
+	//Run count function
+	count(counter, 30, 0, 32000);
 	
 	$scope.select= function(i) {
 	  $scope.selectedIndex=i;
@@ -351,3 +359,33 @@ myModule.controller('myController', rookGame.gameController);
 myModule.controller('modalController', rookGame.modalController);
 
 myModule.config(rookGame.routeProvider);
+
+//Get element for the counter
+var counter = $('#counter');
+
+//Count function - element for counter, starting count number, ending count number, time in milliseconds
+function count(elem, startnum, endnum, time){
+  
+  //Create a variable to store the current counter number and add it to the counter
+  var curnum = startnum;
+  elem.text(curnum);
+  
+  //Work out the speed of the counter
+  var speed = time / (endnum + startnum);
+  
+  //Create the counter animation
+  var timer = window.setInterval(function(){
+    
+    //Test if counter has finished
+    if(curnum > endnum){
+      //Increase the counter by 1 and add it to the counter
+      curnum--;
+      elem.text(curnum);
+    }else{
+      //Stop the animation
+      clearInterval(timer);
+    }
+    
+  },speed);
+  
+}

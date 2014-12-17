@@ -1027,3 +1027,26 @@ input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue
 #trickCol{
 	font-weight: 600;
 }
+
+#counter{
+	width: 5em;
+	text-align: center;
+	background-color: #fff;
+	padding: 0.4em 1em;
+	border-radius: 1em;
+	font-family: sans-serif;
+	color: #444;
+	margin-top: 9px;
+	left: 345px;
+}
+
+#bidHeader{
+	font-weight: 700;
+	left: 335px;
+	color: #777;
+}
+#bidHeader2{
+	color: #fff;
+	font-weight: 700;
+	left: 354px;
+}
