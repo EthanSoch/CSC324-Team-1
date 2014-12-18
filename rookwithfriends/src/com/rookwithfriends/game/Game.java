@@ -174,4 +174,14 @@ public class Game extends GameBase{
 			throw new IllegalArgumentException("team must be 0 or 1");
 		}
 	}
+	
+	public void setScoreByTeam(int team, int scoreInput){
+		if(team == 0 || team == 1){			
+			//Update the team score
+			teamScores[team] = scoreInput;
+			
+		}else{
+			throw new IllegalArgumentException("team must be 0 or 1");
+		}
+	}
 }

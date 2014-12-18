@@ -210,7 +210,27 @@ public class GameSession extends GameSessionBase {
 		//See if game is over
 		int team1Score = game.getScoreByTeam(0);
 		int team2Score = game.getScoreByTeam(1);
-
+		
+		//If the team that wins the bid doesn't hit that bid after the round is done, then their bid should be deducted from their points.  There can be negative points
+		Player bidWinner = game.getBidWinner();
+		int bidWinnerId = bidWinner.getPlayerID();
+		
+		int gameBid = game.getGameBid();
+		
+		if(bidWinnerId == 0 || bidWinnerId == 2){			
+			if(gameBid > team1Score){
+				team1Score -= gameBid;
+				game.setScoreByTeam(0, team1Score);
+			}
+		}
+		else{			
+			if(gameBid > team2Score){
+				team2Score -= gameBid;
+				game.setScoreByTeam(1, team2Score);
+			}
+			
+		}
+		
 		if(team1Score >= 500 || team2Score >= 500){
 			if(team1Score > team2Score){
 				System.out.println("Team 0 Wins");
