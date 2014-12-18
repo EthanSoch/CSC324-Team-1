@@ -66,13 +66,13 @@
 					<h3 class="box__header-title">Team 1</h3>
 				</div>
 				<div class="box__body">
-					<div class="stats stats--main" id="player2Points">Score: {{opponents[(3 + currentPlayer) % 4].score}}</div>
-					<div class="stats" id="player2CB">Current Bid: {{opponents[(3 + currentPlayer) % 4].bid}}</div>
+					<div class="stats stats--main" id="player2Points">Score: {{opponents[(2 + currentPlayer) % 4].score}}</div>
+					<div class="stats" id="player2CB">Current Bid: {{opponents[(2 + currentPlayer) % 4].bid}}</div>
 				</div>
 			</div>
 			<a class="circle" id="player2"> <img height="83" width="83"
 				src="avatarImg.png">
-				<h5 class="playerName">{{opponents[(3 + currentPlayer) % 4].name}}</h5>
+				<h5 class="playerName">{{opponents[(2 + currentPlayer) % 4].name}}</h5>
 			</a>
 		</div>
 	</div>
@@ -84,20 +84,20 @@
 						<h3 class="box__header-title">Team 2</h3>
 					</div>
 					<div class="box__body">
-						<div class="stats stats--main" id="player2Points">Score: {{opponents[(2 + currentPlayer) % 4].score}}</div>
-						<div class="stats" id="player2CB">Current Bid: {{opponents[(2 + currentPlayer) % 4].bid}}</div>
+						<div class="stats stats--main" id="player2Points">Score: {{opponents[(3 + currentPlayer) % 4].score}}</div>
+						<div class="stats" id="player2CB">Current Bid: {{opponents[(3 + currentPlayer) % 4].bid}}</div>
 					</div>
 				</div>
 				<a class="circle" id="player3"> <img height="83" width="83"
 					src="avatarImg.png">
-					<h5 class="playerName">{{opponents[(2 + currentPlayer) % 4].name}}</h5>
+					<h5 class="playerName">{{opponents[(3 + currentPlayer) % 4].name}}</h5>
 				</a>
 			</div>
 		</div>
 		<div id="table1" class="centerStrip">
 			<div id="table2">
 				<div id="middleHand">
-					<div class="card pCard repeatCards" ng-class="card.color" ng-click="select($index)" ng-repeat="card in middleHand" data-card="{{card}}">
+					<div class="card pCard repeatCards mCard" ng-class="card.color" ng-click="select($index)" ng-repeat="card in middleHand" data-card="{{card}}">
 						<div class="cardTop">
 							<div class="number">{{card.rank}}</div>
 							<div class="color"></div>

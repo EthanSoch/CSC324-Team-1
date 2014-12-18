@@ -17,7 +17,7 @@ var rookGame = (function($){
 			return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 		},
 		selectCards:function(numberOfCards){
-			$(".card").click(function(elm){
+			$(".card:not(.mCard)").click(function(elm){
 				var card = $(elm.currentTarget);
 				if(card.attr("data-selected") == "true"){
 					card.attr("data-selected","false");
