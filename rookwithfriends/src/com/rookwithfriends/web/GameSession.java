@@ -101,6 +101,19 @@ public class GameSession extends GameSessionBase {
 		
 		winningPlayerSession.sendMessage(response);
 		winningPlayerSession.sendMessage(winningPlayer.toJSON());
+		
+		//Update the score for the team
+		int teamMemberId = (winningPlayer.getPlayerID() + 2) % 4;
+		UserSession teamMember = players.get(teamMemberId);
+		
+		Map<String,Object> updateScoreForTeam = new HashMap<String, Object>();
+		updateScoreForTeam.put("newPlayerBid", teamMember.getPlayerGameID()+"-"+game.getGameBid());		
+		sendToAll(updateScoreForTeam);
+		
+		//Send current players bid to everyone
+		Map<String,Object> responseOfWinner = new HashMap<String, Object>();
+		responseOfWinner.put("newPlayerBid", winningPlayerSession.getPlayerGameID()+"-"+game.getGameBid());
+		sendToAll(responseOfWinner);
 	}
 	
 	public void setTrump(Map<String, String[]> input){
