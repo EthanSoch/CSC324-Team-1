@@ -49,7 +49,7 @@ var rookGame = (function($){
 rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 	
 	//Scope variable to show the bid counter
-	$scope.showBidCounter = true;
+	$scope.showBidCounter = false;
 	
 	$scope.numplayers = 0;
 	$scope.inviteUrl = "";
@@ -164,7 +164,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		}
 		
 		if(data.trump != undefined){
-			$scope.trump = data.trump;
+			$scope.trump = data.trump.charAt(0).toUpperCase() + data.trump.substring(1);
 		}
 		
 		if(data.newPlayerBid != undefined){
@@ -189,7 +189,7 @@ rookGame.gameController = function($scope, $modal, $location, $log, $rootScope){
 		}
 		
 		if(data.trick != undefined){
-			$scope.trickColor = data.trick.substring(0,1).toUpperCase() + data.trick.substring(1);
+			$scope.trickColor = (data.trick.substring(0,1).toUpperCase() + data.trick.substring(1));
 		}
 
 		if(data.playCard != undefined){

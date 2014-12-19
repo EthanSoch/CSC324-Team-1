@@ -160,7 +160,7 @@
 				src="avatarImg.png">
 				<h5 class="playerName">{{opponents[currentPlayer].name}}</h5>
 			</a>
-			<a href="#" class='button button3' ng-click="submitCards(cardsToSubmit)" ng-show="canSubmitCards" id="selectCardBtn" >Select Cards! <span id="cardCount"> {{cardsChoosen}} of {{cardsNeeded}} Selected.</span></a>
+			<a href="#" class='button button3' ng-click="submitCards(cardsToSubmit)" ng-show="canSubmitCards" id="selectCardBtn" >Select Cards!</a>
 		</div>
 	</div>
 	<menu id="chtMenu" class="dropup">
